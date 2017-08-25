@@ -1,12 +1,12 @@
 var express = require('express');  
 var app = express();  
 var server = require('http').Server(app);  
-
+var port = process.env.PORT || 8080; 
 
 app.use(express.static('public'));
 
-server.listen(8080, function() {  
-    console.log('Server running on http://localhost:8080');
+server.listen(port, function() {  
+    console.log('Server running on http://localhost:' + port);
 });
 /*
 
