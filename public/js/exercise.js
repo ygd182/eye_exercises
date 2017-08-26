@@ -30,24 +30,42 @@
 		return exercise;
 	}
 
-	function animateCircle(top, left, duration, blinkSpeed) {
+	function animateCircle(from, to, duration, blinkSpeed) {
+		$('#circle').css(from);
 		$('#circle').addClass('blink');
 		$('#circle').css("animation-duration", blinkSpeed+ 's');
 		$('#circle').animate({
-	        "left": left,
-	        "top": top
+	        "left": to.left,
+	        "top": to.top
 	    }, duration, function complete(){
 	    	$('#circle').removeClass('blink');
+	    	$('#circle').css(from);
 	    });
 	}
 
 	$(document).ready(function ready(){
 		var exercise = {};
-		exercise.from = 8;
+		exercise.from = 2;
+		exercise.to = 8;
 		exercise.duration = 2000;
-		var top = $('#span' + exercise.from).position().top - circleDimesion/2; 
-		var left = $('#span' + exercise.from).position().left - circleDimesion/2-8;
-		animateCircle(top, left, exercise.duration, 1);
+		var from = {};
+		var to = {};
+		from.top = $('#span' + exercise.from).position().top; 
+		from.left = $('#span' + exercise.from).position().left;
+		to.top = $('#span' + exercise.to).position().top - circleDimesion/2; 
+		to.left = $('#span' + exercise.to).position().left - circleDimesion/2-8;
+
+		
+		animateCircle(from, to, exercise.duration, 1);
+
+		$(window).resize(function(){
+			var from = {};
+			from.top = $('#span' + exercise.from).position().top; 
+			from.left = $('#span' + exercise.from).position().left
+			$('#circle').css(from);
+			$('#circle').stop();
+			$('#circle').removeClass('blink');
+		});
 
 		//getData();
 			
