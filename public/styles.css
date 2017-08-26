@@ -87,3 +87,11 @@ span {
 	width: 40px;
 	height: 40px;
 }
+
+.blink {
+  animation: blinker linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
