@@ -51,14 +51,14 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.json('error' + app.get('db_user'));
+  res.json({error: err});
 });
 
 // =============================================================================
 // DB CONFIGURATION
 // =============================================================================
 
-var dbUrl = 'mongodb://' + config.mongodb.instances[0].host + ':' + config.mongodb.instances[0].port + '/' + config.mongodb.db;
+var dbUrl = 'mongodb://' + app.get('db_user') + ':' + app.get('db_pass') + config.mongodb.instances[0].host + ':' + config.mongodb.instances[0].port + '/' + config.mongodb.db;
 app.set('dbUrl', dbUrl);
 app.use(function (req, res, next) {
 
