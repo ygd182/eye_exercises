@@ -16,7 +16,7 @@
     "debug": "~2.6.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
-    "mongoose": "^4.11.0",
+    "mongoose": "^4.11.8",
     "mongoose-double": "0.0.1",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"

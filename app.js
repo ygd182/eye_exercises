@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var dotenv = require('dotenv');
+dotenv.load();
+
 var config = require('config');
 
 
@@ -61,6 +64,7 @@ app.use(function (req, res, next) {
 
     //readyState = 1 means that connection was established
     if (mongoose.connection.readyState !== 1) {
+        console.log('error');
         return next(new Error('Database connection is not established. Mongoose readyState: ' + mongoose.connection.readyState));
     }
 
