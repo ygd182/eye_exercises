@@ -1,0 +1,12 @@
+{
+	"port": 3100,
+	"mongodb" : {
+		"instances" : [
+			{
+				"host": "@ds159033.mlab.com",
+				"port": 59033
+			}
+		],
+		"db": "eye_exercise"
+	}
+}

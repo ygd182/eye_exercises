@@ -4,12 +4,22 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jorge Bolpe",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.3"
+    "body-parser": "~1.17.1",
+    "config": "^1.26.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.0",
+    "mongoose-double": "0.0.1",
+    "morgan": "~1.8.1",
+    "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
