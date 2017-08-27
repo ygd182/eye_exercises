@@ -1,0 +1,21 @@
+{
+  "name": "eye_exercises",
+  "description": "",
+  "main": "public/index.html",
+  "authors": [
+    "Jorge Bolpe"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ygd182/eye_exercises",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
