@@ -3,15 +3,20 @@
 	position: relative;
 	width: 100%;
 	font-size: 20px;
-	line-height: 20px;
 }
 
 h1 {
 	text-align: center;
 }
 
-span {
+.movement-wrapper span {
 	position: absolute;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
 }
 
 #span1 {
@@ -35,29 +40,30 @@ span {
 }
 
 #span4 {
-	top: calc(50% - 20px);
+	top: calc(50% - 15px);
 	left: 0;
 }
 
 #span5 {
-	top: calc(50% - 20px);
+	top: calc(50% - 15px);
 	right: 0;
 }
 
 #span6 {
-	top: calc(100% - 20px);
+	top: calc(100% - 30px);
 	left: 0;
 }
 
 #span7 {
-	top: calc(100% - 20px);
+	top: calc(100% - 30px);
 	left: 50%;
 }
 
 #span8 {
-	top: calc(100% - 20px);
+	top: calc(100% - 30px);
 	right: 0;
 }
+
 
 #circle {
 	width: 30px;
@@ -83,10 +89,6 @@ span {
 	height: 100vh;
 }
 
-.exercise-movement_wrapper #circle {
-	width: 40px;
-	height: 40px;
-}
 
 .blink {
   animation: blinker linear infinite;

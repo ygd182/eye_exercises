@@ -10,13 +10,28 @@
 
 	function saveExercise(exercise) {
 		console.log(exercise);
-		/*$.ajax({
-		  method: "POST",
-		  url: "some.php",
+		$.ajax({
+		  type: "POST",
+		  url: "/exercise",
 		  data: exercise,
 		}).done(function( msg ) {
-		    alert( "Data Saved: " + msg );
-		});*/
+		    console.log("saved" , msg );
+		});
+	}
+
+	function getPercentage(value, total) {
+		return value / total * 100;
+	}
+
+	function getElementPositionPercentaje(id) {
+		var pos = {};
+		var $element = $('#'+id);
+		var position = $element.position();
+		var height = $element.parent().height();
+		var width = $element.parent().width();
+		pos.top = getPercentage(position.top, height);
+		pos.left = getPercentage(position.left, width);
+		return pos;
 	}
 
 	function getData() {
@@ -31,9 +46,18 @@
 	}
 
 	$(document).ready(function ready(){
+		var formData = null;
+		var submitExercise = null;
 		$('#submit-btn').on('click', function(e) {
 			e.preventDefault();
-			saveExercise(getData());
+
+			formData = getData();
+			submitExercise = formData;
+			submitExercise.from = getElementPositionPercentaje('span' + formData.from);
+			submitExercise.to = getElementPositionPercentaje('span' + formData.to);
+
+
+			saveExercise(submitExercise);
 			
 		});
 	});

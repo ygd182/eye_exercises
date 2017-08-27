@@ -52,8 +52,8 @@
 		var to = {};
 		from.top = $('#span' + exercise.from).position().top; 
 		from.left = $('#span' + exercise.from).position().left;
-		to.top = $('#span' + exercise.to).position().top - circleDimesion/2; 
-		to.left = $('#span' + exercise.to).position().left - circleDimesion/2-8;
+		to.top = $('#span' + exercise.to).position().top; 
+		to.left = $('#span' + exercise.to).position().left;
 
 		
 		animateCircle(from, to, exercise.duration, 1);

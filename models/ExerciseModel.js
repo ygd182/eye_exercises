@@ -27,7 +27,7 @@ var ExerciseSchema = new Schema ({
     blink: Boolean,
     blinkSpeed: SchemaTypes.Double,
     reps: Number,
-    duration: Number
+    duration: SchemaTypes.Double
 });
 
 module.exports = mongoose.model('Exercise', ExerciseSchema);
