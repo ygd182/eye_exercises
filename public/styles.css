@@ -97,3 +97,7 @@ h1 {
 @keyframes blinker {  
   50% { opacity: 0; }
 }
+
+.list-group {
+	font-size: 20px;
+}

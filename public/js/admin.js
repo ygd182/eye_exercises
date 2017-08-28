@@ -5,7 +5,8 @@
 	 blink: false,
 	 blinkSpeed: 0,
 	 reps: 0,
-	 duration: 0
+	 duration: 0,
+	 name: ''
 	};
 
 	function saveExercise(exercise) {
@@ -42,6 +43,7 @@
 		exercise.blinkSpeed = $('#blink-speed-input').val();
 		exercise.duration = $('#duration-input').val();
 		exercise.reps = $('#reps-input').val();
+		exercise.name = $('#name-input').val();
 		return exercise;
 	}
 

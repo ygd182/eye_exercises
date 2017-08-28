@@ -55,8 +55,19 @@
 		console.log('error');
 	}
 
+	function getParameterByName(name, url) {
+	    if (!url) url = window.location.href;
+	    name = name.replace(/[\[\]]/g, "\\$&");
+	    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+	        results = regex.exec(url);
+	    if (!results) return null;
+	    if (!results[2]) return '';
+	    return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
 	$(document).ready(function ready(){
-		getExercise('59a38c10a3d63c1270a2b4e8').then(onSucess,onError);
+		var id = getParameterByName('id');
+		getExercise(id).then(onSucess,onError);
 		/*var exercise = {};
 		exercise.from = 2;
 		exercise.to = 8;
@@ -71,14 +82,13 @@
 		
 		animateCircle(from, to, exercise.duration, 1);*/
 
-		$(window).resize(function(){
+		/*$(window).resize(function(){
 			var from = {};
-			/*from.top = $('#span' + exercise.from).position().top; 
-			from.left = $('#span' + exercise.from).position().left*/
+
 			$('#circle').css(from);
 			$('#circle').stop();
 			$('#circle').removeClass('blink');
-		});
+		});*/
 
 		//getData();
 			
