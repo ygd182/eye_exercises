@@ -36,8 +36,8 @@
 			$('#circle').css("animation-duration", blinkSpeed+ 's');
 		}
 		$('#circle').animate({
-	        "left": to.left + '%',
-	        "top": to.top + '%'
+	        "left": to.left /*+ '%'*/,
+	        "top": to.top /*+ '%'*/
 	    }, duration*1000, function complete(){
 	    	$('#circle').removeClass('blink');
 	    	//$('#circle').css(from);
@@ -46,7 +46,9 @@
 
 	function onSucess(data) {
 		exercise = data;
-		animateCircle(exercise.from, exercise.to, exercise.duration, exercise.blinkSpeed);
+		var fromPos = $('#span' + exercise.fromId).position();
+		var toPos = $('#span' + exercise.toId).position();
+		animateCircle(fromPos, toPos, exercise.duration, exercise.blinkSpeed);
 	}
 
 	function onError() {
@@ -54,7 +56,7 @@
 	}
 
 	$(document).ready(function ready(){
-		getExercise('59a359beaa92305c8f84df32').then(onSucess,onError);
+		getExercise('59a38c10a3d63c1270a2b4e8').then(onSucess,onError);
 		/*var exercise = {};
 		exercise.from = 2;
 		exercise.to = 8;

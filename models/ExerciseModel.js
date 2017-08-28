@@ -19,10 +19,12 @@ var ExerciseSchema = new Schema ({
         top: SchemaTypes.Double,
         left: SchemaTypes.Double
     },
+    fromId: Number,
     to: {
         top: SchemaTypes.Double,
         left: SchemaTypes.Double
     },
+    toId: Number,
     name: String,
     blink: Boolean,
     blinkSpeed: SchemaTypes.Double,

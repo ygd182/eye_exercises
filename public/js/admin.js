@@ -1,7 +1,7 @@
 (function() {
 	var defaultExercise = {
-	 from: null,
-	 to: null,
+	 fromId: null,
+	 toId: null,
 	 blink: false,
 	 blinkSpeed: 0,
 	 reps: 0,
@@ -36,8 +36,8 @@
 
 	function getData() {
 		var exercise = defaultExercise;
-		exercise.from = $('#from-input').val();
-		exercise.to = $('#to-input').val();
+		exercise.fromId = $('#from-input').val();
+		exercise.toId = $('#to-input').val();
 		exercise.blink = $('#blink-check').val();
 		exercise.blinkSpeed = $('#blink-speed-input').val();
 		exercise.duration = $('#duration-input').val();
@@ -53,8 +53,8 @@
 
 			formData = getData();
 			submitExercise = formData;
-			submitExercise.from = getElementPositionPercentaje('span' + formData.from);
-			submitExercise.to = getElementPositionPercentaje('span' + formData.to);
+			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
+			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
 
 
 			saveExercise(submitExercise);
