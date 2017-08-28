@@ -16,6 +16,8 @@
 		  url: "/exercise",
 		  data: exercise,
 		}).done(function( msg ) {
+			alert('Exercise Saved');
+			$('#exercise-form').trigger("reset");
 		    console.log("saved" , msg );
 		});
 	}

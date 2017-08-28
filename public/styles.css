@@ -89,6 +89,10 @@ h1 {
 	height: 100vh;
 }
 
+.exercise-movement_wrapper #circle {
+	display: none;
+}
+
 
 .blink {
   animation: blinker linear infinite;
