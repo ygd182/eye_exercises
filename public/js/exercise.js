@@ -30,7 +30,7 @@
 
 	function animateCircle(from, to, duration, blinkSpeed) {
 		$('#circle').css(from);
-		var blink = false;
+		var blink = true;
 		if(blink) {
 			$('#circle').addClass('blink');
 			$('#circle').css("animation-duration", blinkSpeed+ 's');
