@@ -1,5 +1,6 @@
 (function() {
-	var circleDimesion = 40;
+	var circleDimesion = 30;
+	var exercise = null;
 	var defaultExercise = {
 	 from: null,
 	 to: null,
@@ -9,13 +10,10 @@
 	 duration: 0
 	};
 
-	function getExercise(exercise) {
-		console.log(exercise);
-		$.ajax({
+	function getExercise(id) {
+		return $.ajax({
 		  method: "GET",
-		  url: "some.php",
-		}).done(function( data ) {
-		    alert( "Data Saved: " + msg );
+		  url: "exercise/" + id,
 		});
 	}
 
@@ -32,19 +30,32 @@
 
 	function animateCircle(from, to, duration, blinkSpeed) {
 		$('#circle').css(from);
-		$('#circle').addClass('blink');
-		$('#circle').css("animation-duration", blinkSpeed+ 's');
+		var blink = false;
+		if(blink) {
+			$('#circle').addClass('blink');
+			$('#circle').css("animation-duration", blinkSpeed+ 's');
+		}
 		$('#circle').animate({
-	        "left": to.left,
-	        "top": to.top
-	    }, duration, function complete(){
+	        "left": to.left + '%',
+	        "top": to.top + '%'
+	    }, duration*1000, function complete(){
 	    	$('#circle').removeClass('blink');
-	    	$('#circle').css(from);
+	    	//$('#circle').css(from);
 	    });
 	}
 
+	function onSucess(data) {
+		exercise = data;
+		animateCircle(exercise.from, exercise.to, exercise.duration, exercise.blinkSpeed);
+	}
+
+	function onError() {
+		console.log('error');
+	}
+
 	$(document).ready(function ready(){
-		var exercise = {};
+		getExercise('59a359beaa92305c8f84df32').then(onSucess,onError);
+		/*var exercise = {};
 		exercise.from = 2;
 		exercise.to = 8;
 		exercise.duration = 2000;
@@ -56,12 +67,12 @@
 		to.left = $('#span' + exercise.to).position().left;
 
 		
-		animateCircle(from, to, exercise.duration, 1);
+		animateCircle(from, to, exercise.duration, 1);*/
 
 		$(window).resize(function(){
 			var from = {};
-			from.top = $('#span' + exercise.from).position().top; 
-			from.left = $('#span' + exercise.from).position().left
+			/*from.top = $('#span' + exercise.from).position().top; 
+			from.left = $('#span' + exercise.from).position().left*/
 			$('#circle').css(from);
 			$('#circle').stop();
 			$('#circle').removeClass('blink');
