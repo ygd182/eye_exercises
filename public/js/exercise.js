@@ -70,7 +70,7 @@
 		exercise = data;
 		
 		$(window).on('resize', function(e){
-		    if(screen.width === window.innerWidth){
+		    if(screen.width === window.innerWidth && screen.height === window.innerHeight){
 		    		$('.exercise-movement_wrapper').removeClass('hidden'); 
 		      // this is full screen
 					$('#fullscreen-alert').hide();
