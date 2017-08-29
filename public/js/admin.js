@@ -46,6 +46,7 @@
 		exercise.duration = $('#duration-input').val();
 		exercise.reps = $('#reps-input').val();
 		exercise.name = $('#name-input').val();
+		exercise.rest = $('#rest-input').val();
 		return exercise;
 	}
 

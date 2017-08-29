@@ -51,18 +51,19 @@
 		
 	}
 
-	/*function startAnimationByReps(exercise) {
-	    intervalFunction = setTimeout(function(exercise){ animateCircle(exercise) }, 3000);
+	function startAnimationByReps(exercise) {
+	    intervalFunction = setTimeout(function(exercise){ animateCircle(exercise) }, exercise.rest *1000);
 	}
 
-	function myStopFunction() {
-	    clearTimeout(myVar);
-	}*/
+	function stopAnimationByReps() {
+	    clearTimeout(intervalFunction);
+	}
 
 	function stopAnimation() {
 		$('#circle').hide();
 		$('#circle').stop();
 		$('#circle').removeClass('blink');
+		//stopAnimationByReps();
 	}
 
 	function onSucess(data) {
@@ -108,6 +109,12 @@
 	}
 
 	$(document).ready(function ready(){
+		/*if(screen.width === window.innerWidth){
+			$('#fullscreen-alert').hide();
+			$('.exercise-movement_wrapper').removeClass('hidden'); 
+			$('#circle').show();
+		}*/
+		
 		var id = getParameterByName('id');
 		getExercise(id).then(onSucess,onError);
 			

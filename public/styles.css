@@ -81,6 +81,8 @@ h1 {
 /*------------ADMIN PAGE-----------------*/
 .admin-movement_wrapper {
 	height: 300px;
+	margin: 0 5%;
+    width: 90%;
 }
 
 .form-container {
