@@ -1,6 +1,9 @@
 (function() {
 	var circleDimesion = 30;
 	var exercise = null;
+	var intervalFunction = null;
+	var fullscreenMode = false;
+	var cloneExercise = null;
 	var defaultExercise = {
 	 from: null,
 	 to: null,
@@ -28,28 +31,66 @@
 		return exercise;
 	}
 
-	function animateCircle(from, to, duration, blinkSpeed) {
-		$('#circle').css(from);
-		$('#circle').show();
-		var blink = true;
-		if(blink) {
-			$('#circle').addClass('blink');
-			$('#circle').css("animation-duration", blinkSpeed+ 's');
+	function animateCircle(exercise) {
+		if(exercise.reps > 0) {
+			$('#circle').css(exercise.from);
+			$('#circle').show();
+			if(exercise.blink) {
+				$('#circle').addClass('blink');
+				$('#circle').css("animation-duration", exercise.blinkSpeed + 's');
+			}
+			$('#circle').animate({top: exercise.to.top +'px', left: exercise.to.left +'px'}, exercise.duration*1000, function complete(){
+		    	$('#circle').removeClass('blink');
+		    	//exercise.reps--;
+		    	cloneExercise = jQuery.extend(true, {}, exercise);
+		    	cloneExercise.reps--;
+		    	animateCircle(cloneExercise);
+		    	//$('#circle').css(from);
+		    });
 		}
-		$('#circle').animate({
-	        "left": to.left /*+ '%'*/,
-	        "top": to.top /*+ '%'*/
-	    }, duration*1000, function complete(){
-	    	$('#circle').removeClass('blink');
-	    	//$('#circle').css(from);
-	    });
+		
+	}
+
+	/*function startAnimationByReps(exercise) {
+	    intervalFunction = setTimeout(function(exercise){ animateCircle(exercise) }, 3000);
+	}
+
+	function myStopFunction() {
+	    clearTimeout(myVar);
+	}*/
+
+	function stopAnimation() {
+		$('#circle').hide();
+		$('#circle').stop();
+		$('#circle').removeClass('blink');
 	}
 
 	function onSucess(data) {
 		exercise = data;
-		var fromPos = $('#span' + exercise.fromId).position();
-		var toPos = $('#span' + exercise.toId).position();
-		animateCircle(fromPos, toPos, exercise.duration, exercise.blinkSpeed);
+		
+		$(window).on('resize', function(e){
+		    if(screen.width === window.innerWidth){
+		    		$('.exercise-movement_wrapper').removeClass('hidden'); 
+		      // this is full screen
+					$('#fullscreen-alert').hide();
+					exercise.from = $('#span' + exercise.fromId).position();
+					exercise.to = $('#span' + exercise.toId).position();
+					animateCircle(exercise);
+		       }else {
+		    		$('.exercise-movement_wrapper').addClass('hidden'); 
+					stopAnimation();
+
+					$('#fullscreen-alert').show();
+		       }
+		 });
+
+		/*$(window).resize(function(){
+			$('#circle').hide();
+			$('#circle').stop();
+			$('#circle').removeClass('blink');
+			//animateCircle(exercise);
+		});
+		*/
 	}
 
 	function onError() {
@@ -69,29 +110,6 @@
 	$(document).ready(function ready(){
 		var id = getParameterByName('id');
 		getExercise(id).then(onSucess,onError);
-		/*var exercise = {};
-		exercise.from = 2;
-		exercise.to = 8;
-		exercise.duration = 2000;
-		var from = {};
-		var to = {};
-		from.top = $('#span' + exercise.from).position().top; 
-		from.left = $('#span' + exercise.from).position().left;
-		to.top = $('#span' + exercise.to).position().top; 
-		to.left = $('#span' + exercise.to).position().left;
-
-		
-		animateCircle(from, to, exercise.duration, 1);*/
-
-		/*$(window).resize(function(){
-			var from = {};
-
-			$('#circle').css(from);
-			$('#circle').stop();
-			$('#circle').removeClass('blink');
-		});*/
-
-		//getData();
 			
 	});
 
