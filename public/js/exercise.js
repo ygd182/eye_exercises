@@ -37,7 +37,7 @@
 			$('#circle').show();
 			if(exercise.blink) {
 				$('#circle').addClass('blink');
-				$('#circle').css("animation-duration", 1/exercise.blinkSpeed + 's');
+				$('#circle').css("animation-duration", 1/8*exercise.blinkSpeed + 's');
 			}
 			$('#circle').animate({top: exercise.to.top +'px', left: exercise.to.left +'px'}, exercise.duration*1000, function complete(){
 		    	$('#circle').removeClass('blink');
@@ -67,8 +67,8 @@
 		
 		$(window).on('resize', function(e){
 		    if(screen.width === window.innerWidth && screen.height === window.innerHeight){
+		    		// this is full screen
 		    		$('.exercise-movement_wrapper').removeClass('hidden'); 
-		      // this is full screen
 					$('#fullscreen-alert').hide();
 					exercise.from = $('#span' + exercise.fromId).position();
 					exercise.to = $('#span' + exercise.toId).position();

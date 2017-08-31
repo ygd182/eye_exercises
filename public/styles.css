@@ -104,6 +104,10 @@ h1 {
 .hidden {
 	display: none;
 }
+
+.exercise-movement_wrapper span {
+	visibility: hidden;
+}
 /*
 
 .full-height {
