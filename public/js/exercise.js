@@ -43,15 +43,12 @@
 		    	$('#circle').removeClass('blink');
 		    	cloneExercise = jQuery.extend(true, {}, exercise);
 		    	cloneExercise.reps--;
-		    	animateCircle(cloneExercise);
+		    	//animateCircle(cloneExercise);
+		    	intervalFunction = setTimeout(function(){ animateCircle(cloneExercise) }, exercise.rest *1000);
 		    	//$('#circle').css(from);
 		    });
 		}
 		
-	}
-
-	function startAnimationByReps(exercise) {
-	    intervalFunction = setTimeout(function(exercise){ animateCircle(exercise) }, exercise.rest *1000);
 	}
 
 	function stopAnimationByReps() {
@@ -62,7 +59,7 @@
 		$('#circle').hide();
 		$('#circle').stop();
 		$('#circle').removeClass('blink');
-		//stopAnimationByReps();
+		stopAnimationByReps();
 	}
 
 	function onSucess(data) {
@@ -84,13 +81,6 @@
 		       }
 		 });
 
-		/*$(window).resize(function(){
-			$('#circle').hide();
-			$('#circle').stop();
-			$('#circle').removeClass('blink');
-			//animateCircle(exercise);
-		});
-		*/
 	}
 
 	function onError() {
@@ -108,11 +98,6 @@
 	}
 
 	$(document).ready(function ready(){
-		/*if(screen.width === window.innerWidth){
-			$('#fullscreen-alert').hide();
-			$('.exercise-movement_wrapper').removeClass('hidden'); 
-			$('#circle').show();
-		}*/
 		
 		var id = getParameterByName('id');
 		getExercise(id).then(onSucess,onError);
