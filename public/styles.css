@@ -146,3 +146,7 @@ h1 {
 .list-group {
 	font-size: 20px;
 }
+
+.list-group-item {
+	min-height: 50px;
+}

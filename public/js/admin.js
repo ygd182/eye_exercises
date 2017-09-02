@@ -9,18 +9,7 @@
 	 name: ''
 	};
 
-	function saveExercise(exercise) {
-		console.log(exercise);
-		$.ajax({
-		  type: "POST",
-		  url: "/exercise",
-		  data: exercise,
-		}).done(function( msg ) {
-			alert('Exercise Saved');
-			$('#exercise-form').trigger("reset");
-		    console.log("saved" , msg );
-		});
-	}
+	var exerciseId = null;
 
 	function getPercentage(value, total) {
 		return value / total * 100;
@@ -50,9 +39,56 @@
 		return exercise;
 	}
 
+	function setData(exercise) {
+		$('#from-input').val(exercise.fromId);
+		$('#to-input').val(exercise.toId);
+		$('#blink-check').val(exercise.blin);
+		$('#blink-speed-input').val(exercise.blinkSpeed );
+		$('#duration-input').val(exercise.duration);
+		$('#reps-input').val(exercise.reps);
+		$('#name-input').val(exercise.name);
+		$('#rest-input').val(exercise.rest);
+	}
+
+	function loadForm() {
+		exerciseId = common.getParameterByName('id');
+		if(exerciseId) {
+			$('#submit-btn').parent().hide();
+			$('#update-btn').parent().show();
+			exerciseService.getExercise(exerciseId).then(setData, onError);
+		}
+	}
+
+	function onError(data) {
+		common.onError(data);
+		restorePage();
+	}
+
+	function restorePage() {
+		$('#exercise-form').trigger("reset");
+		$('#submit-btn').parent().show();
+		$('#update-btn').parent().hide();
+		exerciseId = null;
+	}
+
+	function onSuccessUpdate(msg, ) {
+		alert('Exercise Updated');
+	    console.log("saved" , msg );
+	    restorePage();
+	}
+
+	function onSuccessSave(msg) {
+		alert('Exercise Saved');
+	    console.log("saved" , msg );
+	    restorePage();
+	}
+
 	$(document).ready(function ready(){
+		$('#update-btn').parent().hide();
 		var formData = null;
 		var submitExercise = null;
+		loadForm();
+
 		$('#submit-btn').on('click', function(e) {
 			e.preventDefault();
 
@@ -62,7 +98,19 @@
 			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
 
 
-			saveExercise(submitExercise);
+			exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
+			
+		});
+
+		$('#update-btn').on('click', function(e) {
+			e.preventDefault();
+
+			formData = getData();
+			submitExercise = formData;
+			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
+			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
+
+			exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
 			
 		});
 	});
