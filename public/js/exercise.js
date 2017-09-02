@@ -24,6 +24,17 @@
 		return exercise;
 	}
 
+	function showCountdown() {
+		$('#clock').removeClass('hidden');
+		$('#circle').hide();
+
+    	var totalSeconds = new Date().getTime() + exercise.rest *1000;
+    	$('#clock').countdown(totalSeconds, function(event) {
+		  var totalHours = event.offset.totalDays * 24 + event.offset.hours;
+		  $(this).html(event.strftime(totalHours + ' hr %M min %S sec'));
+		});
+	}
+
 	function animateCircle(exercise) {
 		if(exercise.reps > 0) {
 			$('#circle').css(exercise.from);
@@ -36,9 +47,12 @@
 		    	$('#circle').removeClass('blink');
 		    	cloneExercise = jQuery.extend(true, {}, exercise);
 		    	cloneExercise.reps--;
-		    	//animateCircle(cloneExercise);
-		    	intervalFunction = setTimeout(function(){ animateCircle(cloneExercise) }, exercise.rest *1000);
-		    	//$('#circle').css(from);
+
+		    	if(cloneExercise.reps > 0) {
+		    		showCountdown();
+		    	}
+		    	
+		    	intervalFunction = setTimeout(function(){ animateCircle(cloneExercise) }, exercise.rest *1000 + 100);
 		    });
 		}
 		
@@ -81,6 +95,12 @@
 		var id = common.getParameterByName('id');
 		exerciseService.getExercise(id).then(onSucess,common.onError);
 			
+		$('#clock').on('finish.countdown', function() {
+    		console.log('termino');
+    		setTimeout(function(){ $('#clock').addClass('hidden'); },100);
+    		//$('#clock').addClass('hidden');
+    		//animateCircle(cloneExercise);
+	    });
 	});
 
 })();

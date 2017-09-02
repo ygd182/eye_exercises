@@ -81,8 +81,8 @@ h1 {
 /*------------ADMIN PAGE-----------------*/
 .admin-movement_wrapper {
 	height: 300px;
-	margin: 0 5%;
-    width: 90%;
+	margin: 0 10%;
+    width: 80%;
 }
 
 .form-container {
@@ -93,6 +93,9 @@ h1 {
 	margin-bottom: 10px;
 }
 
+#blink-check {
+	display: block;
+}
 
 
 /*-------------EXERCISE PAGE-------------*/
@@ -107,6 +110,15 @@ h1 {
 
 .exercise-movement_wrapper span {
 	visibility: hidden;
+}
+
+.exercise-movement_wrapper .clock-container {
+	font-size: 50px;
+	line-height: 1;
+	font-weight: bold;
+	position: absolute;
+	top: calc(50% - 50px);
+	left: calc(50% - 215px);
 }
 /*
 

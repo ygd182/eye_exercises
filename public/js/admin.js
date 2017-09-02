@@ -83,6 +83,10 @@
 	    restorePage();
 	}
 
+	function isValidForm(data) {
+		return data.fromId !== data.toId && data.name !== undefined && data.name !== ''; 
+	}
+
 	$(document).ready(function ready(){
 		$('#update-btn').parent().hide();
 		var formData = null;
@@ -97,8 +101,9 @@
 			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
 			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
 
-
-			exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
+			if(isValidForm(formData)) {
+				exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
+			}
 			
 		});
 
@@ -110,8 +115,9 @@
 			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
 			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
 
-			exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
-			
+			if(isValidForm(formData)) {
+				exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
+			}
 		});
 	});
 
