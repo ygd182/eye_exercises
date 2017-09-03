@@ -40,6 +40,7 @@
 	}
 
 	function setData(exercise) {
+		console.log(exercise);
 		$('#from-input').val(exercise.fromId);
 		$('#to-input').val(exercise.toId);
 		$('#blink-check').prop('checked', exercise.blink);
@@ -103,7 +104,8 @@
 			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
 			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
 
-			if(isValidForm(formData)) {
+
+			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
 				exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
 			}else {
 				alert('Some fields are missing. From and To should be different');
@@ -119,7 +121,7 @@
 			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
 			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
 
-			if(isValidForm(formData)) {
+			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
 				exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
 			}else {
 				alert('Some fields are missing. From and To should be different');
