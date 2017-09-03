@@ -74,6 +74,7 @@
 		
 		$(window).on('resize', function(e){
 		    if(screen.width === window.innerWidth && screen.height === window.innerHeight){
+		    		$('.navbar').hide();
 		    		// this is full screen
 		    		$('.exercise-movement_wrapper').removeClass('hidden'); 
 					$('#fullscreen-alert').hide();
@@ -83,7 +84,7 @@
 		       }else {
 		    		$('.exercise-movement_wrapper').addClass('hidden'); 
 					stopAnimation();
-
+					$('.navbar').show();
 					$('#fullscreen-alert').show();
 		       }
 		 });

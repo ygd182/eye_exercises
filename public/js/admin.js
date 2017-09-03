@@ -97,7 +97,7 @@
 
 		$('#submit-btn').on('click', function(e) {
 			e.preventDefault();
-
+			//$('#exercise-form').validator();
 			formData = getData();
 			submitExercise = formData;
 			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
@@ -106,7 +106,7 @@
 			if(isValidForm(formData)) {
 				exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
 			}else {
-				alert('Some fields are missing');
+				alert('Some fields are missing. From and To should be different');
 			}
 			
 		});
@@ -122,7 +122,7 @@
 			if(isValidForm(formData)) {
 				exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
 			}else {
-				alert('Some fields are missing');
+				alert('Some fields are missing. From and To should be different');
 			}
 		});
 	});
