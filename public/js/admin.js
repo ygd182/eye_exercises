@@ -42,7 +42,7 @@
 	function setData(exercise) {
 		$('#from-input').val(exercise.fromId);
 		$('#to-input').val(exercise.toId);
-		$('#blink-check').val(exercise.blin);
+		$('#blink-check').prop('checked', exercise.blink);
 		$('#blink-speed-input').val(exercise.blinkSpeed );
 		$('#duration-input').val(exercise.duration);
 		$('#reps-input').val(exercise.reps);
@@ -65,10 +65,12 @@
 	}
 
 	function restorePage() {
-		$('#exercise-form').trigger("reset");
+		/*$('#exercise-form').trigger("reset");
 		$('#submit-btn').parent().show();
 		$('#update-btn').parent().hide();
-		exerciseId = null;
+		exerciseId = null;*/
+		//window.history.pushState({}, document.title, "/admin.html");
+		window.location.href = '/exercise-list.html';
 	}
 
 	function onSuccessUpdate(msg, ) {
@@ -103,6 +105,8 @@
 
 			if(isValidForm(formData)) {
 				exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
+			}else {
+				alert('Some fields are missing');
 			}
 			
 		});
@@ -117,6 +121,8 @@
 
 			if(isValidForm(formData)) {
 				exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
+			}else {
+				alert('Some fields are missing');
 			}
 		});
 	});
