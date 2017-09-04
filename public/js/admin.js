@@ -30,7 +30,7 @@
 		var exercise = defaultExercise;
 		exercise.fromId = $('#from-input').val();
 		exercise.toId = $('#to-input').val();
-		exercise.blink = $('#blink-check').val();
+		exercise.blink = $('#blink-check').prop('checked');
 		exercise.blinkSpeed = $('#blink-speed-input').val();
 		exercise.duration = $('#duration-input').val();
 		exercise.reps = $('#reps-input').val();
@@ -44,6 +44,11 @@
 		$('#from-input').val(exercise.fromId);
 		$('#to-input').val(exercise.toId);
 		$('#blink-check').prop('checked', exercise.blink);
+		if(!$('#blink-check').prop('checked')) {
+			$('#blink-speed-input').attr('disabled', true);
+		} else {
+			$('#blink-speed-input').removeAttr('disabled');
+		}
 		$('#blink-speed-input').val(exercise.blinkSpeed );
 		$('#duration-input').val(exercise.duration);
 		$('#reps-input').val(exercise.reps);
@@ -96,6 +101,14 @@
 		var submitExercise = null;
 		loadForm();
 
+		$('#blink-check').on('change', function(e) {
+			if(!$(e.target).prop('checked')) {
+				$('#blink-speed-input').attr('disabled', true);
+			} else {
+				$('#blink-speed-input').removeAttr('disabled');
+			}
+		});
+
 		$('#submit-btn').on('click', function(e) {
 			e.preventDefault();
 			//$('#exercise-form').validator();
@@ -120,7 +133,7 @@
 			submitExercise = formData;
 			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
 			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
-
+			console.log(submitExercise);
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
 				exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
 			}else {
