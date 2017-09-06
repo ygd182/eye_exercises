@@ -121,7 +121,7 @@ h1 {
 	font-weight: bold;
 	position: absolute;
 	top: calc(50% - 50px);
-	left: calc(50% - 215px);
+	left: calc(50% - 90px);
 }
 /*
 
@@ -137,10 +137,15 @@ h1 {
 
 .blink {
   animation: blinker linear infinite;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: scale(1);
+  -webkit-transform-style: preserve-3d;
 }
 
-@keyframes blinker {  
-  50% { opacity: 0; }
+@keyframes blinker {
+	25% { opacity: 0.5; }  
+  	50% { opacity: 0; }
+  	75% { opacity: 0.5; }
 }
 /*
 .blink {

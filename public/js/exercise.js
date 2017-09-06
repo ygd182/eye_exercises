@@ -31,7 +31,7 @@
     	var totalSeconds = new Date().getTime() + exercise.rest *1000;
     	$('#clock').countdown(totalSeconds, function(event) {
 		  var totalHours = event.offset.totalDays * 24 + event.offset.hours;
-		  $(this).html(event.strftime(totalHours + ' hr %M min %S sec'));
+		  $(this).html(event.strftime(totalHours + '%S sec'));
 		});
 	}
 
@@ -54,6 +54,8 @@
 		    	
 		    	intervalFunction = setTimeout(function(){ animateCircle(cloneExercise) }, exercise.rest *1000 + 100);
 		    });
+		} else {
+			window.location.href = '/exercise-list.html';
 		}
 		
 	}
@@ -73,7 +75,7 @@
 		exercise = data;
 		
 		$(window).on('resize', function(e){
-		    if(screen.width === window.innerWidth && screen.height === window.innerHeight){
+		    if(screen.width === window.innerWidth /*&& screen.height === window.innerHeight*/){
 		    		$('.navbar').hide();
 		    		// this is full screen
 		    		$('.exercise-movement_wrapper').removeClass('hidden'); 
