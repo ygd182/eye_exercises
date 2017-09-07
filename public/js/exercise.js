@@ -50,7 +50,9 @@
 
 		    	if(cloneExercise.reps > 0) {
 		    		showCountdown();
-		    	}
+		    	}else {
+					window.location.href = '/exercise-list.html';
+				}
 		    	
 		    	intervalFunction = setTimeout(function(){ animateCircle(cloneExercise) }, exercise.rest *1000 + 100);
 		    });
