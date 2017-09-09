@@ -1,3 +1,16 @@
+var waitForFinalEvent = (function () {
+  var timers = {};
+  return function (callback, ms, uniqueId) {
+    if (!uniqueId) {
+      uniqueId = "Don't call this twice without a uniqueId";
+    }
+    if (timers[uniqueId]) {
+      clearTimeout (timers[uniqueId]);
+    }
+    timers[uniqueId] = setTimeout(callback, ms);
+  };
+})();
+
 (function() {
 	var circleDimesion = 30;
 	var exercise = null;
@@ -73,25 +86,32 @@
 		stopAnimationByReps();
 	}
 
+
+	function startanimation() {
+		$('.navbar').hide();
+		$('.exercise-movement_wrapper').removeClass('hidden'); 
+		$('#fullscreen-alert').hide();
+		exercise.from = $('#span' + exercise.fromId).position();
+		exercise.to = $('#span' + exercise.toId).position();
+		animateCircle(exercise);
+	}
+
 	function onSucess(data) {
 		exercise = data;
-		
-		$(window).on('resize', function(e){
-		    if(screen.width === window.innerWidth /*&& screen.height === window.innerHeight*/){
-		    		$('.navbar').hide();
-		    		// this is full screen
-		    		$('.exercise-movement_wrapper').removeClass('hidden'); 
-					$('#fullscreen-alert').hide();
-					exercise.from = $('#span' + exercise.fromId).position();
-					exercise.to = $('#span' + exercise.toId).position();
-					animateCircle(exercise);
-		       }else {
+
+		$(window).resize(function () {
+		    waitForFinalEvent(function(){
+		       if(screen.width === window.innerWidth /*&& screen.height === window.innerHeight*/){
+		       	// this is full screen
+		    		startanimation();
+	    		}else {
 		    		$('.exercise-movement_wrapper').addClass('hidden'); 
 					stopAnimation();
 					$('.navbar').show();
 					$('#fullscreen-alert').show();
 		       }
-		 });
+		    }, 500, "some unique string");
+		});
 
 	}
 
@@ -101,12 +121,8 @@
 		exerciseService.getExercise(id).then(onSucess,common.onError);
 			
 		$('#clock').on('finish.countdown', function() {
-    		console.log('termino');
     		setTimeout(function(){ $('#clock').addClass('hidden'); },100);
-    		//$('#clock').addClass('hidden');
-    		//animateCircle(cloneExercise);
 	    });
 	});
 
 })();
-
