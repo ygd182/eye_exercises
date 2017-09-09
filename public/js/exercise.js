@@ -100,6 +100,8 @@ var waitForFinalEvent = (function () {
 		exercise = data;
 
 		$(window).resize(function () {
+			//always sotpAnimation by default
+			stopAnimation();
 		    waitForFinalEvent(function(){
 		       if(screen.width === window.innerWidth /*&& screen.height === window.innerHeight*/){
 		       	// this is full screen
