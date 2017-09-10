@@ -64,12 +64,16 @@ var waitForFinalEvent = (function () {
 		    	if(cloneExercise.reps > 0) {
 		    		showCountdown();
 		    	}else {
+		    		/*stopAnimation();
+		    		$('.action-btn-container').removeClass('hidden'); */
 					window.location.href = '/exercise-list.html';
 				}
 		    	
 		    	intervalFunction = setTimeout(function(){ animateCircle(cloneExercise) }, exercise.rest *1000 + 100);
 		    });
 		} else {
+			/*stopAnimation();
+			$('.action-btn-container').removeClass('hidden'); */
 			window.location.href = '/exercise-list.html';
 		}
 		
@@ -88,6 +92,8 @@ var waitForFinalEvent = (function () {
 
 
 	function startanimation() {
+		$('.action-btn-container').removeClass('hidden'); 
+
 		$('.navbar').hide();
 		$('.exercise-movement_wrapper').removeClass('hidden'); 
 		$('#fullscreen-alert').hide();
@@ -96,26 +102,52 @@ var waitForFinalEvent = (function () {
 		animateCircle(exercise);
 	}
 
+
+	//------------------------------------------
+	function startAnimation() {
+		$('.exercise-movement_wrapper').removeClass('hidden'); 
+		exercise.from = $('#span' + exercise.fromId).position();
+		exercise.to = $('#span' + exercise.toId).position();
+		animateCircle(exercise);
+	}
+
+	function enterFullScreen() {
+		$('.navbar').addClass('hidden');
+		$('#fullscreen-alert').addClass('hidden');
+		$('.exercise-movement_wrapper').removeClass('hidden'); 
+		$('.action-btn-container').removeClass('hidden'); 
+	}
+	//--------------------------------------------------------
+	function isFullscreen() {
+		return (screen.width === window.innerWidth /*&& screen.height === window.innerHeight*/);
+	}
+
 	function onSucess(data) {
 		exercise = data;
+		$('#start-animation-btn').removeClass('disabled');
+	}
 
+	function bindWindowResize() {
 		$(window).resize(function () {
 			//always sotpAnimation by default
 			stopAnimation();
+			$('#myModal').modal();
+
 		    waitForFinalEvent(function(){
-		       if(screen.width === window.innerWidth /*&& screen.height === window.innerHeight*/){
+		    	$('#myModal').modal("hide");
+		       if(isFullscreen()){
 		       	// this is full screen
-		    		startanimation();
+		    		enterFullScreen();
 	    		}else {
 		    		$('.exercise-movement_wrapper').addClass('hidden'); 
 					stopAnimation();
-					$('.navbar').show();
-					$('#fullscreen-alert').show();
+					$('.navbar').removeClass('hidden'); 
+					$('#fullscreen-alert').removeClass('hidden'); 
 		       }
 		    }, 500, "some unique string");
 		});
-
 	}
+
 
 	$(document).ready(function ready(){
 		
@@ -125,6 +157,25 @@ var waitForFinalEvent = (function () {
 		$('#clock').on('finish.countdown', function() {
     		setTimeout(function(){ $('#clock').addClass('hidden'); },100);
 	    });
+
+	    $('#start-animation-btn').on('click', function(e) {
+	    	e.preventDefault();
+	    	$('.action-btn-container').addClass('hidden'); 
+	    	startAnimation();
+	    });
+
+	    $('#return-list-btn').on('click', function(e) {
+	    	e.preventDefault();
+	    	window.location.href = '/exercise-list.html';
+	    });
+
+	    if(isFullscreen()) {
+       		// this is full screen
+    		//startanimation();
+    		enterFullScreen();
+		}
+
+		bindWindowResize();
 	});
 
 })();

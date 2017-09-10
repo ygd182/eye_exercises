@@ -135,6 +135,12 @@ h1 {
 	display: none;
 }
 
+.exercise-movement_wrapper .action-btn-container {
+	position: absolute;
+	top: calc(50% - 50px);
+	left: calc(50% - 240px);
+}
+
 
 .blink {
   animation: blinker linear infinite;
@@ -165,9 +171,34 @@ h1 {
 }*/
 
 .list-group {
-	font-size: 20px;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 .list-group-item {
 	min-height: 50px;
+}
+
+
+
+.exercise-page .modal-dialog {
+  position: relative;
+  height: 100vh;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: calc(50% - 60px);
+    left: calc(50% - 60px);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
