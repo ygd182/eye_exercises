@@ -1,0 +1,13 @@
+<h1>Exercises</h1>
+<ul id="exercise-list" class="list-group">
+    {{#exercises}}
+	<li class="list-group-item" data-id="{{_id}}">
+    <a href="/exercise.html?id={{_id}}">{{name}}</a>
+    <div class="btn-group pull-right">
+      <button type="button" class="btn btn-default btn view-exercise"><i class="glyphicon glyphicon-eye-open"></i></button>
+      <button type="button" class="btn btn-default btn edit-exercise"><i class="glyphicon glyphicon-pencil"></i></button>  
+      <button type="button" class="btn btn-default btn delete-exercise"><i class="glyphicon glyphicon-trash"></i></button>
+    </div>
+  </li>
+   {{/exercises}}
+</ul>
