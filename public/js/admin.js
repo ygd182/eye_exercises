@@ -79,7 +79,7 @@
 		window.location.href = '/exercise-list.html';
 	}
 
-	function onSuccessUpdate(msg, ) {
+	function onSuccessUpdate(msg) {
 		alert('Exercise Updated');
 	    console.log("saved" , msg );
 	    restorePage();
