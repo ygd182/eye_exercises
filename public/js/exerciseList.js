@@ -2,6 +2,7 @@
 
 (function() {
 	var template = {};
+	var deleteId = null;
 
 	/*var actionsDiv = '<div class="btn-group pull-right">'
 				+'<button type="button" class="btn btn-default btn view-exercise"><i class="glyphicon glyphicon-eye-open"></i></button>'
@@ -21,10 +22,6 @@
 
 
 	function onDeleteSucess (data) {
-		if(data){
-			alert('Exercise: ' + data._id + 'deleted');
-		}
-		
 		exerciseService.getExercises().then(render, common.onError);
 	}
 
@@ -35,11 +32,15 @@
 		return id;
 	}
 
+	function deleteExercise() {
+		exerciseService.deleteExercise(deleteId).then(onDeleteSucess ,common.onError);
+	}
+
 	function bindEvents() {
 		$(document).on('click','.delete-exercise', function(e) {
 			e.preventDefault();
-			var id = getIdFromParent($(e.target));
-			exerciseService.deleteExercise(id).then(onDeleteSucess ,common.onError)
+			modalView.show();
+			deleteId = getIdFromParent($(e.target));
 		});
 
 		$(document).on('click','.edit-exercise', function(e) {
@@ -63,10 +64,14 @@
 	}
 
 	function loadTemplates() {
-		common.loadTemplates(['exercise-list', 'navbar']).done(function(temp1, temp2) {
+		common.loadTemplates(['exercise-list', 'navbar', 'modal']).done(function(temp1, temp2, temp3) {
 			template.exerciseList = temp1[0];
 			template.navbar = temp2[0];
 			exerciseService.getExercises().then(render, common.onError);
+			modalView.init('#js-modal-container', temp3[0]);
+			modalView.bindConfirmAction(deleteExercise);
+			modalView.render();
+			
 			
 		});
 	}

@@ -1,0 +1,131 @@
+.modal-container {
+  width: 480px;
+}
+.modal-container .modal-header {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: #E5E5E5;
+  display: flex;
+  justify-content: space-between;
+}
+.modal-container .modal-header .modal-title-left {
+  padding: 5px 0 20px 5px;
+}
+.modal-container .modal-header .modal-title-left .modal-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+}
+.modal-container .modal-header .modal-title-right {
+  padding: 5px 5px 20px 0;
+}
+.modal-container .modal-header .modal-title-right .modal-enviroment {
+  font-weight: bold;
+}
+.modal-container .modal-body .modal-question {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 30px;
+  align-items: center;
+}
+.modal-container .modal-body .modal-question .modal-question-icon {
+  font-size: 35px;
+  color: #767A85;
+}
+.modal-container .modal-body .modal-question .modal-question-message {
+  font-size: 22px;
+  color: #555555;
+  margin-left: 15px;
+}
+.modal-container .modal-body .modal-dropdown-container {
+  position: absolute;
+  left: 91px;
+  top: 23px;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown {
+  width: 198px;
+  height: 28px;
+  text-align: left;
+  color: #555555;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.caret {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  vertical-align: middle;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown .modal-not-picked-option {
+  display: none;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value {
+  padding: 5px 10px;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label {
+  padding: 0 4px;
+  font-size: 13px;
+  font-weight: normal;
+  cursor: pointer;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-aborted,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-aborted {
+  color: #D9534F;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-cancelled,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-cancelled {
+  color: #614E9B;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-error,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-error {
+  background-color: #D9534F;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-failed,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-failed {
+  background-color: #99045B;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-completed,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-completed {
+  color: #5CB85C;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-duplicate,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-duplicate {
+  background-color: #614E9B;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-exists,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-exists {
+  color: #428BCA;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-pending,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-pending {
+  background-color: #428BCA;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-in-progress,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-in-progress {
+  color: #00ABA9;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-metadata-in-progress,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-metadata-in-progress {
+  color: #00ABA9;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-transferring,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-transferring {
+  background-color: #5BC0DE;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-stalled,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-stalled {
+  background-color: #99045B;
+}
+.modal-container .modal-body .modal-dropdown-container .modal-dropdown span.label.transfers-status-default,
+.modal-container .modal-body .modal-dropdown-container .dropdown-menu .dropdown-link-value span.label.transfers-status-default {
+  color: #555555;
+}
+.modal-container .modal-body .modal-body-message {
+  font-size: 13px;
+  color: #555555;
+  margin-top: 0;
+  margin-left: 77px;
+}
+.modal-container .modal-footer .btn {
+  width: 73px;
+}
