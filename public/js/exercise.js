@@ -119,7 +119,7 @@ var waitForFinalEvent = (function () {
 	}
 	//--------------------------------------------------------
 	function isFullscreen() {
-		return (screen.width === window.innerWidth /*&& screen.height === window.innerHeight*/);
+		return (screen.width === window.innerWidth && screen.height === window.innerHeight);
 	}
 
 	function onSucess(data) {
@@ -135,7 +135,7 @@ var waitForFinalEvent = (function () {
 
 		    waitForFinalEvent(function(){
 		    	$('#myModal').modal("hide");
-		       if(isFullscreen()){
+		        if(isFullscreen()){
 		       		// this is full screen
 		    		enterFullScreen();
 	    		}else {
