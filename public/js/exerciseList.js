@@ -59,20 +59,20 @@
 	function render(data) {
 		var viewModel = { exercises : data };
 		var navbarModel = {adminActive: false, listActive: true};
+
  		$('#exercises-container').html(Mustache.render(template.exerciseList, viewModel));
  		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
+ 		modalView.init('#js-modal-container', template.modal);
+		modalView.bindConfirmAction(deleteExercise);
+		modalView.render();
 	}
 
 	function loadTemplates() {
 		common.loadTemplates(['exercise-list', 'navbar', 'modal']).done(function(temp1, temp2, temp3) {
 			template.exerciseList = temp1[0];
 			template.navbar = temp2[0];
+			template.modal = temp3[0];
 			exerciseService.getExercises().then(render, common.onError);
-			modalView.init('#js-modal-container', temp3[0]);
-			modalView.bindConfirmAction(deleteExercise);
-			modalView.render();
-			
-			
 		});
 	}
 
