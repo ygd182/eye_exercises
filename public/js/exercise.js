@@ -136,7 +136,7 @@ var waitForFinalEvent = (function () {
 		    waitForFinalEvent(function(){
 		    	$('#myModal').modal("hide");
 		       if(isFullscreen()){
-		       	// this is full screen
+		       		// this is full screen
 		    		enterFullScreen();
 	    		}else {
 		    		$('.exercise-movement_wrapper').addClass('hidden'); 
@@ -148,34 +148,38 @@ var waitForFinalEvent = (function () {
 		});
 	}
 
-
-	$(document).ready(function ready(){
-		
-		var id = common.getParameterByName('id');
-		exerciseService.getExercise(id).then(onSucess,common.onError);
-			
+	function bindEvents() {
 		$('#clock').on('finish.countdown', function() {
     		setTimeout(function(){ $('#clock').addClass('hidden'); },100);
 	    });
 
 	    $('#start-animation-btn').on('click', function(e) {
 	    	e.preventDefault();
-	    	$('.action-btn-container').addClass('hidden'); 
-	    	startAnimation();
+	    	if(!$(e.target).hasClass('disabled')) {
+	    		$('.action-btn-container').addClass('hidden');
+	    		startAnimation();
+	    	}
 	    });
 
 	    $('#return-list-btn').on('click', function(e) {
 	    	e.preventDefault();
 	    	window.location.href = '/exercise-list.html';
 	    });
+		bindWindowResize();
+	}
 
+	$(document).ready(function ready(){
+		
+		var id = common.getParameterByName('id');
+		exerciseService.getExercise(id).then(onSucess,common.onError);
+			
 	    if(isFullscreen()) {
-       		// this is full screen
-    		//startanimation();
+       		// check if the user never left fullscreen mode
     		enterFullScreen();
 		}
 
-		bindWindowResize();
+		bindEvents();
+		
 	});
 
 })();
