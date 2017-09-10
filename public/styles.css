@@ -176,9 +176,12 @@ h1 {
 }
 
 .list-group-item {
-	min-height: 50px;
+	min-height: 56px;
 }
 
+.list-group-item a {
+	line-height: 34px;
+}
 
 
 .exercise-page .modal-dialog {

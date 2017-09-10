@@ -12,10 +12,23 @@ var common = (function() {
 	function onError(error) {
 		console.log(error);
 	}
+	/*
+	*@ param array[String]
+	* returns promise
+	*/
+	function loadTemplates(names) {
+		var promiseArray = [];
+		for (var i = 0; i < names.length; i++) {
+			promiseArray.push($.get('templates/' + names[i] + '.html'));
+		}
+		//$.when(...promiseArray)
+		return $.when.apply($, promiseArray);
+	}
 
 	return {
 		getParameterByName: getParameterByName,
-		onError: onError
+		onError: onError,
+		loadTemplates: loadTemplates
 	}
 
 })();

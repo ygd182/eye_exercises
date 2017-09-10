@@ -1,7 +1,9 @@
 //exercise-list.js
 
 (function() {
-	var actionsDiv = '<div class="btn-group pull-right">'
+	var template = {};
+
+	/*var actionsDiv = '<div class="btn-group pull-right">'
 				+'<button type="button" class="btn btn-default btn view-exercise"><i class="glyphicon glyphicon-eye-open"></i></button>'
                 +'<button type="button" class="btn btn-default btn edit-exercise"><i class="glyphicon glyphicon-pencil"></i></button>'  
                 +'<button type="button" class="btn btn-default btn delete-exercise"><i class="glyphicon glyphicon-trash"></i></button>'
@@ -15,7 +17,7 @@
 		}
 
 		$('#exercise-list').html(list);
-	}
+	}*/
 
 
 	function onDeleteSucess (data) {
@@ -23,7 +25,7 @@
 			alert('Exercise: ' + data._id + 'deleted');
 		}
 		
-		exerciseService.getExercises().then(onSuccess, common.onError);
+		exerciseService.getExercises().then(render, common.onError);
 	}
 
 	function getIdFromParent($element) {
@@ -33,7 +35,7 @@
 		return id;
 	}
 
-	$(document).ready(function ready(){
+	function bindEvents() {
 		$(document).on('click','.delete-exercise', function(e) {
 			e.preventDefault();
 			var id = getIdFromParent($(e.target));
@@ -51,9 +53,29 @@
 			var id = getIdFromParent($(e.target));
 			window.location.href = '/exercise.html?id=' + id;
 		});
+	}
 
-		exerciseService.getExercises().then(onSuccess, common.onError);
+	function render(data) {
+		var viewModel = { exercises : data };
+		var navbarModel = {adminActive: false, listActive: true};
+ 		$('#exercises-container').html(Mustache.render(template.exerciseList, viewModel));
+ 		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
+	}
 
+	function loadTemplates() {
+		common.loadTemplates(['exercise-list', 'navbar']).done(function(temp1, temp2) {
+			template.exerciseList = temp1[0];
+			template.navbar = temp2[0];
+			exerciseService.getExercises().then(render, common.onError);
+			
+		});
+	}
+
+	$(document).ready(function ready(){
+		bindEvents();
+
+		//exerciseService.getExercises().then(onSuccess, common.onError);
+		loadTemplates();
 
 	});
 
