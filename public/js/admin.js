@@ -61,33 +61,6 @@
 		return exercise;
 	}
 
-	/*function setData(exercise) {
-		console.log(exercise);
-		$('#from-input').val(exercise.fromId);
-		$('#to-input').val(exercise.toId);
-		$('#blink-check').prop('checked', exercise.blink);
-		if(!$('#blink-check').prop('checked')) {
-			$('#blink-speed-input').attr('disabled', true);
-		} else {
-			$('#blink-speed-input').removeAttr('disabled');
-		}
-		$('#blink-speed-input').val(exercise.blinkSpeed );
-		$('#duration-input').val(exercise.duration);
-		$('#reps-input').val(exercise.reps);
-		$('#name-input').val(exercise.name);
-		$('#rest-input').val(exercise.rest);
-	}
-
-	function loadForm() {
-		exerciseId = common.getParameterByName('id');
-		if(exerciseId) {
-			editMode = true;
-			$('#submit-btn').parent().hide();
-			$('#update-btn').parent().show();
-			exerciseService.getExercise(exerciseId).then(setData, onError);
-		}
-	}*/
-
 	function onError(data) {
 		common.onError(data);
 		restorePage();
@@ -132,8 +105,8 @@
 			//$('#exercise-form').validator();
 			formData = getData();
 			submitExercise = formData;
-			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
-			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
+			/*submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
+			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);*/
 
 
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
@@ -149,8 +122,8 @@
 
 			formData = getData();
 			submitExercise = formData;
-			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
-			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
+			/*submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
+			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);*/
 			console.log(submitExercise);
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
 				exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
@@ -167,8 +140,6 @@
 		var submitExercise = null;
 		//loadForm();
 		bindEvents();
-
-		//exerciseService.getExercises().then(onSuccess, common.onError);
 		loadTemplates();
 
 		
