@@ -5,125 +5,17 @@
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-     <script src="bower_components/bootstrap-validator/dist/validator.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/mustache.js/mustache.min.js"></script>
+    <script src="bower_components/bootstrap-validator/dist/validator.min.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/exerciseService.js"></script>
     <script type="text/javascript" src="js/admin.js"></script>
   </head>
 
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">Eye Exercise App</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="admin.html">Admin</a></li>
-          <li><a href="exercise-list.html">Exercise List</a></li>
-        </ul>
-      </div>
-    </nav>
-    <h1>Admin Area</h1>
-    <div class="movement-wrapper admin-movement_wrapper">
-      <div id="circle"></div>
-      <span id="span1">1</span>
-      <span id="span2">2</span>
-      <span id="span3">3</span>
-      <span id="span4">4</span>
-      <span id="span5">5</span>
-      <span id="span6">6</span>
-      <span id="span7">7</span>
-      <span id="span8">8</span>
-    </div>
-    <div class="container form-container">
-      <form id="exercise-form" data-toggle="validator">
-         <legend class="col-form-legend col-sm-12">Create Exercise</legend>
-         <div class="form-group row">
-          <div class="col-sm-12">
-            <label for="example-number-input" class="col-2 col-form-label">Exercise Name</label>
-            <div class="col-10">
-              <input id="name-input" class="form-control"  type="text" required placeholder="Enter the exercise name" data-required-error="*">
-            </div>
-          </div>
-        </div>
-        <fieldset class="form-group row">
-          <div class="col-sm-6">
-            <label class="form-check-label">From</label>
-            <select id="from-input" class="form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-            </select>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-check-label">To</label>
-            <select id="to-input" class="form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-            </select>
-          </div>
-        </fieldset>
-        <div class="form-group row">
-          <div class="col-sm-6">
-            <div class="form-check">
-              <label class="form-check-label">
-                Blink
-              </label>
-              <input id="blink-check" class="form-check-input" type="checkbox">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label for="example-number-input" class="col-2 col-form-label">Blink speed (1-16)</label>
-            <div class="col-10">
-              <input id="blink-speed-input" class="form-control" type="number" value="1" id="example-number-input" min="1" max="16" disabled>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <label for="example-number-input" class="col-2 col-form-label">Duration time (in secs)</label>
-            <div class="col-10">
-              <input id="duration-input" class="form-control" type="number" value="1" step=0.1 min="0.1" required>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <label for="example-number-input" class="col-2 col-form-label">Rest time (in secs)</label>
-            <div class="col-10">
-              <input id="rest-input" class="form-control" type="number" value="1"  min="0" max="60" required>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <label for="example-number-input" class="col-2 col-form-label">Number of reps</label>
-            <div class="col-10">
-              <input id="reps-input" class="form-control" type="number" value="1" id="example-number-input" required min="1">
-            </div>
-          </div>
-        </div>
-        <div class="form-group row">
-         <!-- <div class="col-sm-1">
-            <button id="preview-btn" type="submit" class="btn">Preview</button>
-          </div> -->
-          <div class="col-sm-1">
-            <button id="submit-btn" type="submit" class="btn btn-primary">Save</button>
-          </div>
-          <div class="col-sm-1">
-            <button id="update-btn" type="submit" class="btn btn-primary">Update</button>
-          </div>
-        </div>
-      </form>
-    </div>
+    <div id="navbar-container"></div>
+    <div id="admin-container"></div>
   </body>
 
 </html>
