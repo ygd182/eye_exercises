@@ -3,13 +3,35 @@
 	 fromId: null,
 	 toId: null,
 	 blink: false,
-	 blinkSpeed: 0,
-	 reps: 0,
-	 duration: 0,
+	 blinkSpeed: 1,
+	 reps: 1,
+	 duration: 1,
+	 rest: 1,
 	 name: ''
 	};
 
+	var fromOptions = [ {val: 1, sel: false},
+						{val: 2, sel: false},
+						{val: 3, sel: false},
+						{val: 4, sel: false},
+						{val: 5, sel: false},
+						{val: 6, sel: false},
+						{val: 7, sel: false},
+						{val: 8, sel: false}];
+
+	var toOptions = [   {val: 1, sel: false},
+						{val: 2, sel: false},
+						{val: 3, sel: false},
+						{val: 4, sel: false},
+						{val: 5, sel: false},
+						{val: 6, sel: false},
+						{val: 7, sel: false},
+						{val: 8, sel: false}];
+
 	var exerciseId = null;
+
+	var template = {};
+	var editMode = false;
 
 	function getPercentage(value, total) {
 		return value / total * 100;
@@ -37,32 +59,6 @@
 		exercise.name = $('#name-input').val();
 		exercise.rest = $('#rest-input').val();
 		return exercise;
-	}
-
-	function setData(exercise) {
-		console.log(exercise);
-		$('#from-input').val(exercise.fromId);
-		$('#to-input').val(exercise.toId);
-		$('#blink-check').prop('checked', exercise.blink);
-		if(!$('#blink-check').prop('checked')) {
-			$('#blink-speed-input').attr('disabled', true);
-		} else {
-			$('#blink-speed-input').removeAttr('disabled');
-		}
-		$('#blink-speed-input').val(exercise.blinkSpeed );
-		$('#duration-input').val(exercise.duration);
-		$('#reps-input').val(exercise.reps);
-		$('#name-input').val(exercise.name);
-		$('#rest-input').val(exercise.rest);
-	}
-
-	function loadForm() {
-		exerciseId = common.getParameterByName('id');
-		if(exerciseId) {
-			$('#submit-btn').parent().hide();
-			$('#update-btn').parent().show();
-			exerciseService.getExercise(exerciseId).then(setData, onError);
-		}
 	}
 
 	function onError(data) {
@@ -95,13 +91,8 @@
 		return data.fromId !== data.toId && data.name !== undefined && data.name !== ''; 
 	}
 
-	$(document).ready(function ready(){
-		$('#update-btn').parent().hide();
-		var formData = null;
-		var submitExercise = null;
-		loadForm();
-
-		$('#blink-check').on('change', function(e) {
+	function bindEvents() {
+		$(document).on('change', '#blink-check', function(e) {
 			if(!$(e.target).prop('checked')) {
 				$('#blink-speed-input').attr('disabled', true);
 			} else {
@@ -109,13 +100,13 @@
 			}
 		});
 
-		$('#submit-btn').on('click', function(e) {
+		$(document).on('click', '#submit-btn', function(e) {
 			e.preventDefault();
 			//$('#exercise-form').validator();
 			formData = getData();
 			submitExercise = formData;
-			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
-			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
+			/*submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
+			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);*/
 
 
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
@@ -126,13 +117,13 @@
 			
 		});
 
-		$('#update-btn').on('click', function(e) {
+		$(document).on('click','#update-btn', function(e) {
 			e.preventDefault();
 
 			formData = getData();
 			submitExercise = formData;
-			submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
-			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);
+			/*submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
+			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);*/
 			console.log(submitExercise);
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
 				exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
@@ -140,7 +131,59 @@
 				alert('Some fields are missing. From and To should be different');
 			}
 		});
+
+	}
+
+	$(document).ready(function ready(){
+		//$('#update-btn').parent().hide();
+		var formData = null;
+		var submitExercise = null;
+		//loadForm();
+		bindEvents();
+		loadTemplates();
+
+		
 	});
+
+
+	function setSelectedOption(options, id) {
+		if(id){
+			options[id-1].sel = true;
+		}
+	}
+
+	function render(data) {
+		setSelectedOption(toOptions, data.toId);
+		setSelectedOption(fromOptions, data.fromId);
+		var viewModel = { exercise : data , editMode: editMode, fromOptions: fromOptions, toOptions: toOptions};
+		var navbarModel = {adminActive: true, listActive: false};
+
+ 		$('#admin-container').html(Mustache.render(template.admin, viewModel));
+ 		$('#exercise-form').validator();
+ 		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
+ 		/*modalView.init('#js-modal-container', template.modal);
+		modalView.bindConfirmAction(deleteExercise);
+		modalView.render();*/
+	}
+
+	function getExerciseData() {
+		exerciseId = common.getParameterByName('id');
+		if(exerciseId) {
+			editMode = true;
+			exerciseService.getExercise(exerciseId).then(render, onError);
+		} else {
+			render(defaultExercise);
+		}
+	}
+
+	function loadTemplates() {
+		common.loadTemplates(['admin', 'navbar', 'modal']).done(function(temp1, temp2, temp3) {
+			template.admin = temp1[0];
+			template.navbar = temp2[0];
+			template.modal = temp3[0];
+			getExerciseData();
+		});
+	}
 
 })();
 

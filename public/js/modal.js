@@ -17,35 +17,17 @@ var modalView = (function ModalView() {
     var _confirmCb = null;
 
     /**
-     * Handles the success of the _confirmCb
-     *
-     */
-    function successHandler() {
-        $('#js-modal-container').modal('toggle');
-    }
-
-
-    /**
-     * Handles the error on the modal. If an action is needed after the error is thrown
-     *
-     * @param {Object} error jqXHR object
-     */
-    function errorHandler(error) {
-        console.log('Error message: ' + error.status + ' ' + error.responseText);
-        $('#js-modal-container').modal('toggle');
-    }
-
-    /**
      * Binds the buttons actions, the validation and the summit action
      *
      * @param {Object} $el
      */
     function bindButtonsActions($el) {
-        var submitButton = $el.find('#js-support-confirm-button');
+        var submitButton = $el.find('#js-confirm-button');
 
         $(submitButton).on('click', function(e) {
             e.preventDefault();
-            _confirmCb(successHandler, errorHandler);
+            _confirmCb();
+            $('#js-modal-container').modal('toggle');
         });
     }
 
@@ -120,7 +102,7 @@ var modalView = (function ModalView() {
 
         /**
          * Render in the html the template
-         * @memberof Support.ModalView
+         * @memberof ModalView
          */
         render: function render(externalTemplate) {
             var template = externalTemplate || this._template;
@@ -135,8 +117,8 @@ var modalView = (function ModalView() {
          */
         renderAsNotification: function (externalTemplate) {
             this.render(externalTemplate);
-            this.$el.find('#js-support-cancel-button').remove();
-            this.$el.find('#js-support-confirm-button').text('Ok');
+            this.$el.find('#js-cancel-button').remove();
+            this.$el.find('#js-confirm-button').text('Ok');
         },
 
         /**
@@ -146,4 +128,6 @@ var modalView = (function ModalView() {
             this.$el.modal('show');
         }
     };
+
+    return modal;
 })();

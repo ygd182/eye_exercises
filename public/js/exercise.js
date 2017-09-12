@@ -119,7 +119,6 @@ var waitForFinalEvent = (function () {
 	}
 	//--------------------------------------------------------
 	function isFullscreen() {
-		console.log(screen.height, window.innerHeight);
 		return (screen.width === window.innerWidth && screen.height-10  <= window.innerHeight);
 	}
 
