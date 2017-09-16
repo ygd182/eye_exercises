@@ -11,17 +11,19 @@
   <span id="span8">8</span>
 </div>
 <div class="container form-container">
-  <form id="exercise-form" data-toggle="validator">
+  <form id="exercise-form" data-toggle="validator" role="form">
      <legend class="col-form-legend col-sm-12">Create Exercise</legend>
-     <div class="form-group row">
-      <div class="col-sm-12">
-        <label for="example-number-input" class="col-2 col-form-label">Exercise Name</label>
-        <div class="col-10">
-          <input id="name-input" class="form-control"  type="text" required placeholder="Enter the exercise name" data-required-error="*" value="{{exercise.name}}">
+     <div class="row">
+      <div class="col-sm-12 ">
+        <label class="col-2 col-form-label">Exercise Name</label>
+        <div class="form-group col-10 has-feedback">
+          <input id="name-input" class="form-control"  type="text" required placeholder="Enter the exercise name" value="{{exercise.name}}"   data-required-error="The exercise name is required.">
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
         </div>
       </div>
     </div>
-    <fieldset class="form-group row">
+    <div class="form-group row">
       <div class="col-sm-6">
         <label class="form-check-label">From</label>
         <select id="from-input" class="form-control" value="{{exercise.fromId}}">
@@ -38,9 +40,9 @@
         {{/toOptions}}
         </select>
       </div>
-    </fieldset>
-    <div class="form-group row">
-      <div class="col-sm-6">
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group">
         <div class="form-check">
           <label class="form-check-label">
             Blink
@@ -48,34 +50,40 @@
           <input id="blink-check" class="form-check-input" type="checkbox" {{#exercise.blink}}checked="checked"{{/exercise.blink}}>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-6 form-group">
         <label for="example-number-input" class="col-2 col-form-label">Blink speed (1-16)</label>
         <div class="col-10">
           <input id="blink-speed-input" class="form-control" type="number" value="{{exercise.blinkSpeed}}"  min="1" max="16" {{^exercise.blink}}disabled{{/exercise.blink}}>
         </div>
       </div>
     </div>
-    <div class="form-group row">
+    <div class="row">
       <div class="col-sm-4">
         <label for="example-number-input" class="col-2 col-form-label">Duration time (in secs)</label>
-        <div class="col-10">
-          <input id="duration-input" class="form-control" type="number" value="{{exercise.duration}}" step=0.1 min="0.1" required>
+        <div class="col-10 has-feedback form-group">
+          <input id="duration-input" class="form-control" type="number" value="{{exercise.duration}}" step=0.1 min="0.1" required data-required-error="The duration is required.">
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
         </div>
       </div>
       <div class="col-sm-4">
         <label for="example-number-input" class="col-2 col-form-label">Rest time (in secs)</label>
-        <div class="col-10">
-          <input id="rest-input" class="form-control" type="number" value="{{exercise.rest}}"  min="0" max="60" required>
+        <div class="col-10 has-feedback form-group">
+          <input id="rest-input" class="form-control" type="number" value="{{exercise.rest}}"  min="0" max="60" required data-required-error="The rest time is required.">
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
         </div>
       </div>
       <div class="col-sm-4">
         <label for="example-number-input" class="col-2 col-form-label">Number of reps</label>
-        <div class="col-10">
-          <input id="reps-input" class="form-control" type="number" value="{{exercise.reps}}"  required min="1">
+        <div class="col-10 has-feedback form-group">
+          <input id="reps-input" class="form-control" type="number" value="{{exercise.reps}}"  required min="1" data-required-error="The # of reps is required.">
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
         </div>
       </div>
     </div>
-    <div class="form-group row">
+    <div class="row">
      <!-- <div class="col-sm-1">
         <button id="preview-btn" type="submit" class="btn">Preview</button>
       </div> -->
@@ -85,7 +93,7 @@
       </div>
       {{/editMode}}
       {{#editMode}}
-      <div class="col-sm-1">
+      <div class="col-sm-1 form-group">
         <button id="update-btn" type="submit" class="btn btn-primary">Update</button>
       </div>
       {{/editMode}}
