@@ -4,9 +4,9 @@
 	 toId: null,
 	 blink: false,
 	 blinkSpeed: 1,
-	 reps: 1,
-	 duration: 1,
-	 rest: 1,
+	 reps: null,
+	 duration: null,
+	 rest: null,
 	 name: ''
 	};
 
@@ -107,7 +107,7 @@
 			submitExercise = formData;
 			/*submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
 			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);*/
-
+			$('#exercise-form').validator('validate');
 
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
 				exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
@@ -125,6 +125,7 @@
 			/*submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
 			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);*/
 			console.log(submitExercise);
+			$('#exercise-form').validator('validate');
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
 				exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
 			}else {
