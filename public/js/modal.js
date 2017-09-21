@@ -6,12 +6,12 @@ var modalView = (function ModalView() {
 
     var _options = {
         title: 'Confirm',
-        bodyTitle: 'Are you sure?',
         body: 'Are you sure?',
-        confirm_color: 'primary',
+        confirm_color: 'danger',
         confirm_text: 'Yes',
         cancel_color: 'default',
-        cancel_text: 'No'
+        cancel_text: 'No',
+        has_cancel: true
     };
 
     var _confirmCb = null;
@@ -61,7 +61,7 @@ var modalView = (function ModalView() {
          * @param {Object} opts.
          */
         options: function options(opts) {
-            _options = opts || _options;
+            _options = Object.assign({}, _options, opts);
         },
 
         /**
@@ -71,15 +71,6 @@ var modalView = (function ModalView() {
          */
         setTitle: function setTitle(title) {
             _options.title = title;
-        },
-
-        /**
-         * Set the body first message
-         *
-         * @param {String} bodyTitle
-         */
-        setBodyTitle: function setBodyTitle(bodyTitle) {
-            _options.bodyTitle = bodyTitle;
         },
 
         /**

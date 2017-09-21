@@ -76,15 +76,15 @@
 	}
 
 	function onSuccessUpdate(msg) {
-		alert('Exercise Updated');
+		modalView.show();
 	    console.log("saved" , msg );
-	    restorePage();
+	    //restorePage();
 	}
 
 	function onSuccessSave(msg) {
-		alert('Exercise Saved');
+		modalView.show();
 	    console.log("saved" , msg );
-	    restorePage();
+	    //restorePage();
 	}
 
 	function isValidForm(data) {
@@ -136,10 +136,8 @@
 	}
 
 	$(document).ready(function ready(){
-		//$('#update-btn').parent().hide();
 		var formData = null;
 		var submitExercise = null;
-		//loadForm();
 		bindEvents();
 		loadTemplates();
 
@@ -162,9 +160,10 @@
  		$('#admin-container').html(Mustache.render(template.admin, viewModel));
  		$('#exercise-form').validator();
  		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
- 		/*modalView.init('#js-modal-container', template.modal);
-		modalView.bindConfirmAction(deleteExercise);
-		modalView.render();*/
+ 		modalView.init('#js-modal-container', template.modal);
+ 		modalView.options({has_cancel: false, body: 'Exercise saved.', title: 'Notification', confirm_color: 'primary', confirm_text: 'Dismiss'});
+		modalView.bindConfirmAction(restorePage);
+		modalView.render();
 	}
 
 	function getExerciseData() {
