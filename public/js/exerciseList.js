@@ -4,23 +4,6 @@
 	var template = {};
 	var deleteId = null;
 
-	/*var actionsDiv = '<div class="btn-group pull-right">'
-				+'<button type="button" class="btn btn-default btn view-exercise"><i class="glyphicon glyphicon-eye-open"></i></button>'
-                +'<button type="button" class="btn btn-default btn edit-exercise"><i class="glyphicon glyphicon-pencil"></i></button>'  
-                +'<button type="button" class="btn btn-default btn delete-exercise"><i class="glyphicon glyphicon-trash"></i></button>'
-                +'</div>'
-
-
-	function onSuccess(data) {
-		var list = '';
-		for (var i = 0; i < data.length; i++) {
-			list = list + '<li class="list-group-item" data-id="' + data[i]._id +'"><a href="/exercise.html?id=' + data[i]._id + '">'+ data[i].name +'</a>'+actionsDiv +'</li>';
-		}
-
-		$('#exercise-list').html(list);
-	}*/
-
-
 	function onDeleteSucess (data) {
 		exerciseService.getExercises().then(render, common.onError);
 	}
@@ -63,6 +46,7 @@
  		$('#exercises-container').html(Mustache.render(template.exerciseList, viewModel));
  		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
  		modalView.init('#js-modal-container', template.modal);
+ 		modalView.options({ body: 'Are you sure that you want to delete the selected exercise?'});
 		modalView.bindConfirmAction(deleteExercise);
 		modalView.render();
 	}
@@ -79,7 +63,6 @@
 	$(document).ready(function ready(){
 		bindEvents();
 
-		//exerciseService.getExercises().then(onSuccess, common.onError);
 		loadTemplates();
 
 	});
