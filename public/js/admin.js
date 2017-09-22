@@ -88,7 +88,8 @@
 	}
 
 	function isValidForm(data) {
-		return data.fromId !== data.toId && data.name !== undefined && data.name !== ''; 
+		return !$('#exercise-form').data('bs.validator').hasErrors();
+		//data.fromId !== data.toId /*&& data.name !== undefined && data.name !== ''*/; 
 	}
 
 	function bindEvents() {
@@ -112,7 +113,7 @@
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
 				exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
 			}else {
-				alert('Some fields are missing. From and To should be different');
+				//alert('Some fields are missing. From and To should be different');
 			}
 			
 		});
@@ -126,10 +127,11 @@
 			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);*/
 			console.log(submitExercise);
 			$('#exercise-form').validator('validate');
+
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
 				exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
 			}else {
-				alert('Some fields are missing. From and To should be different');
+		
 			}
 		});
 
@@ -151,15 +153,32 @@
 		}
 	}
 
+	function fromToCheckEquals($el) {
+	    var matchValue = $('#to-input').val(); // foo
+	    if ($el.val() === matchValue) {
+	      return 'From and To should be different';
+	    }
+	  } 
+
 	function render(data) {
+		var navbarModel = {adminActive: true, listActive: false};
+		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
+
 		setSelectedOption(toOptions, data.toId);
 		setSelectedOption(fromOptions, data.fromId);
 		var viewModel = { exercise : data , editMode: editMode, fromOptions: fromOptions, toOptions: toOptions};
-		var navbarModel = {adminActive: true, listActive: false};
-
+		
  		$('#admin-container').html(Mustache.render(template.admin, viewModel));
- 		$('#exercise-form').validator();
- 		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
+ 		var validatorObj = {
+ 			disable: false,
+ 			custom: {
+					  equals: fromToCheckEquals
+					}
+				};
+ 		$('#exercise-form').validator(validatorObj);
+ 		$f = $("form#exercise-form");
+		$f[0].reset();
+ 		
  		modalView.init('#js-modal-container', template.modal);
  		modalView.options({has_cancel: false, body: 'Exercise saved.', title: 'Notification', confirm_color: 'primary', confirm_text: 'Dismiss'});
 		modalView.bindConfirmAction(restorePage);
