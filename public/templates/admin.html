@@ -23,14 +23,16 @@
         </div>
       </div>
     </div>
-    <div class="form-group row">
-      <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-6 form-group">
         <label class="form-check-label">From</label>
-        <select id="from-input" class="form-control" value="{{exercise.fromId}}">
+        <select id="from-input" class="form-control" value="{{exercise.fromId}}" data-equals="foo">
         {{#fromOptions}}
          	<option value="{{val}}" {{#sel}}selected{{/sel}}>{{val}}</option>
         {{/fromOptions}}
         </select>
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        <div class="help-block with-errors"></div>
       </div>
       <div class="col-sm-6">
         <label class="form-check-label">To</label>
