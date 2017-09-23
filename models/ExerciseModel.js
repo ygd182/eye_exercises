@@ -15,15 +15,15 @@ var SchemaTypes = mongoose.Schema.Types;
 
 
 var ExerciseSchema = new Schema ({ 
-	from: {
+	/*from: {
         top: SchemaTypes.Double,
         left: SchemaTypes.Double
-    },
+    },*/
     fromId: Number,
-    to: {
+    /*to: {
         top: SchemaTypes.Double,
         left: SchemaTypes.Double
-    },
+    },*/
     toId: Number,
     name: String,
     blink: Boolean,
