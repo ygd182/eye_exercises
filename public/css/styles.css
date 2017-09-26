@@ -148,7 +148,7 @@ h1 {
 	left: calc(50% - 240px);
 }
 
-
+/*
 .blink {
   animation: blinker linear infinite;
   -webkit-backface-visibility: hidden;
@@ -157,25 +157,35 @@ h1 {
 }
 
 @keyframes blinker {
-	25% { opacity: 0.5; }  
+	0% { opacity: 0.5; }  
   	50% { opacity: 0; }
   	75% { opacity: 0.5; }
-}
+}*/
 /*
 .blink {
-  animation: blink-animation 1s steps(5, start) infinite;
-  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+  animation: blink-animation steps(5, start) infinite;
 }
 @keyframes blink-animation {
   to {
     visibility: hidden;
   }
-}
-@-webkit-keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
 }*/
+
+@keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+.blink {
+  animation: blink step-start 0s infinite;
+  -webkit-animation: blink step-start 0s infinite;
+}
+
 
 .list-group {
 	font-size: 14px;
