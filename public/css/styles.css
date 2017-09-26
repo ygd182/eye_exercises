@@ -161,16 +161,16 @@ h1 {
   	50% { opacity: 0; }
   	75% { opacity: 0.5; }
 }*/
-/*
+
 .blink {
-  animation: blink-animation steps(5, start) infinite;
+  animation: blink-animation steps(2, start) infinite;
 }
 @keyframes blink-animation {
   to {
     visibility: hidden;
   }
-}*/
-
+}
+/*
 @keyframes blink {
   50% {
     opacity: 0.0;
@@ -184,7 +184,7 @@ h1 {
 .blink {
   animation: blink step-start 0s infinite;
   -webkit-animation: blink step-start 0s infinite;
-}
+}*/
 
 
 .list-group {
