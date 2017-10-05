@@ -1,14 +1,18 @@
 (function() {
 	var defaultExercise = {
-	 fromId: null,
-	 toId: null,
-	 blink: false,
-	 blinkSpeed: 1,
+	 
 	 reps: null,
-	 duration: null,
+	 
 	 rest: null,
-	 name: ''
+	 name: '',
+	 parts: [defaultPart]
 	};
+
+	var defaultPart = {
+	 			fromId: null,
+	 			toId: null,
+	 			blink: false,
+	 			blinkSpeed: 1,duration: null};
 
 	var fromOptions = [ {val: 1, sel: false},
 						{val: 2, sel: false},
@@ -135,7 +139,28 @@
 			}
 		});
 
+		$(document).on('click', '#addPartBtn', function(e) {
+			e.preventDefault();
+			defaultExercise.parts.push(defaultPart);
+			render(defaultExercise);
+		});
+
+		$(document).on('click', '#removePartBtn', function(e) {
+			e.preventDefault();
+			var index = getIdFromParent($(e.target));
+			defaultExercise.parts.splice(index,1);
+			render(defaultExercise);
+		});
+
 	}
+
+	function getIdFromParent($element) {
+		var $liItem = $element.closest('li');
+		var id = $liItem.data('id');
+		console.log(id);
+		return id;
+	}
+
 
 	$(document).ready(function ready(){
 		var formData = null;
@@ -166,9 +191,14 @@
 
 		setSelectedOption(toOptions, data.toId);
 		setSelectedOption(fromOptions, data.fromId);
+
 		var viewModel = { exercise : data , editMode: editMode, fromOptions: fromOptions, toOptions: toOptions};
-		
- 		$('#admin-container').html(Mustache.render(template.admin, viewModel));
+		console.log(viewModel);
+		var source = template.admin;
+		var templateLoaded = Handlebars.compile(source); 
+		$('#admin-container').html(templateLoaded(viewModel));
+ 		//$('#admin-container').html(Mustache.render(template.admin, viewModel));
+
  		var validatorObj = {
  			disable: false,
  			custom: {
