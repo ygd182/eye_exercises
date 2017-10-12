@@ -52,7 +52,6 @@ var waitForFinalEvent = (function () {
 
 	function animate(exercise) {
 		if(exercise.reps > 0) {
-			console.log('animacion');
 			
 			$('#circle').show();
 			$('#circle').css("transition-duration", exercise.duration + 's');
@@ -62,19 +61,13 @@ var waitForFinalEvent = (function () {
 			}
 			$('#circle').addClass('position-transition');
 
-			console.log($('#circle').attr('class'));
-
 			setTimeout(function() {
 				$('#circle').css({
                 transform: 'translate(' + exercise.to.left + 'px, ' + exercise.to.top  + 'px)',
             });
 			}, 100);
-			
-
 
 		} else {
-			/*stopAnimation();
-			$('.action-btn-container').removeClass('hidden'); */
 			window.location.href = '/exercise-list.html';
 		}
 
@@ -87,14 +80,9 @@ var waitForFinalEvent = (function () {
             });
 
 		$('#circle').on("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function complete(event){
-	    	console.log('evento transition end');
 	    	$('#circle').removeClass('blink');
 	    	$('#circle').removeClass('position-transition');
-	    	setTimeout(function() {
-		    	
-
-		    	//$('#circle').css({top: exercise.from.top +'px', left: exercise.from.left +'px'});
-		    			    	
+	    	setTimeout(function() {	    			    	
 		    	
 		    	cloneExercise.reps--;
 
@@ -105,8 +93,6 @@ var waitForFinalEvent = (function () {
 		            $('#circle').addClass('position-transition');
 		    		showCountdown();
 		    	}else {
-		    		/*stopAnimation();
-		    		$('.action-btn-container').removeClass('hidden'); */
 					window.location.href = '/exercise-list.html';
 				}
 		    	
