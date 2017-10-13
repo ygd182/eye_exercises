@@ -1,18 +1,19 @@
 (function() {
 	var defaultExercise = {
 	 
-	 reps: null,
+	 reps: 1,
 	 
-	 rest: null,
+	 rest: 1,
 	 name: '',
-	 parts: [defaultPart]
+	 parts: []
 	};
 
 	var defaultPart = {
-	 			fromId: null,
-	 			toId: null,
+	 			fromId: 1,
+	 			toId: 1,
 	 			blink: false,
-	 			blinkSpeed: 1,duration: null};
+	 			blinkSpeed: 1,
+	 			duration: 1};
 
 	var fromOptions = [ {val: 1, sel: false},
 						{val: 2, sel: false},
@@ -52,16 +53,32 @@
 		return pos;
 	}
 
+
+	function getParts() {
+		var part = {};
+		var parts = [];
+
+		$('.parts-list-item').each(function(index) {
+			part = {};
+			console.log($(this));
+			part.fromId = $(this).find('.from-input').val();
+			part.toId = $(this).find('.to-input').val();
+			part.blink = $(this).find('.blink-check').prop('checked');
+			part.blinkSpeed = $(this).find('.blink-speed-input').val();
+			part.duration = $(this).find('.duration-input').val();
+			parts.push(part);
+		});
+		console.log(parts);
+		return parts;
+	}
+
 	function getData() {
 		var exercise = defaultExercise;
-		exercise.fromId = $('#from-input').val();
-		exercise.toId = $('#to-input').val();
-		exercise.blink = $('#blink-check').prop('checked');
-		exercise.blinkSpeed = $('#blink-speed-input').val();
-		exercise.duration = $('#duration-input').val();
+		
 		exercise.reps = $('#reps-input').val();
 		exercise.name = $('#name-input').val();
 		exercise.rest = $('#rest-input').val();
+		exercise.parts = getParts();
 		return exercise;
 	}
 
@@ -98,6 +115,7 @@
 
 	function bindEvents() {
 		$(document).on('change', '#blink-check', function(e) {
+			//CHEQUEAR ID
 			if(!$(e.target).prop('checked')) {
 				$('#blink-speed-input').attr('disabled', true);
 			} else {
@@ -110,8 +128,6 @@
 			//$('#exercise-form').validator();
 			formData = getData();
 			submitExercise = formData;
-			/*submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
-			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);*/
 			$('#exercise-form').validator('validate');
 
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
@@ -127,8 +143,6 @@
 
 			formData = getData();
 			submitExercise = formData;
-			/*submitExercise.from = getElementPositionPercentaje('span' + formData.fromId);
-			submitExercise.to = getElementPositionPercentaje('span' + formData.toId);*/
 			console.log(submitExercise);
 			$('#exercise-form').validator('validate');
 
@@ -139,17 +153,20 @@
 			}
 		});
 
-		$(document).on('click', '#addPartBtn', function(e) {
+		$(document).on('click', '#add-part-btn', function(e) {
 			e.preventDefault();
-			defaultExercise.parts.push(defaultPart);
-			render(defaultExercise);
+			var exercise = getData();
+			exercise.parts.push(defaultPart);
+			
+			render(exercise);
 		});
 
-		$(document).on('click', '#removePartBtn', function(e) {
+		$(document).on('click', '#remove-part-btn', function(e) {
 			e.preventDefault();
 			var index = getIdFromParent($(e.target));
-			defaultExercise.parts.splice(index,1);
-			render(defaultExercise);
+			var exercise = getData();
+			exercise.parts.splice(index,1);
+			render(exercise);
 		});
 
 	}
@@ -165,6 +182,7 @@
 	$(document).ready(function ready(){
 		var formData = null;
 		var submitExercise = null;
+		defaultExercise.parts.push(defaultPart);
 		bindEvents();
 		loadTemplates();
 
@@ -173,9 +191,11 @@
 
 
 	function setSelectedOption(options, id) {
+		console.log(options, id);
 		if(id){
 			options[id-1].sel = true;
 		}
+		return options;
 	}
 
 	function fromToCheckEquals($el) {
@@ -189,10 +209,31 @@
 		var navbarModel = {adminActive: true, listActive: false};
 		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
 
-		setSelectedOption(toOptions, data.toId);
-		setSelectedOption(fromOptions, data.fromId);
+		for (var i = 0; i < data.parts.length; i++) {
+			 fromOptions = [ {val: 1, sel: false},
+							{val: 2, sel: false},
+							{val: 3, sel: false},
+							{val: 4, sel: false},
+							{val: 5, sel: false},
+							{val: 6, sel: false},
+							{val: 7, sel: false},
+							{val: 8, sel: false}];
 
-		var viewModel = { exercise : data , editMode: editMode, fromOptions: fromOptions, toOptions: toOptions};
+		 	toOptions = [   {val: 1, sel: false},
+							{val: 2, sel: false},
+							{val: 3, sel: false},
+							{val: 4, sel: false},
+							{val: 5, sel: false},
+							{val: 6, sel: false},
+							{val: 7, sel: false},
+							{val: 8, sel: false}];
+			data.parts[i].toOptions = setSelectedOption(toOptions, data.parts[i].toId);
+			
+			data.parts[i].fromOptions = setSelectedOption(fromOptions, data.parts[i].fromId);
+		}
+		
+		console.log(data);
+		var viewModel = { exercise : data , editMode: editMode};
 		console.log(viewModel);
 		var source = template.admin;
 		var templateLoaded = Handlebars.compile(source); 

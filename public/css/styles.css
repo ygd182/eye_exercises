@@ -106,7 +106,11 @@ h1 {
 	margin-bottom: 10px;
 }
 
-#blink-check {
+.form-container .parts-list {
+	margin: 0;
+}
+
+.blink-check {
 	display: block;
 }
 
@@ -116,6 +120,7 @@ h1 {
 }
 
 .add-part-row {
+	margin-top: 10px;
 	margin-bottom: 25px;
 }
 
@@ -203,25 +208,6 @@ h1 {
    -moz-perspective: 1000;
    perspective: 1000;*/
 }
-
-
-
-
-/*
-@keyframes blink {
-  50% {
-    opacity: 0.0;
-  }
-}
-@-webkit-keyframes blink {
-  50% {
-    opacity: 0.0;
-  }
-}
-.blink {
-  animation: blink step-start 0s infinite;
-  -webkit-animation: blink step-start 0s infinite;
-}*/
 
 /*--------------transition-------------------------------------*/
 
