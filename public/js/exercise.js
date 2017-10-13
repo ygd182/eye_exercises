@@ -48,34 +48,60 @@ var waitForFinalEvent = (function () {
 		});
 	}
 
-	function animateCircle(exercise) {
+
+
+	function animate(exercise) {
 		if(exercise.reps > 0) {
-			$('#circle').css(exercise.from);
+			
 			$('#circle').show();
+			$('#circle').css("transition-duration", exercise.duration + 's');
 			if(exercise.blink) {
 				$('#circle').addClass('blink');
 				$('#circle').css("animation-duration", 1/8*exercise.blinkSpeed + 's');
 			}
-			$('#circle').animate({top: exercise.to.top +'px', left: exercise.to.left +'px'}, exercise.duration*1000, function complete(){
-		    	$('#circle').removeClass('blink');
-		    	cloneExercise = jQuery.extend(true, {}, exercise);
+			$('#circle').addClass('position-transition');
+
+			setTimeout(function() {
+				$('#circle').css({
+                transform: 'translate(' + exercise.to.left + 'px, ' + exercise.to.top  + 'px)',
+            });
+			}, 100);
+
+		} else {
+			window.location.href = '/exercise-list.html';
+		}
+
+	}
+
+	function animateCircle(exercise) {
+		cloneExercise = jQuery.extend(true, {}, exercise);
+		$('#circle').css({
+                transform: 'translate(' + exercise.from.left + 'px, ' + exercise.from.top  + 'px)'
+            });
+
+		$('#circle').on("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function complete(event){
+	    	$('#circle').removeClass('blink');
+	    	$('#circle').removeClass('position-transition');
+	    	setTimeout(function() {	    			    	
+		    	
 		    	cloneExercise.reps--;
 
 		    	if(cloneExercise.reps > 0) {
+		    		$('#circle').css({
+		                transform: 'translate(' + exercise.from.left + 'px, ' + exercise.from.top  + 'px)'
+		            });
+		            $('#circle').addClass('position-transition');
 		    		showCountdown();
 		    	}else {
-		    		/*stopAnimation();
-		    		$('.action-btn-container').removeClass('hidden'); */
 					window.location.href = '/exercise-list.html';
 				}
 		    	
-		    	intervalFunction = setTimeout(function(){ animateCircle(cloneExercise) }, exercise.rest *1000 + 100);
-		    });
-		} else {
-			/*stopAnimation();
-			$('.action-btn-container').removeClass('hidden'); */
-			window.location.href = '/exercise-list.html';
-		}
+		    	intervalFunction = setTimeout(function(){ animate(cloneExercise) }, exercise.rest *1000 + 100);
+		    }, 100);
+	    });
+
+	   animate(exercise);
+
 		
 	}
 
@@ -91,7 +117,7 @@ var waitForFinalEvent = (function () {
 	}
 
 
-	function startanimation() {
+	/*function startanimation() {
 		$('.action-btn-container').removeClass('hidden'); 
 
 		$('.navbar').hide();
@@ -100,7 +126,7 @@ var waitForFinalEvent = (function () {
 		exercise.from = $('#span' + exercise.fromId).position();
 		exercise.to = $('#span' + exercise.toId).position();
 		animateCircle(exercise);
-	}
+	}*/
 
 
 	//------------------------------------------
@@ -119,7 +145,7 @@ var waitForFinalEvent = (function () {
 	}
 	//--------------------------------------------------------
 	function isFullscreen() {
-		return (screen.width === window.innerWidth && screen.height-10  <= window.innerHeight);
+		return (screen.width === window.innerWidth /*&& screen.height-10  <= window.innerHeight*/);
 	}
 
 	function onSucess(data) {
