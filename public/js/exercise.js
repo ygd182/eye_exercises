@@ -145,7 +145,7 @@ var waitForFinalEvent = (function () {
 	}
 	//--------------------------------------------------------
 	function isFullscreen() {
-		return (screen.width === window.innerWidth /*&& screen.height-10  <= window.innerHeight*/);
+		return (screen.width === window.innerWidth && screen.height-10  <= window.innerHeight);
 	}
 
 	function onSucess(data) {
