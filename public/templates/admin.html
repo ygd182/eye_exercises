@@ -48,7 +48,7 @@
         <li class="list-group-item col-sm-12 parts-list-item" data-id="{{@index}}">
            <div class="col-sm-2 form-group">
             <label class="form-check-label">From</label>
-            <select id="" class="form-control from-input" data-equals="foo">
+            <select id="from-input-{{@index}}" class="form-control from-input" data-equals="foo">
             {{#fromOptions}}
               <option value="{{val}}" {{#sel}}selected{{/sel}}>{{val}}</option>
             {{/fromOptions}}
@@ -57,7 +57,7 @@
           </div>
           <div class="col-sm-2">
             <label class="form-check-label">To</label>
-            <select id="" class="form-control to-input">
+            <select id="to-input-{{@index}}" class="form-control to-input">
             {{#toOptions}}
               <option value="{{val}}" {{#sel}}selected{{/sel}}>{{val}}</option>
             {{/toOptions}}

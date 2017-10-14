@@ -60,7 +60,6 @@
 
 		$('.parts-list-item').each(function(index) {
 			part = {};
-			console.log($(this));
 			part.fromId = $(this).find('.from-input').val();
 			part.toId = $(this).find('.to-input').val();
 			part.blink = $(this).find('.blink-check').prop('checked');
@@ -68,7 +67,6 @@
 			part.duration = $(this).find('.duration-input').val();
 			parts.push(part);
 		});
-		console.log(parts);
 		return parts;
 	}
 
@@ -125,13 +123,14 @@
 
 		$(document).on('click', '#submit-btn', function(e) {
 			e.preventDefault();
-			//$('#exercise-form').validator();
+
 			formData = getData();
 			submitExercise = formData;
 			$('#exercise-form').validator('validate');
 
+			console.log(formData);
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
-				exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
+				//exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
 			}else {
 				//alert('Some fields are missing. From and To should be different');
 			}
@@ -157,6 +156,7 @@
 			e.preventDefault();
 			var exercise = getData();
 			exercise.parts.push(defaultPart);
+			$('#exercise-form').validator('update');
 			
 			render(exercise);
 		});
@@ -191,7 +191,6 @@
 
 
 	function setSelectedOption(options, id) {
-		console.log(options, id);
 		if(id){
 			options[id-1].sel = true;
 		}
@@ -199,16 +198,15 @@
 	}
 
 	function fromToCheckEquals($el) {
-	    var matchValue = $('#to-input').val(); // foo
+		var numId = $el.attr('id').match(/\d+/)[0];
+	    var matchValue = $('#to-input-'+ numId).val(); // foo
 	    if ($el.val() === matchValue) {
 	      return 'From and To should be different';
 	    }
-	  } 
+	} 
 
-	function render(data) {
-		var navbarModel = {adminActive: true, listActive: false};
-		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
 
+	function loadSelectArrays(data) {
 		for (var i = 0; i < data.parts.length; i++) {
 			 fromOptions = [ {val: 1, sel: false},
 							{val: 2, sel: false},
@@ -231,10 +229,17 @@
 			
 			data.parts[i].fromOptions = setSelectedOption(fromOptions, data.parts[i].fromId);
 		}
+
+		return data;
+	}
+
+	function render(data) {
+		var navbarModel = {adminActive: true, listActive: false};
+		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
+
+		data = loadSelectArrays(data);
 		
-		console.log(data);
 		var viewModel = { exercise : data , editMode: editMode};
-		console.log(viewModel);
 		var source = template.admin;
 		var templateLoaded = Handlebars.compile(source); 
 		$('#admin-container').html(templateLoaded(viewModel));
