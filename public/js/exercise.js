@@ -165,6 +165,7 @@ var waitForFinalEvent = (function () {
 		       		// this is full screen
 		    		enterFullScreen();
 	    		}else {
+	    			$('#clock').addClass('hidden');
 		    		$('.exercise-movement_wrapper').addClass('hidden'); 
 					stopAnimation();
 					$('.navbar').removeClass('hidden'); 
