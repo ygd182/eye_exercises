@@ -145,7 +145,7 @@ var waitForFinalEvent = (function () {
 	}
 	//--------------------------------------------------------
 	function isFullscreen() {
-		return (screen.width === window.innerWidth /*&& screen.height-10  <= window.innerHeight*/);
+		return (screen.width === window.innerWidth && screen.height-10  <= window.innerHeight);
 	}
 
 	function onSucess(data) {
@@ -165,6 +165,7 @@ var waitForFinalEvent = (function () {
 		       		// this is full screen
 		    		enterFullScreen();
 	    		}else {
+	    			$('#clock').addClass('hidden');
 		    		$('.exercise-movement_wrapper').addClass('hidden'); 
 					stopAnimation();
 					$('.navbar').removeClass('hidden'); 
