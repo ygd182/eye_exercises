@@ -112,12 +112,13 @@
 	}
 
 	function bindEvents() {
-		$(document).on('change', '#blink-check', function(e) {
+		$(document).on('change', '.blink-check', function(e) {
 			//CHEQUEAR ID
+			var numId = ($(e.target).attr('id')).match(/\d+/)[0];
 			if(!$(e.target).prop('checked')) {
-				$('#blink-speed-input').attr('disabled', true);
+				$('#blink-speed-input-' + numId).attr('disabled', true);
 			} else {
-				$('#blink-speed-input').removeAttr('disabled');
+				$('#blink-speed-input-' + numId).removeAttr('disabled');
 			}
 		});
 
@@ -130,7 +131,7 @@
 
 			console.log(formData);
 			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
-				//exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
+				exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
 			}else {
 				//alert('Some fields are missing. From and To should be different');
 			}
