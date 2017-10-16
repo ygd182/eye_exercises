@@ -113,7 +113,6 @@
 
 	function bindEvents() {
 		$(document).on('change', '.blink-check', function(e) {
-			//CHEQUEAR ID
 			var numId = ($(e.target).attr('id')).match(/\d+/)[0];
 			if(!$(e.target).prop('checked')) {
 				$('#blink-speed-input-' + numId).attr('disabled', true);

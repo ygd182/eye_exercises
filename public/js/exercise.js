@@ -17,25 +17,10 @@ var waitForFinalEvent = (function () {
 	var intervalFunction = null;
 	var fullscreenMode = false;
 	var cloneExercise = null;
-	var defaultExercise = {
-	 from: null,
-	 to: null,
-	 blink: false,
-	 blinkSpeed: 0,
-	 reps: 0,
-	 duration: 0
-	};
 
-	function getData() {
-		var exercise = defaultExercise;
-		exercise.from = $('#from-input').val();
-		exercise.to = $('#to-input').val();
-		exercise.blink = $('#blink-check').val();
-		exercise.blinkSpeed = $('#blink-speed-input').val();
-		exercise.duration = $('#duration-input').val();
-		exercise.reps = $('#reps-input').val();
-		return exercise;
-	}
+	var repCounter = 1;
+	var partCounter = 0;
+
 
 	function showCountdown() {
 		$('#clock').removeClass('hidden');
@@ -51,58 +36,56 @@ var waitForFinalEvent = (function () {
 
 
 	function animate(exercise) {
-		if(exercise.reps > 0) {
-			
-			$('#circle').show();
-			$('#circle').css("transition-duration", exercise.duration + 's');
-			if(exercise.blink) {
-				$('#circle').addClass('blink');
-				$('#circle').css("animation-duration", 1/8*exercise.blinkSpeed + 's');
-			}
-			$('#circle').addClass('position-transition');
-
-			setTimeout(function() {
-				$('#circle').css({
-                transform: 'translate(' + exercise.to.left + 'px, ' + exercise.to.top  + 'px)',
+			exercise.from = $('#span' + exercise.fromId).position();
+			exercise.to = $('#span' + exercise.toId).position();
+			$('#circle').css({
+                transform: 'translate(' + exercise.from.left + 'px, ' + exercise.from.top  + 'px)'
             });
+            setTimeout(function() {	
+			
+				$('#circle').show();
+				$('#circle').css("transition-duration", exercise.duration + 's');
+				if(exercise.blink) {
+					$('#circle').addClass('blink');
+					$('#circle').css("animation-duration", 1/8*exercise.blinkSpeed + 's');
+				}
+				$('#circle').addClass('position-transition');
+
+				setTimeout(function() {
+					$('#circle').css({
+	                transform: 'translate(' + exercise.to.left + 'px, ' + exercise.to.top  + 'px)',
+	            });
+				}, 100);
 			}, 100);
-
-		} else {
-			window.location.href = '/exercise-list.html';
-		}
-
 	}
 
 	function animateCircle(exercise) {
-		cloneExercise = jQuery.extend(true, {}, exercise);
-		$('#circle').css({
-                transform: 'translate(' + exercise.from.left + 'px, ' + exercise.from.top  + 'px)'
-            });
 
 		$('#circle').on("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function complete(event){
 	    	$('#circle').removeClass('blink');
 	    	$('#circle').removeClass('position-transition');
-	    	setTimeout(function() {	    			    	
-		    	
-		    	cloneExercise.reps--;
 
-		    	if(cloneExercise.reps > 0) {
-		    		$('#circle').css({
-		                transform: 'translate(' + exercise.from.left + 'px, ' + exercise.from.top  + 'px)'
-		            });
-		            $('#circle').addClass('position-transition');
-		    		showCountdown();
-		    	}else {
-					window.location.href = '/exercise-list.html';
-				}
+	    	partCounter++;
+	    	if(partCounter< exercise.parts.length) {
+	    		animate(exercise.parts[partCounter]); 
 		    	
-		    	intervalFunction = setTimeout(function(){ animate(cloneExercise) }, exercise.rest *1000 + 100);
-		    }, 100);
+
+	    	} else {
+	    		repCounter++;
+	    		if(repCounter<= exercise.reps) {
+	    			partCounter = 0;
+	    			showCountdown();
+		    		intervalFunction = setTimeout(function(){ animate(exercise.parts[partCounter]); }, exercise.rest *1000 + 100);
+		    	
+	    			
+	    		} else {
+	    			window.location.href = '/exercise-list.html';
+	    		}
+	    	}
 	    });
-
-	   animate(exercise);
-
+	    animate(exercise.parts[partCounter]);
 		
+
 	}
 
 	function stopAnimationByReps() {
@@ -117,23 +100,12 @@ var waitForFinalEvent = (function () {
 	}
 
 
-	/*function startanimation() {
-		$('.action-btn-container').removeClass('hidden'); 
-
-		$('.navbar').hide();
-		$('.exercise-movement_wrapper').removeClass('hidden'); 
-		$('#fullscreen-alert').hide();
-		exercise.from = $('#span' + exercise.fromId).position();
-		exercise.to = $('#span' + exercise.toId).position();
-		animateCircle(exercise);
-	}*/
-
-
 	//------------------------------------------
 	function startAnimation() {
 		$('.exercise-movement_wrapper').removeClass('hidden'); 
-		exercise.from = $('#span' + exercise.fromId).position();
-		exercise.to = $('#span' + exercise.toId).position();
+		repCounter = 1;
+		partCounter = 0;
+		
 		animateCircle(exercise);
 	}
 
