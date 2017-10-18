@@ -22,7 +22,8 @@
 						{val: 5, sel: false},
 						{val: 6, sel: false},
 						{val: 7, sel: false},
-						{val: 8, sel: false}];
+						{val: 8, sel: false},
+						{val: 9, sel: false}];
 
 	var toOptions = [   {val: 1, sel: false},
 						{val: 2, sel: false},
@@ -31,7 +32,8 @@
 						{val: 5, sel: false},
 						{val: 6, sel: false},
 						{val: 7, sel: false},
-						{val: 8, sel: false}];
+						{val: 8, sel: false},
+						{val: 9, sel: false}];
 
 	var exerciseId = null;
 
@@ -215,7 +217,8 @@
 							{val: 5, sel: false},
 							{val: 6, sel: false},
 							{val: 7, sel: false},
-							{val: 8, sel: false}];
+							{val: 8, sel: false},
+							{val: 9, sel: false}];
 
 		 	toOptions = [   {val: 1, sel: false},
 							{val: 2, sel: false},
@@ -224,7 +227,8 @@
 							{val: 5, sel: false},
 							{val: 6, sel: false},
 							{val: 7, sel: false},
-							{val: 8, sel: false}];
+							{val: 8, sel: false},
+							{val: 9, sel: false}];
 			data.parts[i].toOptions = setSelectedOption(toOptions, data.parts[i].toId);
 			
 			data.parts[i].fromOptions = setSelectedOption(fromOptions, data.parts[i].fromId);
