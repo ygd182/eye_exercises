@@ -59,37 +59,44 @@ var waitForFinalEvent = (function () {
 			}, 100);
 	}
 
-	function animateCircle(exercise) {
 
-		$('#circle').on("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function complete(event){
-	    	$('#circle').removeClass('blink');
-	    	$('#circle').removeClass('position-transition');
 
-	    	partCounter++;
-	    	if(partCounter< exercise.parts.length) {
-	    		animate(exercise.parts[partCounter]); 
-		    	
+	function transitionEndHandler(event){
+    	$('#circle').removeClass('blink');
+    	$('#circle').removeClass('position-transition');
+    	$('#circle').css("transition-duration", 0 + 's');
 
-	    	} else {
-	    		repCounter++;
-	    		if(repCounter<= exercise.reps) {
-	    			partCounter = 0;
-	    			showCountdown();
-		    		intervalFunction = setTimeout(function(){ animate(exercise.parts[partCounter]); }, exercise.rest *1000 + 100);
-		    	
-	    			
-	    		} else {
-	    			window.location.href = '/exercise-list.html';
-	    		}
-	    	}
-	    });
+    	partCounter++;
+    	if(partCounter< exercise.parts.length) {
+    		setTimeout(function(){ animate(exercise.parts[partCounter]); }, 100);
+	    	
+
+    	} else {
+    		repCounter++;
+    		if(repCounter<= exercise.reps) {
+    			partCounter = 0;
+    			showCountdown();
+	    		intervalFunction = setTimeout(function(){ animate(exercise.parts[partCounter]); }, exercise.rest *1000 + 100);
+	    	
+    			
+    		} else {
+    			window.location.href = '/exercise-list.html';
+    		}
+    	}
+    }
+
+	function animateCircle() {
+		$('#circle').on("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", transitionEndHandler);
 	    animate(exercise.parts[partCounter]);
-		
+	}
 
+	function unbindTransition() {
+		$('#circle').off("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", transitionEndHandler);
 	}
 
 	function stopAnimationByReps() {
 	    clearTimeout(intervalFunction);
+	    unbindTransition();
 	}
 
 	function stopAnimation() {
@@ -106,7 +113,7 @@ var waitForFinalEvent = (function () {
 		repCounter = 1;
 		partCounter = 0;
 		
-		animateCircle(exercise);
+		animateCircle();
 	}
 
 	function enterFullScreen() {
