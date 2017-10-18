@@ -166,6 +166,7 @@
 		$(document).on('click', '#remove-part-btn', function(e) {
 			e.preventDefault();
 			var index = getIdFromParent($(e.target));
+			console.log(index);
 			var exercise = getData();
 			exercise.parts.splice(index,1);
 			render(exercise);
@@ -176,7 +177,6 @@
 	function getIdFromParent($element) {
 		var $liItem = $element.closest('li');
 		var id = $liItem.data('id');
-		console.log(id);
 		return id;
 	}
 
