@@ -68,17 +68,13 @@ var waitForFinalEvent = (function () {
 
     	partCounter++;
     	if(partCounter< exercise.parts.length) {
-    		setTimeout(function(){ animate(exercise.parts[partCounter]); }, 100);
-	    	
-
+    		animate(exercise.parts[partCounter]);
     	} else {
     		repCounter++;
     		if(repCounter<= exercise.reps) {
     			partCounter = 0;
     			showCountdown();
-	    		intervalFunction = setTimeout(function(){ animate(exercise.parts[partCounter]); }, exercise.rest *1000 + 100);
-	    	
-    			
+	    		intervalFunction = setTimeout(function(){ animate(exercise.parts[partCounter]); }, exercise.rest *1000 + 100);    			
     		} else {
     			window.location.href = '/exercise-list.html';
     		}
