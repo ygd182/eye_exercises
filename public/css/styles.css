@@ -46,10 +46,6 @@ h1 {
 	right: 0;
 }
 
-#span3 {
-	top: 0;
-	right: 0;
-}
 
 #span4 {
 	top: calc(50% - 15px);
@@ -58,23 +54,29 @@ h1 {
 
 #span5 {
 	top: calc(50% - 15px);
-	right: 0;
+	left: 50%;
 }
 
 #span6 {
-	bottom: 0;
-	left: 0;
+	top: calc(50% - 15px);
+	right: 0;
 }
 
 #span7 {
 	bottom: 0;
-	left: 50%;
+	left: 0;
 }
 
 #span8 {
 	bottom: 0;
+	left: 50%;
+}
+
+#span9 {
+	bottom: 0;
 	right: 0;
 }
+
 
 
 #circle {
@@ -104,10 +106,23 @@ h1 {
 	margin-bottom: 10px;
 }
 
-#blink-check {
+.form-container .parts-list {
+	margin: 0;
+}
+
+.blink-check {
 	display: block;
 }
 
+.parts-action-container {
+	padding-top: 25px;
+	text-align: center;
+}
+
+.add-part-row {
+	margin-top: 10px;
+	margin-bottom: 25px;
+}
 
 /*-------------EXERCISE PAGE-------------*/
 
@@ -193,25 +208,6 @@ h1 {
    -moz-perspective: 1000;
    perspective: 1000;*/
 }
-
-
-
-
-/*
-@keyframes blink {
-  50% {
-    opacity: 0.0;
-  }
-}
-@-webkit-keyframes blink {
-  50% {
-    opacity: 0.0;
-  }
-}
-.blink {
-  animation: blink step-start 0s infinite;
-  -webkit-animation: blink step-start 0s infinite;
-}*/
 
 /*--------------transition-------------------------------------*/
 
