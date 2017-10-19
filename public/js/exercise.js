@@ -68,7 +68,7 @@ var waitForFinalEvent = (function () {
 
     	partCounter++;
     	if(partCounter< exercise.parts.length) {
-    		animate(exercise.parts[partCounter]);
+    		intervalFunction = setTimeout(function(){ animate(exercise.parts[partCounter]);}, 100);    	
     	} else {
     		repCounter++;
     		if(repCounter<= exercise.reps) {
