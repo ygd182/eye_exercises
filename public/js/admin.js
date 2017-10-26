@@ -1,8 +1,6 @@
 (function() {
 	var defaultExercise = {
-	 
 	 reps: 1,
-	 
 	 rest: 1,
 	 name: '',
 	 parts: []
@@ -239,15 +237,16 @@
 
 	function render(data) {
 		var navbarModel = {adminActive: true, listActive: false};
-		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
+		var templateLoaded = Handlebars.compile(template.navbar);
+
+		$('#navbar-container').html(templateLoaded(navbarModel));
 
 		data = loadSelectArrays(data);
 		
 		var viewModel = { exercise : data , editMode: editMode};
 		var source = template.admin;
-		var templateLoaded = Handlebars.compile(source); 
+		templateLoaded = Handlebars.compile(source); 
 		$('#admin-container').html(templateLoaded(viewModel));
- 		//$('#admin-container').html(Mustache.render(template.admin, viewModel));
 
  		var validatorObj = {
  			disable: false,
