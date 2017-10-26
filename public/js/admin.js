@@ -179,17 +179,6 @@
 	}
 
 
-	$(document).ready(function ready(){
-		var formData = null;
-		var submitExercise = null;
-		defaultExercise.parts.push(defaultPart);
-		bindEvents();
-		loadTemplates();
-
-		
-	});
-
-
 	function setSelectedOption(options, id) {
 		if(id){
 			options[id-1].sel = true;
@@ -282,6 +271,14 @@
 			getExerciseData();
 		});
 	}
+
+	$(document).ready(function ready(){
+		var formData = null;
+		var submitExercise = null;
+		defaultExercise.parts.push(defaultPart);
+		bindEvents();
+		loadTemplates();
+	});
 
 })();
 

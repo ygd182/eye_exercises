@@ -65,9 +65,7 @@
 
 	$(document).ready(function ready(){
 		bindEvents();
-
 		loadTemplates();
-
 	});
 
 })();
