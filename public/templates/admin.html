@@ -72,7 +72,7 @@
               <div class="help-block with-errors"></div>
             </div>
           </div>
-          <div class="col-sm-2 form-group">
+          <div class="col-sm-1 form-group">
             <div class="form-check">
               <label class="form-check-label">
                 Blink
@@ -84,6 +84,14 @@
             <label for="example-number-input" class="col-2 col-form-label">Blink speed (1-16)</label>
             <div class="col-10">
               <input id="blink-speed-input-{{@index}}" class="form-control blink-speed-input" type="number" value="{{blinkSpeed}}"  min="1" max="16" {{^blink}}disabled{{/blink}}>
+            </div>
+          </div>
+           <div class="col-sm-1 form-group">
+            <div class="form-check">
+              <label class="form-check-label">
+                Hide
+              </label>
+              <input id="hide-check-{{@index}}" class="form-check-input hide-check" type="checkbox" {{#hide}} checked="checked"{{/hide}}>
             </div>
           </div>
           {{#if @index}}

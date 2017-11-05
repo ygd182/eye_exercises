@@ -77,8 +77,6 @@ h1 {
 	right: 0;
 }
 
-
-
 #circle {
 	width: 30px;
 	height: 30px;
@@ -110,7 +108,7 @@ h1 {
 	margin: 0;
 }
 
-.blink-check {
+.blink-check, .hide-check {
 	display: block;
 }
 
@@ -134,6 +132,10 @@ h1 {
 	display: none;
 }
 
+.not-shown {
+	visibility: hidden;
+}
+
 .exercise-movement_wrapper span {
 	visibility: hidden;
 }
@@ -146,12 +148,6 @@ h1 {
 	top: calc(50% - 50px);
 	left: calc(50% - 90px);
 }
-/*
-
-.full-height {
-	height: 100vh;
-}
-*/
 
 .exercise-movement_wrapper #circle {
 	display: none;
@@ -210,8 +206,6 @@ h1 {
 }
 
 /*--------------transition-------------------------------------*/
-
-
 
 .list-group {
 	font-size: 14px;

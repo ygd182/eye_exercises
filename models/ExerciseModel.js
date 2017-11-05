@@ -10,6 +10,7 @@ var PartSchema = new Schema ({
     blink: Boolean,
     blinkSpeed: SchemaTypes.Double,
     duration: SchemaTypes.Double,
+    hide: Boolean
 });
 
 var ExerciseSchema = new Schema ({ 

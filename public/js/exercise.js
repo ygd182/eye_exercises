@@ -42,8 +42,11 @@ var waitForFinalEvent = (function () {
                 transform: 'translate(' + exercise.from.left + 'px, ' + exercise.from.top  + 'px)'
             });
             setTimeout(function() {	
-			
+				
 				$('#circle').show();
+				if(exercise.hide) {
+					$('#circle').addClass('not-shown');
+				}
 				$('#circle').css("transition-duration", exercise.duration + 's');
 				if(exercise.blink) {
 					$('#circle').addClass('blink');
@@ -62,6 +65,7 @@ var waitForFinalEvent = (function () {
 
 
 	function transitionEndHandler(event){
+		$('#circle').removeClass('not-shown');
     	$('#circle').removeClass('blink');
     	$('#circle').removeClass('position-transition');
     	$('#circle').css("transition-duration", 0 + 's');

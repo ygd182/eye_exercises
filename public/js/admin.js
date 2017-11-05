@@ -11,7 +11,9 @@
 	 			toId: 1,
 	 			blink: false,
 	 			blinkSpeed: 1,
-	 			duration: 1};
+	 			duration: 1,
+	 			hide: false
+	 		};
 
 	var fromOptions = [ {val: 1, sel: false},
 						{val: 2, sel: false},
@@ -65,6 +67,7 @@
 			part.blink = $(this).find('.blink-check').prop('checked');
 			part.blinkSpeed = $(this).find('.blink-speed-input').val();
 			part.duration = $(this).find('.duration-input').val();
+			part.hide = $(this).find('.hide-check').prop('checked');
 			parts.push(part);
 		});
 		return parts;
@@ -225,6 +228,7 @@
 	}
 
 	function render(data) {
+		console.log(data);
 		var navbarModel = {adminActive: true, listActive: false};
 		var templateLoaded = Handlebars.compile(template.navbar);
 
