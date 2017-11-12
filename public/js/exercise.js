@@ -70,9 +70,15 @@ var waitForFinalEvent = (function () {
     	$('#circle').removeClass('position-transition');
     	$('#circle').css("transition-duration", 0 + 's');
 
+
+    	var showBeforeStart = 0.1;
+    	var previousPartExercise = exercise.parts[partCounter];
+    	if(previousPartExercise.hide){
+    		showBeforeStart = previousPartExercise.staticDuration;
+    	}
     	partCounter++;
     	if(partCounter< exercise.parts.length) {
-    		intervalFunction = setTimeout(function(){ animate(exercise.parts[partCounter]);}, 100);    	
+    		intervalFunction = setTimeout(function(){ animate(exercise.parts[partCounter]);}, showBeforeStart*1000);    	
     	} else {
     		repCounter++;
     		if(repCounter<= exercise.reps) {

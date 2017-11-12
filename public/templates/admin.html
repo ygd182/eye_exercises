@@ -46,59 +46,75 @@
       <ul class="list-group row parts-list">
         {{#exercise.parts}}
         <li class="list-group-item col-sm-12 parts-list-item" data-id="{{@index}}">
-           <div class="col-sm-2 form-group">
-            <label class="form-check-label">From</label>
-            <select id="from-input-{{@index}}" class="form-control from-input" data-equals="foo">
-            {{#fromOptions}}
-              <option value="{{val}}" {{#sel}}selected{{/sel}}>{{val}}</option>
-            {{/fromOptions}}
-            </select>
-            <div class="help-block with-errors"></div>
-          </div>
-          <div class="col-sm-2">
-            <label class="form-check-label">To</label>
-            <select id="to-input-{{@index}}" class="form-control to-input">
-            {{#toOptions}}
-              <option value="{{val}}" {{#sel}}selected{{/sel}}>{{val}}</option>
-            {{/toOptions}}
-            </select>
+          <div class="col-sm-6" >
+            <div class="row">
+               <div class="col-sm-3 form-group">
+                <label class="form-check-label">From</label>
+                <select id="from-input-{{@index}}" class="form-control from-input" data-equals="foo">
+                {{#fromOptions}}
+                  <option value="{{val}}" {{#sel}}selected{{/sel}}>{{val}}</option>
+                {{/fromOptions}}
+                </select>
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="col-sm-3">
+                <label class="form-check-label">To</label>
+                <select id="to-input-{{@index}}" class="form-control to-input">
+                {{#toOptions}}
+                  <option value="{{val}}" {{#sel}}selected{{/sel}}>{{val}}</option>
+                {{/toOptions}}
+                </select>
+              </div>
+
+              <div class="col-sm-4">
+                <label for="example-number-input" class="col-2 col-form-label">Duration time (in secs)</label>
+                <div class="col-10 has-feedback form-group">
+                  <input id="" class="form-control duration-input" type="number" value="{{duration}}" step=0.1 min="0.1" required data-required-error="The duration is required.">
+                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <div class="col-sm-2 form-group">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    Blink
+                  </label>
+                  <input id="blink-check-{{@index}}" class="form-check-input blink-check" type="checkbox" {{#blink}} checked="checked"{{/blink}}>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="col-sm-2">
-            <label for="example-number-input" class="col-2 col-form-label">Duration time (in secs)</label>
-            <div class="col-10 has-feedback form-group">
-              <input id="" class="form-control duration-input" type="number" value="{{duration}}" step=0.1 min="0.1" required data-required-error="The duration is required.">
-              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-              <div class="help-block with-errors"></div>
+          <div class="col-sm-6" >
+            <div class="row">
+              <div class="col-sm-4 form-group">
+                <label for="example-number-input" class="col-2 col-form-label">Blink speed (1-16)</label>
+                <div class="col-10">
+                  <input id="blink-speed-input-{{@index}}" class="form-control blink-speed-input" type="number" value="{{blinkSpeed}}"  min="1" max="16" {{^blink}}disabled{{/blink}}>
+                </div>
+              </div>
+               <div class="col-sm-2 form-group">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    Static
+                  </label>
+                  <input id="hide-check-{{@index}}" class="form-check-input hide-check" type="checkbox" {{#hide}} checked="checked"{{/hide}}>
+                </div>
+              </div>
+              <div class="col-sm-4 form-group">
+                <label for="example-number-input" class="col-2 col-form-label">Static duration</label>
+                <div class="col-10">
+                  <input id="static-duration-input-{{@index}}" class="form-control static-duration-input" type="number" value="{{staticDuration}}"  min="1" max="16" {{^hide}}disabled{{/hide}}>
+                </div>
+              </div>
+              {{#if @index}}
+              <div class="col-sm-2 parts-action-container">
+                <button type="button" id="remove-part-btn" class="btn btn-danger"><i class="glyphicon glyphicon-minus"></i></button>
+              </div>
+              {{/if}}
+
             </div>
           </div>
-          <div class="col-sm-1 form-group">
-            <div class="form-check">
-              <label class="form-check-label">
-                Blink
-              </label>
-              <input id="blink-check-{{@index}}" class="form-check-input blink-check" type="checkbox" {{#blink}} checked="checked"{{/blink}}>
-            </div>
-          </div>
-          <div class="col-sm-2 form-group">
-            <label for="example-number-input" class="col-2 col-form-label">Blink speed (1-16)</label>
-            <div class="col-10">
-              <input id="blink-speed-input-{{@index}}" class="form-control blink-speed-input" type="number" value="{{blinkSpeed}}"  min="1" max="16" {{^blink}}disabled{{/blink}}>
-            </div>
-          </div>
-           <div class="col-sm-1 form-group">
-            <div class="form-check">
-              <label class="form-check-label">
-                Static
-              </label>
-              <input id="hide-check-{{@index}}" class="form-check-input hide-check" type="checkbox" {{#hide}} checked="checked"{{/hide}}>
-            </div>
-          </div>
-          {{#if @index}}
-          <div class="col-sm-2 parts-action-container">
-            <button type="button" id="remove-part-btn" class="btn btn-danger"><i class="glyphicon glyphicon-minus"></i></button>
-          </div>
-          {{/if}}
         </li> 
       {{/exercise.parts}}
         

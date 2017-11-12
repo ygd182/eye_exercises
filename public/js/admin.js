@@ -12,7 +12,8 @@
 	 			blink: false,
 	 			blinkSpeed: 1,
 	 			duration: 1,
-	 			hide: false
+	 			hide: false,
+	 			staticDuration: 1
 	 		};
 
 	var fromOptions = [ {val: 1, sel: false},
@@ -68,6 +69,7 @@
 			part.blinkSpeed = $(this).find('.blink-speed-input').val();
 			part.duration = $(this).find('.duration-input').val();
 			part.hide = $(this).find('.hide-check').prop('checked');
+			part.staticDuration = $(this).find('.static-duration-input').val();
 			parts.push(part);
 		});
 		return parts;
@@ -121,6 +123,15 @@
 				$('#blink-speed-input-' + numId).attr('disabled', true);
 			} else {
 				$('#blink-speed-input-' + numId).removeAttr('disabled');
+			}
+		});
+
+		$(document).on('change', '.hide-check', function(e) {
+			var numId = ($(e.target).attr('id')).match(/\d+/)[0];
+			if(!$(e.target).prop('checked')) {
+				$('#static-duration-input-' + numId).attr('disabled', true);
+			} else {
+				$('#static-duration-input-' + numId).removeAttr('disabled');
 			}
 		});
 
