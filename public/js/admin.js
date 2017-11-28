@@ -91,29 +91,21 @@
 	}
 
 	function restorePage() {
-		/*$('#exercise-form').trigger("reset");
-		$('#submit-btn').parent().show();
-		$('#update-btn').parent().hide();
-		exerciseId = null;*/
-		//window.history.pushState({}, document.title, "/admin.html");
 		window.location.href = '/exercise-list.html';
 	}
 
 	function onSuccessUpdate(msg) {
 		modalView.show();
 	    console.log("saved" , msg );
-	    //restorePage();
 	}
 
 	function onSuccessSave(msg) {
 		modalView.show();
 	    console.log("saved" , msg );
-	    //restorePage();
 	}
 
 	function isValidForm(data) {
 		return !$('#exercise-form').data('bs.validator').hasErrors();
-		//data.fromId !== data.toId /*&& data.name !== undefined && data.name !== ''*/; 
 	}
 
 	function bindEvents() {
@@ -202,7 +194,7 @@
 
 	function fromToCheckEquals($el) {
 		var numId = $el.attr('id').match(/\d+/)[0];
-	    var matchValue = $('#to-input-'+ numId).val(); // foo
+	    var matchValue = $('#to-input-'+ numId).val();
 	    if ($el.val() === matchValue) {
 	      return 'From and To should be different';
 	    }
