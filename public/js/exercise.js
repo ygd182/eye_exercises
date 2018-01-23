@@ -42,8 +42,11 @@ var waitForFinalEvent = (function () {
                 transform: 'translate(' + exercise.from.left + 'px, ' + exercise.from.top  + 'px)'
             });
             setTimeout(function() {	
-			
+				
 				$('#circle').show();
+				if(exercise.hide) {
+					$('#circle').addClass('not-shown');
+				}
 				$('#circle').css("transition-duration", exercise.duration + 's');
 				if(exercise.blink) {
 					$('#circle').addClass('blink');
@@ -62,13 +65,20 @@ var waitForFinalEvent = (function () {
 
 
 	function transitionEndHandler(event){
+		$('#circle').removeClass('not-shown');
     	$('#circle').removeClass('blink');
     	$('#circle').removeClass('position-transition');
     	$('#circle').css("transition-duration", 0 + 's');
 
+
+    	var showBeforeStart = 0.1;
+    	var previousPartExercise = exercise.parts[partCounter];
+    	if(previousPartExercise.hide){
+    		showBeforeStart = previousPartExercise.staticDuration;
+    	}
     	partCounter++;
     	if(partCounter< exercise.parts.length) {
-    		intervalFunction = setTimeout(function(){ animate(exercise.parts[partCounter]);}, 100);    	
+    		intervalFunction = setTimeout(function(){ animate(exercise.parts[partCounter]);}, showBeforeStart*1000);    	
     	} else {
     		repCounter++;
     		if(repCounter<= exercise.reps) {

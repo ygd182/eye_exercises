@@ -42,9 +42,12 @@
 	function render(data) {
 		var viewModel = { exercises : data };
 		var navbarModel = {adminActive: false, listActive: true};
+		var templateLoaded = Handlebars.compile(template.navbar);
+		$('#navbar-container').html(templateLoaded(navbarModel));
 
- 		$('#exercises-container').html(Mustache.render(template.exerciseList, viewModel));
- 		$('#navbar-container').html(Mustache.render(template.navbar, navbarModel));
+		templateLoaded = Handlebars.compile(template.exerciseList);
+		$('#exercises-container').html(templateLoaded(viewModel));
+
  		modalView.init('#js-modal-container', template.modal);
  		modalView.options({ body: 'Are you sure that you want to delete the selected exercise?'});
 		modalView.bindConfirmAction(deleteExercise);
@@ -62,9 +65,7 @@
 
 	$(document).ready(function ready(){
 		bindEvents();
-
 		loadTemplates();
-
 	});
 
 })();

@@ -98,7 +98,10 @@ var modalView = (function ModalView() {
         render: function render(externalTemplate) {
             var template = externalTemplate || this._template;
 
-            this.$el.html(Mustache.render(template, _options));
+            var templateLoaded = Handlebars.compile(template);
+
+            //this.$el.html(Mustache.render(template, _options));
+            this.$el.html(templateLoaded(_options));
             bind(this.$el);
         },
 
