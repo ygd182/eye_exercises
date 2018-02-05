@@ -9,8 +9,8 @@ var router = require('express').Router();
 module.exports = function(passport){
     // Routes are seperated into modules
     router.use('/user', require('./user')(passport));
-   	router.all('*', passport.authenticate());
-    router.use('/exercise', require('./ExerciseRoute'));
+   	//router.all('*', passport.authenticate());
+    router.use('/exercise',[ passport.authenticate(), require('./ExerciseRoute') ] );
     
 
     return router;

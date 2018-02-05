@@ -1,0 +1,3 @@
+//users
+
+curl -H "Content-Type: application/json" -X POST -d '{"email": "admin", "password": "admin"}' http://localhost:3100/user/
