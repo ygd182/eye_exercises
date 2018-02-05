@@ -1,7 +1,9 @@
 var exerciseService = (function () {
 	
+	
 	function getExercise(id) {
 		return $.ajax({
+			headers: common.getAjaxHeader(),
 		  method: "GET",
 		  url: "exercise/" + id,
 		});
@@ -9,6 +11,7 @@ var exerciseService = (function () {
 
 	function deleteExercise (id) {
 		return $.ajax({
+			headers: common.getAjaxHeader(),
 		  method: "DELETE",
 		  url: "exercise/" + id,
 		});
@@ -16,6 +19,7 @@ var exerciseService = (function () {
 
 	function getExercises() {
 		return $.ajax({
+			headers: common.getAjaxHeader(),
 		  method: "GET",
 		  url: "exercise",
 		});
@@ -23,6 +27,7 @@ var exerciseService = (function () {
 
 	function saveExercise(exercise) {
 		return $.ajax({
+			headers: common.getAjaxHeader(),
 		  type: "POST",
 		  url: "/exercise",
 		  data: exercise,
@@ -31,6 +36,7 @@ var exerciseService = (function () {
 
 	function updateExercise(id, exercise) {
 		return $.ajax({
+			headers: common.getAjaxHeader(),
 		  type: "PUT",
 		  url: "/exercise/" + id,
 		  data: exercise,

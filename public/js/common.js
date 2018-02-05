@@ -11,7 +11,7 @@ var common = (function() {
 	}
 
 	function onError(error) {
-		console.log(error);
+		console.log(error.responseText);
 	}
 	/*
 	*@ param array[String]
@@ -31,10 +31,29 @@ var common = (function() {
 	    document.documentElement.scrollTop = 0; // For IE and Firefox
 	}
 
+	function checkLoggedIn(){
+		var token = sessionStorage.getItem('token');
+		if(!token) {
+			window.location.href = '/login.html';
+		} 
+	}
+
+	function getAjaxHeader() {
+		var header = { Authorization : '' };
+		var token = sessionStorage.getItem('token');
+		if(token) {
+			header.Authorization = token;
+		}
+
+		return header;
+	}
+
 	return {
 		getParameterByName: getParameterByName,
 		onError: onError,
-		loadTemplates: loadTemplates
+		loadTemplates: loadTemplates,
+		checkLoggedIn: checkLoggedIn,
+		getAjaxHeader: getAjaxHeader
 	}
 
 })();

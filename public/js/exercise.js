@@ -181,6 +181,7 @@ var waitForFinalEvent = (function () {
 	}
 
 	$(document).ready(function ready(){
+		common.checkLoggedIn();
 		
 		var id = common.getParameterByName('id');
 		exerciseService.getExercise(id).then(onSucess,common.onError);

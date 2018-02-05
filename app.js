@@ -34,8 +34,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/exercise', exercise);
 
+
+
+//app.use('/exercise', exercise);
+var passportConfig  = require('./middleware/passport-config')();
+app.use(passportConfig.initialize());
+
+//=================================================================================
+
+app.use('/', require('./routes')(passportConfig));
+
+
+
+//=============================================================================
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -60,7 +72,12 @@ app.use(function(err, req, res, next) {
 
 var dbUrl = 'mongodb://' + app.get('db_user') + ':' + app.get('db_pass') + config.mongodb.instances[0].host + ':' + config.mongodb.instances[0].port + '/' + config.mongodb.db;
 app.set('dbUrl', dbUrl);
-app.use(function (req, res, next) {
+
+var mongooseConnection = require('./middleware/mongooseConnection');
+
+app.use(mongooseConnection);
+
+/*app.use(function (req, res, next) {
 
     //readyState = 1 means that connection was established
     if (mongoose.connection.readyState !== 1) {
@@ -69,7 +86,7 @@ app.use(function (req, res, next) {
     }
 
     next();
-});
+});*/
 
 
 module.exports = app;

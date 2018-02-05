@@ -11,6 +11,7 @@
   "author": "Jorge Bolpe",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "~1.17.1",
     "bower": "^1.8.0",
     "config": "^1.26.1",
@@ -18,9 +19,13 @@
     "debug": "~2.6.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "jwt-simple": "^0.5.1",
+    "lodash": "^3.10.1",
     "mongoose": "^4.11.8",
     "mongoose-double": "0.0.1",
     "morgan": "~1.8.1",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {

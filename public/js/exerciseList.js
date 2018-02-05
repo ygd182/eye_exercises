@@ -64,6 +64,7 @@
 	}
 
 	$(document).ready(function ready(){
+		common.checkLoggedIn();
 		bindEvents();
 		loadTemplates();
 	});

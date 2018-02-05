@@ -280,6 +280,7 @@
 	}
 
 	$(document).ready(function ready(){
+		common.checkLoggedIn();
 		var formData = null;
 		var submitExercise = null;
 		defaultExercise.parts.push(defaultPart);
