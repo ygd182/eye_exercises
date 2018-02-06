@@ -4,6 +4,7 @@
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/handlebars/handlebars.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/jquery.countdown/dist/jquery.countdown.js"></script>
   <script type="text/javascript" src="js/common.js"></script>
@@ -11,24 +12,15 @@
   <script type="text/javascript" src="js/exercise.js"></script>
 </head>
 <body class="exercise-page">
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="index.html">Eye Exercise App</a>
-	    </div>
-	    <ul class="nav navbar-nav">
-	      <li><a href="admin.html">Admin</a></li>
-	      <li><a href="exercise-list.html">Exercise List</a></li>
-	    </ul>
-	  </div>
-	</nav>
-	<div id="fullscreen-alert" class="alert alert-success" role="alert">
+	<div id="navbar-container"></div>
+	<div id="exercise-container"></div>
+	
+	<!-- <div id="fullscreen-alert" class="alert alert-success" role="alert">
 	  <strong>Press F11 to go to fullscreen mode and start the exercise</strong>
 	</div>
 	<div class="movement-wrapper exercise-movement_wrapper hidden">
 		<div class="action-btn-container btn-group-vertical hidden">
 			<button type="button" id="start-animation-btn" class="btn btn-primary btn disabled btn-lg">Play exercise</button>
-			<!--<button type="button" id="return-list-btn" class="btn btn-default btn">Go to exercise list</button>-->
 			<label>Or press F11 to go to out from fullscreen mode</label>
 		</div>
 		<div id="clock" class="clock-container hidden"></div>
@@ -42,13 +34,13 @@
 	    <span id="span7">7</span>
 	    <span id="span8">8</span>
 	    <span id="span9">9</span>    
-	</div>
+	</div> -->
 
 	<div class="modal fade" id="myModal" role="dialog">
-	    <div class="modal-dialog">
-	      <!-- Modal content-->
-	      <div class="loader"></div>
-	    </div>
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="loader"></div>
     </div>
+  </div>
 </body>
 </html>

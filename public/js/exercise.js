@@ -12,6 +12,7 @@ var waitForFinalEvent = (function () {
 })();
 
 (function() {
+	var template = {};
 	var circleDimesion = 30;
 	var exercise = null;
 	var intervalFunction = null;
@@ -133,11 +134,6 @@ var waitForFinalEvent = (function () {
 		return (screen.width === window.innerWidth && screen.height-10  <= window.innerHeight);
 	}
 
-	function onSucess(data) {
-		exercise = data;
-		$('#start-animation-btn').removeClass('disabled');
-	}
-
 	function bindWindowResize() {
 		$(window).resize(function () {
 			//always sotpAnimation by default
@@ -180,18 +176,43 @@ var waitForFinalEvent = (function () {
 		bindWindowResize();
 	}
 
+	function renderContainers() {
+		var navbarModel = {adminActive: false, listActive: false};
+		var templateLoaded = Handlebars.compile(template.navbar);
+		$('#navbar-container').html(templateLoaded(navbarModel));
+
+		templateLoaded = Handlebars.compile(template.exercise);
+		$('#exercise-container').html(templateLoaded());
+
+	}
+
+	function onSucess(data) {
+		renderContainers();
+		exercise = data;
+		$('#start-animation-btn').removeClass('disabled');
+		bindEvents();
+	}
+
+	function loadTemplates() {
+		common.loadTemplates(['navbar', 'exercise']).done(function(temp1, temp2) {
+			template.navbar = temp1[0];
+			template.exercise = temp2[0];
+			var id = common.getParameterByName('id');
+			exerciseService.getExercise(id).then(onSucess,common.onError);
+		});
+	}
+
 	$(document).ready(function ready(){
 		common.checkLoggedIn();
 		
-		var id = common.getParameterByName('id');
-		exerciseService.getExercise(id).then(onSucess,common.onError);
+		loadTemplates() 
 			
-	    if(isFullscreen()) {
-       		// check if the user never left fullscreen mode
+	  if(isFullscreen()) {
+       	// check if the user never left fullscreen mode
     		enterFullScreen();
 		}
 
-		bindEvents();
+		
 		
 	});
 

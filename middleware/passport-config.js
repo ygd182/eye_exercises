@@ -12,16 +12,12 @@ var params = {
 module.exports = function() {
   var strategy = new Strategy(params, function(jwt_payload, done) {
     UserModel.findOne({id: jwt_payload.id}, function(err, user) {
-      console.log('entra');
           if (err) {
-             console.log('---------------anduvo  pero falta el jwt');
-              return done(err, false);
+            return done(err, false);
           }
           if (user) {
-            console.log('---------------anduvo ');
               done(null, user);
           } else {
-              console.log('---------------done con false');
               done(null, false);
           }
       });

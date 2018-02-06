@@ -14,7 +14,7 @@
 	    console.log("logged in" , data );
 	    if(data.token) {
 	    	sessionStorage.setItem('token', data.token);
-	      window.location.href = '/exercise-list.html';
+	      window.location.href = '/index.html';
 	    }
 	    
 	}
