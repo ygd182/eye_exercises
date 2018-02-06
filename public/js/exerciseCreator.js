@@ -271,7 +271,7 @@
 	}
 
 	function loadTemplates() {
-		common.loadTemplates(['admin', 'navbar', 'modal']).done(function(temp1, temp2, temp3) {
+		common.loadTemplates(['exercise-creator', 'navbar', 'modal']).done(function(temp1, temp2, temp3) {
 			template.admin = temp1[0];
 			template.navbar = temp2[0];
 			template.modal = temp3[0];

@@ -4,6 +4,7 @@
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/handlebars/handlebars.min.js"></script>
   <script type="text/javascript" src="js/common.js"></script>
   <script>
       common.checkLoggedIn();
@@ -11,21 +12,7 @@
   <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="index.html">Eye Exercise App</a>
-	    </div>
-	    <ul class="nav navbar-nav">
-	      <li><a href="admin.html">Admin</a></li>
-	      <li><a href="exercise-list.html">Exercise List</a></li>
-	    </ul>
-	  </div>
-	</nav>
-	<h1>Eye Exercise App</h1>
-	<ul class="list-group">
-		<li class="list-group-item"> <a href="/admin.html">Admin (Exercise creator)</a></li>
-		<li class="list-group-item"> <a href="/exercise-list.html">Exercise List</a></li>
-	</ul>
+	<div id="navbar-container"></div>
+	<div id="list-container"></div>
 </body>
 </html>
