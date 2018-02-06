@@ -6,7 +6,7 @@ var ExtractJwt = passportJWT.ExtractJwt;
 var Strategy = passportJWT.Strategy;
 var params = {
     secretOrKey: 'secretKey',
-    jwtFromRequest: ExtractJwt.fromAuthHeader()
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt")
   };
 
 module.exports = function() {
