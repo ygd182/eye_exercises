@@ -7,9 +7,17 @@
 	    <li {{#adminActive}}class="active"{{/adminActive}}><a href="exercise-creator.html">Exercise Creator</a></li>
 	    <li {{#listActive}}class="active"{{/listActive}}><a href="exercise-list.html">Exercise List</a></li>
 	  </ul>
-	   <div class="navbar-header pull-right">
-	   	<span class="logout">{{user}}</span>
-	    <a class="logout" href="login.html">Logout</a>
-	  </div>
+	  <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-user"></span>
+        {{user}}
+            <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                   <a class="logout" href="login.html">Logout</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
 	</div>
 </nav>
