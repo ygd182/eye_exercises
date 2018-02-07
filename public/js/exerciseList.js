@@ -42,10 +42,8 @@
 	function render(data) {
 		var viewModel = { exercises : data };
 		var navbarModel = {adminActive: false, listActive: true};
-		var templateLoaded = Handlebars.compile(template.navbar);
-		$('#navbar-container').html(templateLoaded(navbarModel));
-
-		templateLoaded = Handlebars.compile(template.exerciseList);
+		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
+		var templateLoaded = Handlebars.compile(template.exerciseList);
 		$('#exercises-container').html(templateLoaded(viewModel));
 
  		modalView.init('#js-modal-container', template.modal);

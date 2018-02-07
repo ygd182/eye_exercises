@@ -1,5 +1,6 @@
 //login.js
 (function() {
+	var email = '';
 
 	function getData() {
 		var loginData = {};
@@ -14,6 +15,7 @@
 	    console.log("logged in" , data );
 	    if(data.token) {
 	    	sessionStorage.setItem('token', data.token);
+	    	sessionStorage.setItem('user', email);
 	      window.location.href = '/index.html';
 	    }
 	    
@@ -29,6 +31,7 @@
 
 			console.log(formData);
 			//if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
+				email= formData.email;
 				loginService.login(formData).then(onSuccessLogin, common.onError);
 		/*	}else {
 				//alert('Some fields are missing. From and To should be different');

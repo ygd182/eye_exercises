@@ -48,12 +48,19 @@ var common = (function() {
 		return header;
 	}
 
+	function renderNavbar(containerId, options, template) {
+		var templateLoaded = Handlebars.compile(template);
+		options.user = sessionStorage.getItem('user');
+		$(containerId).html(templateLoaded(options));
+	}
+
 	return {
 		getParameterByName: getParameterByName,
 		onError: onError,
 		loadTemplates: loadTemplates,
 		checkLoggedIn: checkLoggedIn,
-		getAjaxHeader: getAjaxHeader
-	}
+		getAjaxHeader: getAjaxHeader,
+		renderNavbar: renderNavbar
+	};
 
 })();

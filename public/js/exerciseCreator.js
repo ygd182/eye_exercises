@@ -233,15 +233,13 @@
 	function render(data) {
 		console.log(data);
 		var navbarModel = {adminActive: true, listActive: false};
-		var templateLoaded = Handlebars.compile(template.navbar);
-
-		$('#navbar-container').html(templateLoaded(navbarModel));
+		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
 
 		data = loadSelectArrays(data);
 		
 		var viewModel = { exercise : data , editMode: editMode};
 		var source = template.admin;
-		templateLoaded = Handlebars.compile(source); 
+		var templateLoaded = Handlebars.compile(source); 
 		$('#admin-container').html(templateLoaded(viewModel));
 
  		var validatorObj = {

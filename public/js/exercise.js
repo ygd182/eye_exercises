@@ -178,10 +178,8 @@ var waitForFinalEvent = (function () {
 
 	function renderContainers() {
 		var navbarModel = {adminActive: false, listActive: false};
-		var templateLoaded = Handlebars.compile(template.navbar);
-		$('#navbar-container').html(templateLoaded(navbarModel));
-
-		templateLoaded = Handlebars.compile(template.exercise);
+		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
+		var templateLoaded = Handlebars.compile(template.exercise);
 		$('#exercise-container').html(templateLoaded());
 
 	}

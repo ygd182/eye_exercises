@@ -4,10 +4,10 @@
 
 	function render() {
 		var navbarModel = {adminActive: false, listActive: false};
-		var templateLoaded = Handlebars.compile(template.navbar);
-		$('#navbar-container').html(templateLoaded(navbarModel));
 
-		templateLoaded = Handlebars.compile(template.list);
+		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
+
+		var templateLoaded = Handlebars.compile(template.list);
 		$('#list-container').html(templateLoaded());
 
 	}
