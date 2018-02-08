@@ -36,6 +36,7 @@ var config = {secret: 'secretKey'};
                       // return the information including token as JSON
                       res.json({success: true, token: 'JWT ' + token});
                     } else {
+                      res.status(401);
                       res.send({success: false, msg: 'Authentication failed. Wrong password.'});
                     }
                   });
