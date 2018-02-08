@@ -1,7 +1,7 @@
 //ExerciseController.js
 'use strict';
 
-var Exercise = require('../models/ExerciseModel.js');
+var Exercise = require('../models/exerciseModel.js');
 
 module.exports = function(){
 
@@ -43,7 +43,6 @@ module.exports = function(){
 		      res.json(post);
 		    });
 		}
-
 
 	};
 

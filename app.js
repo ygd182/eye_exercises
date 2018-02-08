@@ -11,9 +11,6 @@ dotenv.load();
 var config = require('config');
 
 
-var exercise = require('./routes/ExerciseRoute');
-
-
 // =============================================================================
 // Express CONFIGURATION
 // =============================================================================
@@ -27,17 +24,13 @@ app.set('db_user', process.env.db_user);
 app.set('db_pass', process.env.db_pass);
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-
-//app.use('/exercise', exercise);
 var passportConfig  = require('./middleware/passport-config')();
 app.use(passportConfig.initialize());
 
@@ -76,17 +69,6 @@ app.set('dbUrl', dbUrl);
 var mongooseConnection = require('./middleware/mongooseConnection');
 
 app.use(mongooseConnection);
-
-/*app.use(function (req, res, next) {
-
-    //readyState = 1 means that connection was established
-    if (mongoose.connection.readyState !== 1) {
-        console.log('error');
-        return next(new Error('Database connection is not established. Mongoose readyState: ' + mongoose.connection.readyState));
-    }
-
-    next();
-});*/
 
 
 module.exports = app;

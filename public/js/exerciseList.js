@@ -29,7 +29,7 @@
 		$(document).on('click','.edit-exercise', function(e) {
 			e.preventDefault();
 			var id = getIdFromParent($(e.target));
-			window.location.href = '/admin.html?id=' + id;
+			window.location.href = '/exercise-creator.html?id=' + id;
 		});
 
 		$(document).on('click','.view-exercise', function(e) {

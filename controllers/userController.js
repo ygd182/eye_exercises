@@ -2,7 +2,7 @@
 'use strict';
 
 var jwt = require('jwt-simple');
-var UserModel = require('../models/UserModel');
+var UserModel = require('../models/userModel');
 
 // route middleware to ensure user is logged in
 
@@ -15,7 +15,6 @@ var config = {secret: 'secretKey'};
     return {
 
         isLoggedIn: function isLoggedIn(req, res, next) {
-            console.log(req);
             if (req.isAuthenticated())
                 return next();
          

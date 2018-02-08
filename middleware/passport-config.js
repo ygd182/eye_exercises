@@ -1,6 +1,6 @@
 var passport = require("passport");
 var passportJWT = require("passport-jwt");
-var UserModel = require('../models/UserModel');
+var UserModel = require('../models/userModel');
 
 var ExtractJwt = passportJWT.ExtractJwt;
 var Strategy = passportJWT.Strategy;
