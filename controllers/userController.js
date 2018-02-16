@@ -9,7 +9,7 @@ var UserModel = require('../models/userModel');
 
 module.exports = function(){
 
-var config = {secret: 'secretKey'};
+var config = { secret: 'secretKey' };
     
 
     return {
@@ -44,8 +44,34 @@ var config = {secret: 'secretKey'};
             });
         },
 
-        getContent: function getContent(req, res) {
-             res.json({success: true, message: 'You are authorized'});
+        getAll : function(req, res, next) {
+          UserModel.find(function (err, UserModels) {
+            if (err) return next(err);
+            res.json(UserModels);
+          });
+        },
+
+        getById: function(req, res, next) {
+          UserModel.findById(req.params.id, function (err, post) {
+            if (err) return next(err);
+            res.json(post);
+          });
+        },
+
+        update: function(req, res, next) {
+          UserModel.findByIdAndUpdate(req.params.id, req.body,
+            function (err, post) {
+              if (err) return next(err);
+              res.json(post);
+            });
+        },
+
+        delete: function(req, res, next) {
+          UserModel.findByIdAndRemove(req.params.id, req.body,
+            function (err, post) {
+              if (err) return next(err);
+              res.json(post);
+            });
         },
 
         logout: function logout(req, res) {
