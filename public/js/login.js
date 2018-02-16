@@ -10,14 +10,20 @@
 		return loginData;
 	}
 
-	function onSuccessLogin(data) {
-	    console.log("logged in" , data );
-	    if(data.token) {
+	function onSuccessLogin(data) {    
+	    if(data.success) {
+	    	console.log("logged in" , data );
 	    	sessionStorage.setItem('token', data.token);
 	    	sessionStorage.setItem('user', data.email);
 	      window.location.href = '/index.html';
+	    } else {
+	    	console.log("log error" , data );
+	    	onErrorLogin(data);
 	    }
-	    
+	}
+
+	function onErrorLogin(data) {
+		$('.error-msg').show();
 	}
 
 
