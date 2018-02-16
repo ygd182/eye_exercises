@@ -58,18 +58,8 @@
 	function bindLogin() {
 		$(document).on('click', '.btn-signin', function(e) {
 			e.preventDefault();
-
 			formData = getData();
-			//$('#exercise-form').validator('validate');
-
-			console.log(formData);
-			//if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
-
-				loginService.login(formData).then(onSuccessLogin, common.onError);
-		/*	}else {
-				//alert('Some fields are missing. From and To should be different');
-			}*/
-			
+			loginService.login(formData).then(onSuccessLogin, common.onError);
 		});
 	}
 
