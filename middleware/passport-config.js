@@ -11,7 +11,7 @@ var params = {
 
 module.exports = function() {
   var strategy = new Strategy(params, function(jwt_payload, done) {
-    UserModel.findOne({id: jwt_payload.id}, function(err, user) {
+    UserModel.findOne({_id: jwt_payload._id}, function(err, user) {
           if (err) {
             return done(err, false);
           }
@@ -29,7 +29,7 @@ module.exports = function() {
       return passport.initialize();
     },
     authenticate: function() {
-      return passport.authenticate("jwt", { failureRedirect: '/login.html',                                            
+      return passport.authenticate("jwt", { /*failureRedirect: '/login.html',   */                                         
                                             session: false });
     }
   };
