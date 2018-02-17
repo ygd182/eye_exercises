@@ -8,15 +8,15 @@ module.exports = function(passport){
 
     router.post('/login', UserController.login);
 
-    router.post('/',[roleCheck.checkAdminRole, UserController.signup]);
+    router.post('/',[ passport.authenticate(), roleCheck.checkAdminRole, UserController.signup]);
 
-    router.get('/', [roleCheck.checkAdminRole, UserController.getAll]);
+    router.get('/', [ passport.authenticate(), roleCheck.checkAdminRole, UserController.getAll]);
 
-	router.get('/:id', [roleCheck.checkAdminRole, UserController.getById]);
+	router.get('/:id', [passport.authenticate(), roleCheck.checkAdminRole, UserController.getById]);
 
-	router.put('/:id', [roleCheck.checkAdminRole, UserController.update]);
+	router.put('/:id', [passport.authenticate(), roleCheck.checkAdminRole, UserController.update]);
 
-	router.delete('/:id',[roleCheck.checkAdminRole, UserController.delete]);
+	router.delete('/:id',[passport.authenticate(), roleCheck.checkAdminRole, UserController.delete]);
     
     return router;
 };
