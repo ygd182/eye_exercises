@@ -59,7 +59,7 @@
 		$(document).on('click', '.btn-signin', function(e) {
 			e.preventDefault();
 			formData = getData();
-			loginService.login(formData).then(onSuccessLogin, common.onError);
+			userService.login(formData).then(onSuccessLogin, common.onError);
 		});
 	}
 

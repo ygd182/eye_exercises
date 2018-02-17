@@ -1,4 +1,4 @@
-//userService.js
+//loginService.js
 
 var userService = (function () {
 	
