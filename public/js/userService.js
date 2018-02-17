@@ -2,39 +2,34 @@
 
 var userService = (function () {
 	
-	/*function getExercise(id) {
+	function getUser(id) {
 		return $.ajax({
 		  method: "GET",
-		  url: "exercise/" + id,
+		  url: "user/" + id,
 		});
 	}
 
-	function deleteExercise (id) {
+	function deleteUser (id) {
 		return $.ajax({
 		  method: "DELETE",
-		  url: "exercise/" + id,
+		  url: "user/" + id,
 		});
 	}
 
-
-	function updateExercise(id, exercise) {
+	function updateUser(id, user) {
 		return $.ajax({
 		  type: "PUT",
-		  url: "/exercise/" + id,
-		  data: exercise,
+		  url: "/user/" + id,
+		  data: user,
 		});
 	}
 
-	function getExercises() {
+	function getUsers() {
 		return $.ajax({
 		  method: "GET",
-		  url: "exercise",
+		  url: "user",
 		});
 	}
-
-*/
-
-
 
 	function login(loginData) {
 		return $.ajax({
