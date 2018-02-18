@@ -4,6 +4,7 @@ var userService = (function () {
 	
 	function getUser(id) {
 		return $.ajax({
+			headers: common.getAjaxHeader(),
 		  method: "GET",
 		  url: "user/" + id,
 		});
@@ -18,6 +19,7 @@ var userService = (function () {
 
 	function updateUser(id, user) {
 		return $.ajax({
+			headers: common.getAjaxHeader(),
 		  type: "PUT",
 		  url: "/user/" + id,
 		  data: user,
@@ -26,6 +28,7 @@ var userService = (function () {
 
 	function getUsers() {
 		return $.ajax({
+			headers: common.getAjaxHeader(),
 		  method: "GET",
 		  url: "user",
 		});
@@ -47,9 +50,13 @@ var userService = (function () {
 		});
 	}
 
-
 	return {
-		login: login
+		login: login,
+		getUser: getUser,
+		deleteUser: deleteUser,
+		updateUser: updateUser,
+		getUsers: getUsers,
+		logout: logout
 	}
 
 })();

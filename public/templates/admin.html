@@ -1,6 +1,6 @@
 <h1>Admin page</h1>
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-sm-4 form-container">
 		<form class="form">
 		    <div class="form-group">
 		        <label for="email" class="cols-sm-2">Email</label>
@@ -25,7 +25,7 @@
 		        <div class="cols-sm-10">
 		            <div class="input-group">
 		                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-		                <input type="password" class="form-control" name="password" id="password-input" placeholder="Enter your Password">
+		                <input type="password" class="form-control" name="password" id="password-input-repeat" placeholder="Re-enter your Password">
 		            </div>
 		        </div>
 		    </div>
@@ -38,10 +38,13 @@
 
 <h3>List of Users</h3>
 <ul class="list-group">
+	{{#userArray}}
 	<li class="list-group-item"> 
-		<a href="/exercise-creator.html">user 1</a>  <div class="btn-group pull-right">
-    <!--<button type="button" class="btn btn-default btn view-exercise"><i class="glyphicon glyphicon-eye-open"></i></button> -->
-    <button type="button" class="btn btn-default btn edit-exercise"><i class="glyphicon glyphicon-pencil"></i></button>  
-    <button type="button" class="btn btn-default btn delete-exercise"><i class="glyphicon glyphicon-trash"></i></button>
-    </div></li>
+		<a href="/user-creator.html">{{email}}</a>  <div class="btn-group pull-right">
+    <!--<button type="button" class="btn btn-default btn view-user"><i class="glyphicon glyphicon-eye-open"></i></button> -->
+    <button type="button" class="btn btn-default btn edit-user"><i class="glyphicon glyphicon-pencil"></i></button>  
+    <button type="button" class="btn btn-default btn delete-user"><i class="glyphicon glyphicon-trash"></i></button>
+    </div>
+  </li>
+   {{/userArray}}
 </ul>
