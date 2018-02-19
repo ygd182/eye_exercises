@@ -5,7 +5,7 @@ var UserModel = require('../models/userModel');
 var ExtractJwt = passportJWT.ExtractJwt;
 var Strategy = passportJWT.Strategy;
 var params = {
-    secretOrKey: 'secretKey',
+    secretOrKey: process.env.secret_jwt_key,
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt")
   };
 
