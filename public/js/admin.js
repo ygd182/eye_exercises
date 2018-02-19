@@ -10,11 +10,26 @@
 		userService.deleteUser(deleteId).then(onDeleteSucess ,common.onError);
 	}
 
+	function getFormData() {
+		var user = {};
+		
+		user.email = $('#email-input').val();
+		user.password = $('#password-input-repeat').val();
+		user.passwordRepeat = $('#password-input-repeat').val();
+
+		return user;
+	}
+
 	function getIdFromParent($element) {
 		var $liItem = $element.closest('li');
 		var id = $liItem.data('id');
 		console.log(id);
 		return id;
+	}
+
+	function onSaveSucess(data) {
+		console.log(data);
+		userService.getUsers().then(render, common.onError);
 	}
 
 	function bindEvents() {
@@ -28,6 +43,14 @@
 			e.preventDefault();
 			var id = getIdFromParent($(e.target));
 			//window.location.href = '/user-creator.html?id=' + id;
+		});
+
+		$(document).on('click','.btn-save-user', function(e) {
+			e.preventDefault();
+			var user = getFormData();
+			console.log(user);
+			userService.saveUser(user).then(onSaveSucess, common.onError);
+
 		});
 
 	}

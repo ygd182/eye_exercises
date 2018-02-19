@@ -51,13 +51,23 @@ var userService = (function () {
 		});
 	}
 
+	function saveUser(user) {
+		return $.ajax({
+			headers: common.getAjaxHeader(),
+		  type: "POST",
+		  url: "/user",
+		  data: user,
+		});
+	}
+
 	return {
 		login: login,
 		getUser: getUser,
 		deleteUser: deleteUser,
 		updateUser: updateUser,
 		getUsers: getUsers,
-		logout: logout
+		logout: logout,
+		saveUser: saveUser
 	}
 
 })();
