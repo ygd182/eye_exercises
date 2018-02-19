@@ -58,7 +58,7 @@
 			$('#user-form').validator('validate');
 
 			if(isValidForm(user) && !$(e.target).hasClass('disabled')) {
-				userService.saveUser(user).then(onSaveSucess, common.onError);
+				//userService.saveUser(user).then(onSaveSucess, common.onError);
 			}
 		});
 
@@ -79,16 +79,9 @@
 		modalView.bindConfirmAction(deleteUser);
 		modalView.render();
 
-	/*	var validatorObj = {
- 			disable: false,
- 			custom: {
-					  equals: fromToCheckEquals
-					}
-				};*/
- 		$('#user-form').validator(/*validatorObj*/);
+ 		$('#user-form').validator();
  		/*$f = $("form#user-form");
 		$f[0].reset();*/
-
 
 	}
 

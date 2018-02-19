@@ -29,11 +29,11 @@
 		        </div>
 		    </div>
 		    <div class="form-group has-feedback">
-		        <label for="password" class="cols-sm-2">Repeat Password</label>
+		        <label for="password-repeat" class="cols-sm-2">Repeat Password</label>
 		        <div class="cols-sm-10">
 		            <div class="input-group">
 		                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-		                <input type="password" class="form-control" name="password" id="password-input-repeat" placeholder="Re-enter your Password" data-required-error="The password is required." required>
+		                <input type="password" class="form-control" name="password-repeat" id="password-input-repeat" placeholder="Re-enter your Password" data-required-error="The password is required." required data-match="#password-input" data-match-error="Passwords don't match">
 		                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 		            </div>
 		            <div class="help-block with-errors"></div>
