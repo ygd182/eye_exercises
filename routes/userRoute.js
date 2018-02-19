@@ -8,7 +8,7 @@ module.exports = function(passport){
 
     router.post('/login', UserController.login);
 
-    router.post('/',[ /*passport.authenticate(), roleCheck.checkAdminRole,*/ UserController.signup]);
+    router.post('/',[ passport.authenticate(), roleCheck.checkAdminRole, UserController.signup]);
 
     router.get('/', [ passport.authenticate(), roleCheck.checkAdminRole, UserController.getAll]);
 

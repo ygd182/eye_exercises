@@ -14,7 +14,7 @@
 		var user = {};
 		
 		user.email = $('#email-input').val();
-		user.password = $('#password-input-repeat').val();
+		user.password = $('#password-input').val();
 		user.passwordRepeat = $('#password-input-repeat').val();
 
 		return user;
