@@ -232,7 +232,7 @@
 
 	function render(data) {
 		console.log(data);
-		var navbarModel = {adminActive: true, listActive: false};
+		var navbarModel = {adminActive: false, listActive: false, creatorActive: true};
 		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
 
 		data = loadSelectArrays(data);

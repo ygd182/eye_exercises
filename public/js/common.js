@@ -1,3 +1,8 @@
+function registerHelpers() {
+	Handlebars.registerHelper('ifNotEquals', function(arg1, arg2, options) {
+		    return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
+		});
+}
 var common = (function() {
 	
 	function getParameterByName(name, url) {
@@ -54,6 +59,7 @@ var common = (function() {
 		$(containerId).html(templateLoaded(options));
 	}
 
+	registerHelpers();
 	return {
 		getParameterByName: getParameterByName,
 		onError: onError,

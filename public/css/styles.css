@@ -94,21 +94,23 @@ h1 {
 	background-color: blue;
 }
 
+.form-container {
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
 
 /*------------ADMIN PAGE-----------------*/
 .admin-movement_wrapper {
 	height: 300px;
 	margin: 0 10%;
     width: 80%;
+    margin-bottom: 20px;
 }
 
-.form-container {
-	margin-top: 30px;
-	border-radius: 5px;
-	border: 1px solid #e5e5e5;
-	padding: 15px;
-	margin-bottom: 10px;
-}
 
 .form-container .parts-list {
 	margin: 0;

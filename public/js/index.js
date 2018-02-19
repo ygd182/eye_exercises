@@ -3,7 +3,7 @@
 	var template = {};
 
 	function render() {
-		var navbarModel = {adminActive: false, listActive: false};
+		var navbarModel = {adminActive: false, listActive: false, creatorActive: false};
 
 		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
 

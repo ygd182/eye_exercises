@@ -1,7 +1,8 @@
 <h1>Admin page</h1>
-<div class="row">
-	<div class="col-sm-4 form-container">
+<div class="">
+	<div class="container form-container">
 		<form class="form">
+		 		<legend class="col-form-legend col-sm-12">Create User</legend>
 		    <div class="form-group">
 		        <label for="email" class="cols-sm-2">Email</label>
 		        <div class="cols-sm-10">
@@ -39,11 +40,13 @@
 <h3>List of Users</h3>
 <ul class="list-group">
 	{{#userArray}}
-	<li class="list-group-item"> 
-		<a href="/user-creator.html">{{email}}</a>  <div class="btn-group pull-right">
+	<li class="list-group-item" data-id="{{_id}}"> 
+		<a href="#">{{email}}</a>  <div class="btn-group pull-right">
     <!--<button type="button" class="btn btn-default btn view-user"><i class="glyphicon glyphicon-eye-open"></i></button> -->
-    <button type="button" class="btn btn-default btn edit-user"><i class="glyphicon glyphicon-pencil"></i></button>  
-    <button type="button" class="btn btn-default btn delete-user"><i class="glyphicon glyphicon-trash"></i></button>
+    {{#ifNotEquals email "admin"}}
+	    <button type="button" class="btn btn-default btn edit-user"><i class="glyphicon glyphicon-pencil"></i></button>  
+	    <button type="button" class="btn btn-default btn delete-user"><i class="glyphicon glyphicon-trash"></i></button>
+    {{/ifNotEquals}}
     </div>
   </li>
    {{/userArray}}

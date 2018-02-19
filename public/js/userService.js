@@ -12,6 +12,7 @@ var userService = (function () {
 
 	function deleteUser (id) {
 		return $.ajax({
+			headers: common.getAjaxHeader(),
 		  method: "DELETE",
 		  url: "user/" + id,
 		});
