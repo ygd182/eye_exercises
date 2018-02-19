@@ -32,6 +32,11 @@
 		userService.getUsers().then(render, common.onError);
 	}
 
+	function isValidForm(data) {
+		console.log(!$('#user-form').data('bs.validator').hasErrors());
+		return !$('#user-form').data('bs.validator').hasErrors();
+	}
+
 	function bindEvents() {
 		$(document).on('click','.delete-user', function(e) {
 			e.preventDefault();
@@ -49,8 +54,12 @@
 			e.preventDefault();
 			var user = getFormData();
 			console.log(user);
-			userService.saveUser(user).then(onSaveSucess, common.onError);
 
+			$('#user-form').validator('validate');
+
+			if(isValidForm(user) && !$(e.target).hasClass('disabled')) {
+				userService.saveUser(user).then(onSaveSucess, common.onError);
+			}
 		});
 
 	}
@@ -69,6 +78,16 @@
  		modalView.options({ body: 'Are you sure that you want to delete the selected user?'});
 		modalView.bindConfirmAction(deleteUser);
 		modalView.render();
+
+	/*	var validatorObj = {
+ 			disable: false,
+ 			custom: {
+					  equals: fromToCheckEquals
+					}
+				};*/
+ 		$('#user-form').validator(/*validatorObj*/);
+ 		/*$f = $("form#user-form");
+		$f[0].reset();*/
 
 
 	}

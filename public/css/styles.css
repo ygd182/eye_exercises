@@ -402,3 +402,9 @@ h1 {
 .error-msg {
     display: none;
 }
+
+/*--------------------------------Admin page----------------------------------------*/
+
+.form-control-feedback {
+    z-index: 3;
+}
