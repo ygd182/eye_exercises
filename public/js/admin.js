@@ -58,7 +58,7 @@
 			$('#user-form').validator('validate');
 
 			if(isValidForm(user) && !$(e.target).hasClass('disabled')) {
-				//userService.saveUser(user).then(onSaveSucess, common.onError);
+				userService.saveUser(user).then(onSaveSucess, common.onError);
 			}
 		});
 

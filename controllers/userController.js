@@ -9,7 +9,7 @@ var UserModel = require('../models/userModel');
 
 module.exports = function(){
 
-var config = { secret: 'secretKey' };
+var config = { secret: process.env.secret_jwt_key };
     
 
     return {
