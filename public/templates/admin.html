@@ -39,17 +39,15 @@
 		            <div class="help-block with-errors"></div>
 		         </div>
 		    </div>
-		    <div class="form-group has-feedback">
-		       <label for="role-select" class="cols-sm-2">Role</label>
-		    	  <div class="btn-group">
-               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                 <span data-bind="label">Select role</span>&nbsp;<span class="caret"></span>
-               </button>
-               <ul class="dropdown-menu" id="role-selection-dropdown-menu" role="menu">
-                 <li><a href="#">admin</a></li>
-                 <li><a href="#">user</a></li>
-               </ul>
-             </div>
+		    <div class="form-group">
+		       <label for="role-select" class="cols-sm-2">Select role</label>
+		    	 <div class="input-group">
+     				 <span class="input-group-addon"><i class="fa fa-id-badge fa-lg"></i></span>
+	            <select  id="role-select" class="form-control">
+							  <option value="user" selected="selected">Common user</option>
+							  <option value="admin">Administrator</option>
+							</select>
+						</div>
 		    </div>
 		    <button type="submit" class="btn btn-lg btn-primary btn-block btn-save-user" >Save</button>
 		</form><!-- /form -->
@@ -62,7 +60,9 @@
 <ul class="list-group">
 	{{#userArray}}
 	<li class="list-group-item" data-id="{{_id}}"> 
-		<a href="#">{{email}}</a>  <div class="btn-group pull-right">
+		<a href="#">{{email}}</a>
+		<span class="label label-danger">{{role}}</span>  
+		<div class="btn-group pull-right">
     <!--<button type="button" class="btn btn-default btn view-user"><i class="glyphicon glyphicon-eye-open"></i></button> -->
     {{#ifNotEquals email "admin"}}
 	    <button type="button" class="btn btn-default btn edit-user"><i class="glyphicon glyphicon-pencil"></i></button>  

@@ -16,7 +16,7 @@
 		user.email = $('#email-input').val();
 		user.password = $('#password-input').val();
 		user.passwordRepeat = $('#password-input-repeat').val();
-
+		user.role = $('#role-select').val();
 		return user;
 	}
 
@@ -62,18 +62,6 @@
 			}
 		});
 
-		$( document.body ).on( 'click', '#role-selection-dropdown-menu li', function( event ) {
-
-	      var $target = $( event.currentTarget );
-
-	      $target.closest( '.btn-group' )
-	         .find( '[data-bind="label"]' ).text( $target.text() )
-	            .end()
-	         .children( '.dropdown-toggle' ).dropdown( 'toggle' );
-
-	      return false;
-
-	   });
 
 	}
 

@@ -90,7 +90,8 @@ var config = { secret: process.env.secret_jwt_key };
           } else {
             var newUser = new UserModel({
               email: req.body.email,
-              password: req.body.password
+              password: req.body.password,
+              role: req.body.role
             });
             // save the user
             newUser.save(function(err) {
