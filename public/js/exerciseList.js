@@ -40,7 +40,7 @@
 	}
 
 	function render(data) {
-		var viewModel = { exercises : data };
+		var viewModel = { exercises : data ,isAdmin: common.isAdmin() };
 		var navbarModel = {adminActive: false, listActive: true, creatorActive: false};
 		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
 		var templateLoaded = Handlebars.compile(template.exerciseList);

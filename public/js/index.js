@@ -3,12 +3,12 @@
 	var template = {};
 
 	function render() {
-		var navbarModel = {adminActive: false, listActive: false, creatorActive: false};
-
+		var navbarModel = { adminActive: false, listActive: false, creatorActive: false, isAdmin: common.isAdmin() };
+		console.log(navbarModel);
 		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
 
 		var templateLoaded = Handlebars.compile(template.list);
-		$('#list-container').html(templateLoaded());
+		$('#list-container').html(templateLoaded({isAdmin: common.isAdmin()}));
 
 	}
 

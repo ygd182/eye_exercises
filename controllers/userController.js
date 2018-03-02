@@ -34,7 +34,7 @@ var config = { secret: process.env.secret_jwt_key };
                       // if user is found and password is right create a token
                       var token = jwt.encode(user, config.secret);
                       // return the information including token as JSON
-                      res.json({success: true, token: 'JWT ' + token, email: user.email});
+                      res.json({success: true, token: 'JWT ' + token, email: user.email, role: user.role});
                     } else {
                       res.status(401);
                       res.send({success: false, msg: 'Authentication failed. Wrong password.'});

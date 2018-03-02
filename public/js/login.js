@@ -28,6 +28,7 @@
 	    	console.log("logged in" , data );
 	    	sessionStorage.setItem('token', data.token);
 	    	sessionStorage.setItem('user', data.email);
+	    	sessionStorage.setItem('role', data.role);
 	      window.location.href = '/index.html';
 	    } else {
 	    	console.log("log error" , data );

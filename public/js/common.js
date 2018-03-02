@@ -43,6 +43,11 @@ var common = (function() {
 		} 
 	}
 
+	function isAdmin() {
+		var role = sessionStorage.getItem('role');
+		return role === 'admin';
+	}
+
 	function getAjaxHeader() {
 		var header = { Authorization : '' };
 		var token = sessionStorage.getItem('token');
@@ -66,7 +71,8 @@ var common = (function() {
 		loadTemplates: loadTemplates,
 		checkLoggedIn: checkLoggedIn,
 		getAjaxHeader: getAjaxHeader,
-		renderNavbar: renderNavbar
+		renderNavbar: renderNavbar,
+		isAdmin: isAdmin
 	};
 
 })();
