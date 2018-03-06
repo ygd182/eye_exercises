@@ -4,7 +4,6 @@
 
 	function render() {
 		var navbarModel = { adminActive: false, listActive: false, creatorActive: false, isAdmin: common.isAdmin() };
-		console.log(navbarModel);
 		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
 
 		var templateLoaded = Handlebars.compile(template.list);
