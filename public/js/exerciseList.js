@@ -41,7 +41,7 @@
 
 	function render(data) {
 		var viewModel = { exercises : data ,isAdmin: common.isAdmin() };
-		var navbarModel = {adminActive: false, listActive: true, creatorActive: false};
+		var navbarModel = {adminActive: false, listActive: true, creatorActive: false, isAdmin: common.isAdmin()};
 		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
 		var templateLoaded = Handlebars.compile(template.exerciseList);
 		$('#exercises-container').html(templateLoaded(viewModel));

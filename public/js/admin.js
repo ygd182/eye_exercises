@@ -29,7 +29,16 @@
 
 	function onSaveSucess(data) {
 		console.log(data);
-		userService.getUsers().then(render, common.onError);
+		if(data.success) {
+			userService.getUsers().then(render, common.onError);
+		} else {
+			console.log("log error" , data );
+	    onErrorSaveUser(data);
+		}
+	}
+
+	function onErrorSaveUser(data) {
+		$('.error-msg').show();
 	}
 
 	function isValidForm(data) {
@@ -67,7 +76,7 @@
 
 
 	function render(data) {
-		var navbarModel = {adminActive: true, listActive: false ,creatorActive: false};
+		var navbarModel = {adminActive: true, listActive: false ,creatorActive: false, isAdmin: common.isAdmin()};
 		var viewModel = { userArray : data /*, isAdminHelper: isAdminHelper*/};
 
 		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
