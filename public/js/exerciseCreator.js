@@ -231,7 +231,6 @@
 	}
 
 	function render(data) {
-		console.log(data);
 		var navbarModel = {adminActive: false, listActive: false, creatorActive: true, isAdmin: common.isAdmin()};
 		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
 
