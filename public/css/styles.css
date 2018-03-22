@@ -130,6 +130,13 @@ h1 {
 	margin-bottom: 25px;
 }
 
+.admin-user-list-container {
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    margin-top: 10px;
+    padding: 15px;
+}
+
 /*-------------EXERCISE PAGE-------------*/
 
 .exercise-movement_wrapper {

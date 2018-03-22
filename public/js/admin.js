@@ -1,6 +1,8 @@
 //admin.js
 (function() {
 	var template = {};
+	var selectedUser = {};
+	var userList = [];
 
 	function onDeleteSucess (data) {
 		userService.getUsers().then(render, common.onError);
@@ -23,6 +25,13 @@
 	function getIdFromParent($element) {
 		var $liItem = $element.closest('li');
 		var id = $liItem.data('id');
+		console.log(id);
+		return id;
+	}
+
+	function getIndexFromParent($element) {
+		var $liItem = $element.closest('li');
+		var id = $liItem.data('index');
 		console.log(id);
 		return id;
 	}
@@ -55,7 +64,9 @@
 
 		$(document).on('click','.edit-user', function(e) {
 			e.preventDefault();
-			var id = getIdFromParent($(e.target));
+			var id = getIndexFromParent($(e.target));
+			selectedUser = userList[id];
+			console.log(selectedUser);
 			//window.location.href = '/user-creator.html?id=' + id;
 		});
 
@@ -76,6 +87,7 @@
 
 
 	function render(data) {
+		userList = data;
 		var navbarModel = {adminActive: true, listActive: false ,creatorActive: false, isAdmin: common.isAdmin()};
 		var viewModel = { userArray : data /*, isAdminHelper: isAdminHelper*/};
 
