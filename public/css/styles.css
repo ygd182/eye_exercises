@@ -137,6 +137,12 @@ h1 {
     padding: 15px;
 }
 
+.admin-user-list-container .list-group { 
+    height: calc(100vh - 275px);
+    overflow-y: auto;
+}
+
+
 /*-------------EXERCISE PAGE-------------*/
 
 .exercise-movement_wrapper {

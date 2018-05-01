@@ -22,6 +22,21 @@
 		return user;
 	}
 
+	function setFormData(user) {
+
+		
+	  $('#email-input').val(user.email);
+
+		$('#role-select').val(user.role);
+
+	}
+
+	function editUser(index) {
+		selectedUser = userList[index];
+		console.log(selectedUser);
+		setFormData(selectedUser);
+	}
+
 	function getIdFromParent($element) {
 		var $liItem = $element.closest('li');
 		var id = $liItem.data('id');
@@ -64,9 +79,8 @@
 
 		$(document).on('click','.edit-user', function(e) {
 			e.preventDefault();
-			var id = getIndexFromParent($(e.target));
-			selectedUser = userList[id];
-			console.log(selectedUser);
+			var index = getIndexFromParent($(e.target));
+			editUser(index);
 			//window.location.href = '/user-creator.html?id=' + id;
 		});
 
