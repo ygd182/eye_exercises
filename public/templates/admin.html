@@ -1,67 +1,14 @@
 <div class="">
   <h1>Admin page</h1>
-  <div class="col-sm-6">
-  	<div class="form-container">
-  		<form class="form" id="user-form" data-toggle="validator">
-  		 		<legend class="col-form-legend">Create User</legend>
-  		    <div class="form-group has-feedback">
-  		        <label for="email" class="col-sm-2">Email</label>
-  		        <div class="col-sm-10">
-  		            <div class="input-group ">
-  		                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-  		                <input type="email" class="form-control" name="email" id="email-input" placeholder="Enter your Email" data-required-error="The email is required." required>
-  		                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-  		            </div>
-  		            
-  					  <div class="help-block with-errors"></div>
-
-  		        </div>
-  		          
-  		    </div>
-  		    <div class="form-group has-feedback">
-  		        <label for="password" class="col-sm-2">Password</label>
-  		        <div class="col-sm-10">
-  		            <div class="input-group">
-  		                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-  		                <input type="password" class="form-control" name="password" id="password-input" placeholder="Enter your Password" data-required-error="The password is required." required>
-  		                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-  		            </div>
-  		            <div class="help-block with-errors"></div>
-  		        </div>
-  		    </div>
-  		    <div class="form-group has-feedback">
-  		        <label for="password-repeat" class="col-sm-2">Repeat Password</label>
-  		        <div class="col-sm-10">
-  		            <div class="input-group">
-  		                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-  		                <input type="password" class="form-control" name="password-repeat" id="password-input-repeat" placeholder="Re-enter your Password" data-required-error="The password is required." required data-match="#password-input" data-match-error="Passwords don't match">
-  		                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-  		            </div>
-  		            <div class="help-block with-errors"></div>
-  		         </div>
-  		    </div>
-  		    <div class="form-group">
-  		       <label for="role-select" class="col-sm-2">Select role</label>
-  		    	 <div class="input-group">
-       				 <span class="input-group-addon"><i class="fa fa-id-badge fa-lg"></i></span>
-  	            <select  id="role-select" class="form-control">
-  							  <option value="user" selected="selected">Common user</option>
-  							  <option value="admin">Administrator</option>
-  							</select>
-  						</div>
-  		    </div>
-  		    <button type="submit" class="btn btn-lg btn-primary btn-block btn-save-user" >Save</button>
-  		</form><!-- /form -->
-  		<div class="alert alert-danger error-msg">
-        <strong>Error</strong> Email already exists.
-      </div>
-  		
-  	</div>
-  	
-  </div>
+  
   <div class="col-sm-6 admin-user-list-container">
-    <h3>List of Users</h3>
-    <ul class="list-group">
+    <h3 class="">List of Users</h3>
+    <div class="add-user-btn-container">
+    <label>Create new user</label>
+      <button type="button" id="add-user-btn" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button>
+      
+    </div>
+    <ul class="list-group row">
       {{#userArray}}
       <li class="list-group-item" data-id="{{_id}}" data-index="{{@index}}"> 
         <a href="#">{{email}}</a>
@@ -83,5 +30,66 @@
     </ul>
     
   </div>
+
+  <div class="col-sm-6">
+    <div class="form-container">
+      <form class="form" id="user-form" data-toggle="validator">
+          <legend class="col-form-legend">Create User</legend>
+          <div class="form-group has-feedback">
+              <label for="email" class="col-sm-2">Email</label>
+              <div class="col-sm-10">
+                  <div class="input-group ">
+                      <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                      <input type="email" class="form-control" name="email" id="email-input" placeholder="Enter your Email" data-required-error="The email is required." required>
+                      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  </div>
+                  
+              <div class="help-block with-errors"></div>
+
+              </div>
+                
+          </div>
+          <div class="form-group has-feedback">
+              <label for="password" class="col-sm-2">Password</label>
+              <div class="col-sm-10">
+                  <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                      <input type="password" class="form-control" name="password" id="password-input" placeholder="Enter your Password" data-required-error="The password is required." required>
+                      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  </div>
+                  <div class="help-block with-errors"></div>
+              </div>
+          </div>
+          <div class="form-group has-feedback">
+              <label for="password-repeat" class="col-sm-2">Repeat Password</label>
+              <div class="col-sm-10">
+                  <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                      <input type="password" class="form-control" name="password-repeat" id="password-input-repeat" placeholder="Re-enter your Password" data-required-error="The password is required." required data-match="#password-input" data-match-error="Passwords don't match">
+                      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  </div>
+                  <div class="help-block with-errors"></div>
+               </div>
+          </div>
+          <div class="form-group">
+             <label for="role-select" class="col-sm-2">Select role</label>
+             <div class="input-group">
+               <span class="input-group-addon"><i class="fa fa-id-badge fa-lg"></i></span>
+                <select  id="role-select" class="form-control">
+                  <option value="user" selected="selected">Common user</option>
+                  <option value="admin">Administrator</option>
+                </select>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-lg btn-primary btn-block btn-save-user" >Save</button>
+      </form><!-- /form -->
+      <div class="alert alert-danger error-msg">
+        <strong>Error</strong> Email already exists.
+      </div>
+      
+    </div>
+    
+  </div>
+
 </div>
 

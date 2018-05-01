@@ -31,7 +31,7 @@
 
 	}
 
-	function editUser(index) {
+	function editUser(index) {xvb 
 		selectedUser = userList[index];
 		console.log(selectedUser);
 		setFormData(selectedUser);
@@ -95,6 +95,12 @@
 				userService.saveUser(user).then(onSaveSucess, common.onError);
 			}
 		});
+
+		$(document).on('click','.add-user-btn', function(e) {
+			e.preventDefault();
+			
+		});
+
 
 
 	}

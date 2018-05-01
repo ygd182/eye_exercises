@@ -140,6 +140,7 @@ h1 {
 .admin-user-list-container .list-group { 
     height: calc(100vh - 275px);
     overflow-y: auto;
+    margin-top: 10px;
 }
 
 
