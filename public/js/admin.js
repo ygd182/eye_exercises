@@ -86,11 +86,11 @@
 		if(showEdition) {
 			$('.btn-save-user').hide();
 			$('.btn-update-user').show();
-			$('.form-legend').html('Update User');
+			$('.form-legend').html('<b>Update User</b> ' + selectedUser.email);
 		} else {
 			$('.btn-save-user').show();
 			$('.btn-update-user').hide();
-			$('.form-legend').html('Create User');
+			$('.form-legend').html('<b>Create User</b>');
 		}
 
 	}

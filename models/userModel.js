@@ -40,9 +40,26 @@ UserSchema.pre('save', function (next) {
         return next();
     }
 });
+
+
+UserSchema.pre("update", function (next) {
+
+    console.log('entra ',this._update);
+    var update = this._update;
+    console.log(update);
+    //this.ṕassword = update.$set.password;
+    bcrypt.hash(update.password, 10, (err, hash) => {
+        update.password = hash;
+        console.log(update.password);
+        next();
+    });
+});
+
  
 UserSchema.methods.comparePassword = function (passw, cb) {
+    console.log(passw, this.password);
     bcrypt.compare(passw, this.password, function (err, isMatch) {
+        console.log(err, isMatch);
         if (err) {
             return cb(err);
         }

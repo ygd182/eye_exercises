@@ -23,7 +23,8 @@
 		return loginData;
 	}
 
-	function onSuccessLogin(data) {    
+	function onSuccessLogin(data) { 
+    console.log(data.success);   
 	    if(data.success) {
 	    	console.log("logged in" , data );
 	    	sessionStorage.setItem('token', data.token);
@@ -60,7 +61,7 @@
 		$(document).on('click', '.btn-signin', function(e) {
 			e.preventDefault();
 			formData = getData();
-			userService.login(formData).then(onSuccessLogin, common.onError);
+			userService.login(formData).then(onSuccessLogin, onErrorLogin);
 		});
 	}
 

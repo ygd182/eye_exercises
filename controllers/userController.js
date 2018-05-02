@@ -59,10 +59,24 @@ var config = { secret: process.env.secret_jwt_key };
         },
 
         update: function(req, res, next) {
-          UserModel.findByIdAndUpdate(req.params.id, req.body,
-            function (err, post) {
+          UserModel.findById(req.params.id, req.body,
+            function (err, user) {
               if (err) return next(err);
-              res.json(post);
+
+              user.email = req.body.email;
+              user.password = req.body.password;
+              user.role = req.body.role;
+              console.log(user);
+
+               // save the user
+              user.update(user, function(err) {
+                if (err) {
+                  console.log(err);
+                  return res.json({success: false, msg: 'Email already exists.'});
+                }
+                res.json({success: true, msg: 'Successful updated the user.'});
+              });
+              //res.json(post);
             });
         },
 
