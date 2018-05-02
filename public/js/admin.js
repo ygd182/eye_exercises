@@ -3,6 +3,8 @@
 	var template = {};
 	var selectedUser = {};
 	var userList = [];
+	var showEdition = false;
+	var index = null;
 
 	function onDeleteSucess (data) {
 		userService.getUsers().then(render, common.onError);
@@ -31,7 +33,7 @@
 
 	}
 
-	function editUser(index) {xvb 
+	function editUser() { 
 		selectedUser = userList[index];
 		console.log(selectedUser);
 		setFormData(selectedUser);
@@ -61,6 +63,16 @@
 		}
 	}
 
+	function onEditSucess(data) {
+		console.log(data);
+		if(data._id = editId) {
+			userService.getUsers().then(render, common.onError);
+		} else {
+			console.log("log error" , data );
+	    onErrorSaveUser(data);
+		}
+	}
+
 	function onErrorSaveUser(data) {
 		$('.error-msg').show();
 	}
@@ -68,6 +80,17 @@
 	function isValidForm(data) {
 		console.log(!$('#user-form').data('bs.validator').hasErrors());
 		return !$('#user-form').data('bs.validator').hasErrors();
+	}
+
+	function showSaveOrUpdate() {
+		if(showEdition) {
+			$('.btn-save-user').hide();
+			$('.btn-update-user').show();
+		} else {
+			$('.btn-save-user').show();
+			$('.btn-update-user').hide();
+		}
+
 	}
 
 	function bindEvents() {
@@ -79,8 +102,11 @@
 
 		$(document).on('click','.edit-user', function(e) {
 			e.preventDefault();
-			var index = getIndexFromParent($(e.target));
-			editUser(index);
+			showEdition = true;
+			showSaveOrUpdate();
+			editId = getIdFromParent($(e.target));
+			index = getIndexFromParent($(e.target));
+			editUser();
 			//window.location.href = '/user-creator.html?id=' + id;
 		});
 
@@ -96,12 +122,26 @@
 			}
 		});
 
-		$(document).on('click','.add-user-btn', function(e) {
+		$(document).on('click','#add-user-btn', function(e) {
 			e.preventDefault();
-			
+			showEdition = false;
+			$('#user-form')[0].reset();
+			showSaveOrUpdate();
+
 		});
 
 
+		$(document).on('click','.btn-update-user', function(e) {
+			e.preventDefault();
+			var user = getFormData();
+			console.log(user);
+
+			$('#user-form').validator('validate');
+
+			if(isValidForm(user) && !$(e.target).hasClass('disabled')) {
+				userService.updateUser(editId, user).then(onEditSucess, common.onError);
+			}
+		});
 
 	}
 
@@ -109,7 +149,7 @@
 	function render(data) {
 		userList = data;
 		var navbarModel = {adminActive: true, listActive: false ,creatorActive: false, isAdmin: common.isAdmin()};
-		var viewModel = { userArray : data /*, isAdminHelper: isAdminHelper*/};
+		var viewModel = { userArray : data};
 
 		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
 
@@ -122,6 +162,7 @@
 		modalView.render();
 
  		$('#user-form').validator();
+ 		$('.btn-update-user').hide();
  		/*$f = $("form#user-form");
 		$f[0].reset();*/
 
