@@ -28,7 +28,7 @@
 
 		
 	  $('#email-input').val(user.email);
-
+	  $('#email-input').prop('disabled', true);
 		$('#role-select').val(user.role);
 
 	}
@@ -86,11 +86,12 @@
 		if(showEdition) {
 			$('.btn-save-user').hide();
 			$('.btn-update-user').show();
-			$('.form-legend').html('<b>Update User</b> ' + selectedUser.email);
+			$('.form-legend').html('<b>Update User:</b> ' + selectedUser.email);
 		} else {
 			$('.btn-save-user').show();
 			$('.btn-update-user').hide();
 			$('.form-legend').html('<b>Create User</b>');
+			$('#email-input').prop('disabled', false);
 		}
 
 	}
@@ -105,10 +106,11 @@
 		$(document).on('click','.edit-user', function(e) {
 			e.preventDefault();
 			showEdition = true;
-			showSaveOrUpdate();
+			
 			editId = getIdFromParent($(e.target));
 			index = getIndexFromParent($(e.target));
 			editUser();
+			showSaveOrUpdate();
 			//window.location.href = '/user-creator.html?id=' + id;
 		});
 
