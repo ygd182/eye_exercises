@@ -86,9 +86,11 @@
 		if(showEdition) {
 			$('.btn-save-user').hide();
 			$('.btn-update-user').show();
+			$('.form-legend').html('Update User');
 		} else {
 			$('.btn-save-user').show();
 			$('.btn-update-user').hide();
+			$('.form-legend').html('Create User');
 		}
 
 	}
