@@ -69,7 +69,7 @@ var config = { secret: process.env.secret_jwt_key };
               console.log(user);
 
                // save the user
-              user.update(user, function(err) {
+              UserModel.update({_id: req.params.id}, user, function(err) {
                 if (err) {
                   console.log(err);
                   return res.json({success: false, msg: 'Email already exists.'});

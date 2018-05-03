@@ -25,8 +25,6 @@
 	}
 
 	function setFormData(user) {
-
-		
 	  $('#email-input').val(user.email);
 	  $('#email-input').prop('disabled', true);
 		$('#role-select').val(user.role);
@@ -35,26 +33,22 @@
 
 	function editUser() { 
 		selectedUser = userList[index];
-		console.log(selectedUser);
 		setFormData(selectedUser);
 	}
 
 	function getIdFromParent($element) {
 		var $liItem = $element.closest('li');
 		var id = $liItem.data('id');
-		console.log(id);
 		return id;
 	}
 
 	function getIndexFromParent($element) {
 		var $liItem = $element.closest('li');
 		var id = $liItem.data('index');
-		console.log(id);
 		return id;
 	}
 
 	function onSaveSucess(data) {
-		console.log(data);
 		if(data.success) {
 			userService.getUsers().then(render, common.onError);
 		} else {
@@ -111,7 +105,6 @@
 			index = getIndexFromParent($(e.target));
 			editUser();
 			showSaveOrUpdate();
-			//window.location.href = '/user-creator.html?id=' + id;
 		});
 
 		$(document).on('click','.btn-save-user', function(e) {
@@ -167,8 +160,6 @@
 
  		$('#user-form').validator();
  		$('.btn-update-user').hide();
- 		/*$f = $("form#user-form");
-		$f[0].reset();*/
 
 	}
 
