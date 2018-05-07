@@ -31,6 +31,13 @@
 
 	}
 
+	function clearFormData() {
+	  $('#email-input').val('');
+	  $('#email-input').prop('disabled', false);
+		$('#role-select').val('');
+
+	}
+
 	function editUser() { 
 		selectedUser = userList[index];
 		setFormData(selectedUser);
@@ -80,7 +87,7 @@
 		if(showEdition) {
 			$('.btn-save-user').hide();
 			$('.btn-update-user').show();
-			$('.form-legend').html('<b>Update User:</b> ' + selectedUser.email);
+			$('.form-legend').html('<b>Edit User:</b> ' + selectedUser.email);
 		} else {
 			$('.btn-save-user').show();
 			$('.btn-update-user').hide();
@@ -123,6 +130,7 @@
 			e.preventDefault();
 			showEdition = false;
 			$('#user-form')[0].reset();
+			clearFormData();
 			showSaveOrUpdate();
 
 		});
