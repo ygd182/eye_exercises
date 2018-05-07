@@ -1,181 +1,46 @@
+//admin.js
 (function() {
-	var defaultExercise = {
-	 reps: 1,
-	 rest: 1,
-	 name: '',
-	 parts: []
-	};
-
-	var defaultPart = {
-	 			fromId: 1,
-	 			toId: 1,
-	 			blink: false,
-	 			blinkSpeed: 1,
-	 			duration: 1,
-	 			hide: false,
-	 			staticDuration: 1
-	 		};
-
-	var fromOptions = [ {val: 1, sel: false},
-						{val: 2, sel: false},
-						{val: 3, sel: false},
-						{val: 4, sel: false},
-						{val: 5, sel: false},
-						{val: 6, sel: false},
-						{val: 7, sel: false},
-						{val: 8, sel: false},
-						{val: 9, sel: false}];
-
-	var toOptions = [   {val: 1, sel: false},
-						{val: 2, sel: false},
-						{val: 3, sel: false},
-						{val: 4, sel: false},
-						{val: 5, sel: false},
-						{val: 6, sel: false},
-						{val: 7, sel: false},
-						{val: 8, sel: false},
-						{val: 9, sel: false}];
-
-	var exerciseId = null;
-
 	var template = {};
-	var editMode = false;
+	var selectedUser = {};
+	var userList = [];
+	var showEdition = false;
+	var index = null;
 
-	function getPercentage(value, total) {
-		return value / total * 100;
+	function onDeleteSucess (data) {
+		userService.getUsers().then(render, common.onError);
 	}
 
-	function getElementPositionPercentaje(id) {
-		var pos = {};
-		var $element = $('#'+id);
-		var position = $element.position();
-		var height = $element.parent().height();
-		var width = $element.parent().width();
-		pos.top = getPercentage(position.top, height);
-		pos.left = getPercentage(position.left, width);
-		return pos;
+	function deleteUser() {
+		userService.deleteUser(deleteId).then(onDeleteSucess ,common.onError);
 	}
 
-
-	function getParts() {
-		var part = {};
-		var parts = [];
-
-		$('.parts-list-item').each(function(index) {
-			part = {};
-			part.fromId = $(this).find('.from-input').val();
-			part.toId = $(this).find('.to-input').val();
-			part.blink = $(this).find('.blink-check').prop('checked');
-			part.blinkSpeed = $(this).find('.blink-speed-input').val();
-			part.duration = $(this).find('.duration-input').val();
-			part.hide = $(this).find('.hide-check').prop('checked');
-			part.staticDuration = $(this).find('.static-duration-input').val();
-			parts.push(part);
-		});
-		return parts;
-	}
-
-	function getData() {
-		var exercise = defaultExercise;
+	function getFormData() {
+		var user = {};
 		
-		exercise.reps = $('#reps-input').val();
-		exercise.name = $('#name-input').val();
-		exercise.rest = $('#rest-input').val();
-		exercise.parts = getParts();
-		return exercise;
+		user.email = $('#email-input').val();
+		user.password = $('#password-input').val();
+		user.passwordRepeat = $('#password-input-repeat').val();
+		user.role = $('#role-select').val();
+		return user;
 	}
 
-	function onError(data) {
-		common.onError(data);
-		restorePage();
+	function setFormData(user) {
+	  $('#email-input').val(user.email);
+	  $('#email-input').prop('disabled', true);
+		$('#role-select').val(user.role);
+
 	}
 
-	function restorePage() {
-		window.location.href = '/exercise-list.html';
+	function clearFormData() {
+	  $('#email-input').val('');
+	  $('#email-input').prop('disabled', false);
+		$('#role-select').val('');
+
 	}
 
-	function onSuccessUpdate(msg) {
-		modalView.show();
-	    console.log("saved" , msg );
-	}
-
-	function onSuccessSave(msg) {
-		modalView.show();
-	    console.log("saved" , msg );
-	}
-
-	function isValidForm(data) {
-		return !$('#exercise-form').data('bs.validator').hasErrors();
-	}
-
-	function bindEvents() {
-		$(document).on('change', '.blink-check', function(e) {
-			var numId = ($(e.target).attr('id')).match(/\d+/)[0];
-			if(!$(e.target).prop('checked')) {
-				$('#blink-speed-input-' + numId).attr('disabled', true);
-			} else {
-				$('#blink-speed-input-' + numId).removeAttr('disabled');
-			}
-		});
-
-		$(document).on('change', '.hide-check', function(e) {
-			var numId = ($(e.target).attr('id')).match(/\d+/)[0];
-			if(!$(e.target).prop('checked')) {
-				$('#static-duration-input-' + numId).attr('disabled', true);
-			} else {
-				$('#static-duration-input-' + numId).removeAttr('disabled');
-			}
-		});
-
-		$(document).on('click', '#submit-btn', function(e) {
-			e.preventDefault();
-
-			formData = getData();
-			submitExercise = formData;
-			$('#exercise-form').validator('validate');
-
-			console.log(formData);
-			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
-				exerciseService.saveExercise(submitExercise).then(onSuccessSave, common.onError);
-			}else {
-				//alert('Some fields are missing. From and To should be different');
-			}
-			
-		});
-
-		$(document).on('click','#update-btn', function(e) {
-			e.preventDefault();
-
-			formData = getData();
-			submitExercise = formData;
-			console.log(submitExercise);
-			$('#exercise-form').validator('validate');
-
-			if(isValidForm(formData) && !$(e.target).hasClass('disabled')) {
-				exerciseService.updateExercise(exerciseId, submitExercise).then(onSuccessUpdate, common.onError);
-			}else {
-		
-			}
-		});
-
-		$(document).on('click', '#add-part-btn', function(e) {
-			e.preventDefault();
-			var exercise = getData();
-			exercise.parts.push(defaultPart);
-			$('#exercise-form').validator('update');
-			
-			render(exercise);
-		});
-
-		$(document).on('click', '#remove-part-btn', function(e) {
-			e.preventDefault();
-			var index = getIdFromParent($(e.target));
-			console.log(index);
-			var exercise = getData();
-			exercise.parts.splice(index,1);
-			render(exercise);
-		});
-
+	function editUser() { 
+		selectedUser = userList[index];
+		setFormData(selectedUser);
 	}
 
 	function getIdFromParent($element) {
@@ -184,108 +49,141 @@
 		return id;
 	}
 
-
-	function setSelectedOption(options, id) {
-		if(id){
-			options[id-1].sel = true;
-		}
-		return options;
+	function getIndexFromParent($element) {
+		var $liItem = $element.closest('li');
+		var id = $liItem.data('index');
+		return id;
 	}
 
-	function fromToCheckEquals($el) {
-		var numId = $el.attr('id').match(/\d+/)[0];
-	    var matchValue = $('#to-input-'+ numId).val();
-	    if ($el.val() === matchValue) {
-	      return 'From and To should be different';
-	    }
-	} 
+	function onSaveSucess(data) {
+		if(data.success) {
+			userService.getUsers().then(render, common.onError);
+		} else {
+			console.log("log error" , data );
+	    onErrorSaveUser(data);
+		}
+	}
 
+	function onEditSucess(data) {
+		console.log(data);
+		if(data._id = editId) {
+			userService.getUsers().then(render, common.onError);
+		} else {
+			console.log("log error" , data );
+	    onErrorSaveUser(data);
+		}
+	}
 
-	function loadSelectArrays(data) {
-		for (var i = 0; i < data.parts.length; i++) {
-			 fromOptions = [ {val: 1, sel: false},
-							{val: 2, sel: false},
-							{val: 3, sel: false},
-							{val: 4, sel: false},
-							{val: 5, sel: false},
-							{val: 6, sel: false},
-							{val: 7, sel: false},
-							{val: 8, sel: false},
-							{val: 9, sel: false}];
+	function onErrorSaveUser(data) {
+		$('.error-msg').show();
+	}
 
-		 	toOptions = [   {val: 1, sel: false},
-							{val: 2, sel: false},
-							{val: 3, sel: false},
-							{val: 4, sel: false},
-							{val: 5, sel: false},
-							{val: 6, sel: false},
-							{val: 7, sel: false},
-							{val: 8, sel: false},
-							{val: 9, sel: false}];
-			data.parts[i].toOptions = setSelectedOption(toOptions, data.parts[i].toId);
+	function isValidForm(data) {
+		console.log(!$('#user-form').data('bs.validator').hasErrors());
+		return !$('#user-form').data('bs.validator').hasErrors();
+	}
+
+	function showSaveOrUpdate() {
+		if(showEdition) {
+			$('.btn-save-user').hide();
+			$('.btn-update-user').show();
+			$('.form-legend').html('<b>Edit User:</b> ' + selectedUser.email);
+		} else {
+			$('.btn-save-user').show();
+			$('.btn-update-user').hide();
+			$('.form-legend').html('<b>Create User</b>');
+			$('#email-input').prop('disabled', false);
+		}
+
+	}
+
+	function bindEvents() {
+		$(document).on('click','.delete-user', function(e) {
+			e.preventDefault();
+			modalView.show();
+			deleteId = getIdFromParent($(e.target));
+		});
+
+		$(document).on('click','.edit-user', function(e) {
+			e.preventDefault();
+			showEdition = true;
 			
-			data.parts[i].fromOptions = setSelectedOption(fromOptions, data.parts[i].fromId);
-		}
+			editId = getIdFromParent($(e.target));
+			index = getIndexFromParent($(e.target));
+			editUser();
+			showSaveOrUpdate();
+		});
 
-		return data;
+		$(document).on('click','.btn-save-user', function(e) {
+			e.preventDefault();
+			var user = getFormData();
+			console.log(user);
+
+			$('#user-form').validator('validate');
+
+			if(isValidForm(user) && !$(e.target).hasClass('disabled')) {
+				userService.saveUser(user).then(onSaveSucess, common.onError);
+			}
+		});
+
+		$(document).on('click','#add-user-btn', function(e) {
+			e.preventDefault();
+			showEdition = false;
+			$('#user-form')[0].reset();
+			clearFormData();
+			showSaveOrUpdate();
+
+		});
+
+
+		$(document).on('click','.btn-update-user', function(e) {
+			e.preventDefault();
+			var user = getFormData();
+			console.log(user);
+
+			$('#user-form').validator('validate');
+
+			if(isValidForm(user) && !$(e.target).hasClass('disabled')) {
+				userService.updateUser(editId, user).then(onEditSucess, common.onError);
+			}
+		});
+
 	}
+
 
 	function render(data) {
-		console.log(data);
-		var navbarModel = {adminActive: true, listActive: false};
-		var templateLoaded = Handlebars.compile(template.navbar);
+		userList = data;
+		var navbarModel = {adminActive: true, listActive: false ,creatorActive: false, isAdmin: common.isAdmin()};
+		var viewModel = { userArray : data};
 
-		$('#navbar-container').html(templateLoaded(navbarModel));
+		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
 
-		data = loadSelectArrays(data);
-		
-		var viewModel = { exercise : data , editMode: editMode};
-		var source = template.admin;
-		templateLoaded = Handlebars.compile(source); 
-		$('#admin-container').html(templateLoaded(viewModel));
+		var templateLoaded = Handlebars.compile(template.list);
+		$('#list-container').html(templateLoaded(viewModel));
 
- 		var validatorObj = {
- 			disable: false,
- 			custom: {
-					  equals: fromToCheckEquals
-					}
-				};
- 		$('#exercise-form').validator(validatorObj);
- 		$f = $("form#exercise-form");
-		$f[0].reset();
- 		
- 		modalView.init('#js-modal-container', template.modal);
- 		modalView.options({has_cancel: false, body: 'Exercise saved.', title: 'Notification', confirm_color: 'primary', confirm_text: 'Dismiss'});
-		modalView.bindConfirmAction(restorePage);
+		modalView.init('#js-modal-container', template.modal);
+ 		modalView.options({ body: 'Are you sure that you want to delete the selected user?'});
+		modalView.bindConfirmAction(deleteUser);
 		modalView.render();
-	}
 
-	function getExerciseData() {
-		exerciseId = common.getParameterByName('id');
-		if(exerciseId) {
-			editMode = true;
-			exerciseService.getExercise(exerciseId).then(render, onError);
-		} else {
-			render(defaultExercise);
-		}
+ 		$('#user-form').validator();
+ 		$('.btn-update-user').hide();
+
 	}
 
 	function loadTemplates() {
 		common.loadTemplates(['admin', 'navbar', 'modal']).done(function(temp1, temp2, temp3) {
-			template.admin = temp1[0];
+			template.list = temp1[0];
 			template.navbar = temp2[0];
 			template.modal = temp3[0];
-			getExerciseData();
+			userService.getUsers().then(render, common.onError);
 		});
 	}
 
 	$(document).ready(function ready(){
-		var formData = null;
-		var submitExercise = null;
-		defaultExercise.parts.push(defaultPart);
-		bindEvents();
+		common.checkLoggedIn();
 		loadTemplates();
+		bindEvents();
 	});
 
 })();
-

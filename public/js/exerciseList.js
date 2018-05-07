@@ -29,7 +29,7 @@
 		$(document).on('click','.edit-exercise', function(e) {
 			e.preventDefault();
 			var id = getIdFromParent($(e.target));
-			window.location.href = '/admin.html?id=' + id;
+			window.location.href = '/exercise-creator.html?id=' + id;
 		});
 
 		$(document).on('click','.view-exercise', function(e) {
@@ -40,12 +40,10 @@
 	}
 
 	function render(data) {
-		var viewModel = { exercises : data };
-		var navbarModel = {adminActive: false, listActive: true};
-		var templateLoaded = Handlebars.compile(template.navbar);
-		$('#navbar-container').html(templateLoaded(navbarModel));
-
-		templateLoaded = Handlebars.compile(template.exerciseList);
+		var viewModel = { exercises : data ,isAdmin: common.isAdmin() };
+		var navbarModel = {adminActive: false, listActive: true, creatorActive: false, isAdmin: common.isAdmin()};
+		common.renderNavbar('#navbar-container', navbarModel, template.navbar);
+		var templateLoaded = Handlebars.compile(template.exerciseList);
 		$('#exercises-container').html(templateLoaded(viewModel));
 
  		modalView.init('#js-modal-container', template.modal);
@@ -64,6 +62,7 @@
 	}
 
 	$(document).ready(function ready(){
+		common.checkLoggedIn();
 		bindEvents();
 		loadTemplates();
 	});

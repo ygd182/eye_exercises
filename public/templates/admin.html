@@ -1,142 +1,100 @@
-<h1>Admin Area</h1>
-<div class="movement-wrapper admin-movement_wrapper">
-  <div id="circle"></div>
-  <span id="span1">1</span>
-  <span id="span2">2</span>
-  <span id="span3">3</span>
-  <span id="span4">4</span>
-  <span id="span5">5</span>
-  <span id="span6">6</span>
-  <span id="span7">7</span>
-  <span id="span8">8</span>
-  <span id="span9">9</span>
-</div>
-<div class="container form-container">
-  <form id="exercise-form" data-toggle="validator" role="form">
-     <legend class="col-form-legend col-sm-12">Create Exercise</legend>
-     <div class="row">
-      <div class="col-sm-12 ">
-        <label class="col-2 col-form-label">Exercise Name</label>
-        <div class="form-group col-10 has-feedback">
-          <input id="name-input" class="form-control"  type="text" required placeholder="Enter the exercise name" value="{{exercise.name}}"   data-required-error="The exercise name is required.">
-          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-          <div class="help-block with-errors"></div>
-        </div>
-      </div>
+<div class="">
+  <h1>Admin page</h1>
+  
+  <div class="col-sm-6 admin-user-list-container">
+    <h3 class="">List of Users</h3>
+    <div class="add-user-btn-container">
+    <label>Create new user</label>
+      <button type="button" id="add-user-btn" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button>
+      
     </div>
-     <div class="row">
-      <div class="col-sm-6">
-        <label for="example-number-input" class="col-2 col-form-label">Rest time (in secs)</label>
-        <div class="col-10 has-feedback form-group">
-          <input id="rest-input" class="form-control" type="number" value="{{exercise.rest}}"  min="0" max="60" required data-required-error="The rest time is required.">
-          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-          <div class="help-block with-errors"></div>
+    <ul class="list-group row">
+      {{#userArray}}
+      <li class="list-group-item" data-id="{{_id}}" data-index="{{@index}}"> 
+        <a href="#">{{email}}</a>
+        {{#ifNotEquals role "user"}}
+          <span class="label label-danger">{{role}}</span>  
+        {{/ifNotEquals}}
+        {{#ifNotEquals role "admin"}}
+          <span class="label label-success">{{role}}</span>
+        {{/ifNotEquals}}
+        <div class="btn-group pull-right">
+        <!--<button type="button" class="btn btn-default btn view-user"><i class="glyphicon glyphicon-eye-open"></i></button> -->
+        {{#ifNotEquals role "admin"}}
+          <button type="button" class="btn btn-default btn edit-user"><i class="glyphicon glyphicon-pencil"></i></button>  
+          <button type="button" class="btn btn-default btn delete-user"><i class="glyphicon glyphicon-trash"></i></button>
+        {{/ifNotEquals}}
         </div>
-      </div>
-      <div class="col-sm-6">
-        <label for="example-number-input" class="col-2 col-form-label">Number of reps</label>
-        <div class="col-10 has-feedback form-group">
-          <input id="reps-input" class="form-control" type="number" value="{{exercise.reps}}"  required min="1" data-required-error="The # of reps is required.">
-          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-          <div class="help-block with-errors"></div>
-        </div>
-      </div>
-    </div>
+      </li>
+       {{/userArray}}
+    </ul>
+    
+  </div>
 
-      <ul class="list-group row parts-list">
-        {{#exercise.parts}}
-        <li class="list-group-item col-sm-12 parts-list-item" data-id="{{@index}}">
-          <div class="col-sm-6" >
-            <div class="row">
-               <div class="col-sm-3 form-group">
-                <label class="form-check-label">From</label>
-                <select id="from-input-{{@index}}" class="form-control from-input" data-equals="foo">
-                {{#fromOptions}}
-                  <option value="{{val}}" {{#sel}}selected{{/sel}}>{{val}}</option>
-                {{/fromOptions}}
-                </select>
-                <div class="help-block with-errors"></div>
-              </div>
-              <div class="col-sm-3">
-                <label class="form-check-label">To</label>
-                <select id="to-input-{{@index}}" class="form-control to-input">
-                {{#toOptions}}
-                  <option value="{{val}}" {{#sel}}selected{{/sel}}>{{val}}</option>
-                {{/toOptions}}
-                </select>
-              </div>
+  <div class="col-sm-6">
+    <div class="form-container">
+      <form class="form" id="user-form" data-toggle="validator">
+          <legend class="col-form-legend form-legend"><b>Create User</b></legend>
+          <div class="row form-group has-feedback">
+              <label for="email" class="col-sm-2">Email</label>
+              <div class="col-sm-10">
+                  <div class="input-group ">
+                      <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                      <input type="email" class="form-control" name="email" id="email-input" placeholder="Enter your Email" data-required-error="The email is required." required>
+                      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  </div>
+                  
+              <div class="help-block with-errors"></div>
 
-              <div class="col-sm-4">
-                <label for="example-number-input" class="col-2 col-form-label">Duration time (in secs)</label>
-                <div class="col-10 has-feedback form-group">
-                  <input id="" class="form-control duration-input" type="number" value="{{duration}}" step=0.1 min="0.1" required data-required-error="The duration is required.">
-                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              </div>
+                
+          </div>
+          <div class="row form-group has-feedback">
+              <label for="password" class="col-sm-2">Password</label>
+              <div class="col-sm-10">
+                  <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                      <input type="password" class="form-control" name="password" id="password-input" placeholder="Enter your Password" data-required-error="The password is required." required>
+                      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  </div>
                   <div class="help-block with-errors"></div>
+              </div>
+          </div>
+          <div class="row form-group has-feedback">
+              <label for="password-repeat" class="col-sm-2">Repeat Password</label>
+              <div class="col-sm-10">
+                  <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                      <input type="password" class="form-control" name="password-repeat" id="password-input-repeat" placeholder="Re-enter your Password" data-required-error="The password is required." required data-match="#password-input" data-match-error="Passwords don't match">
+                      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  </div>
+                  <div class="help-block with-errors"></div>
+               </div>
+          </div>
+          <div class="row form-group">
+             <label for="role-select" class="col-sm-2">Select role</label>
+             <div class="col-sm-10">
+               <div class="input-group">
+                 <span class="input-group-addon"><i class="fa fa-id-badge fa-lg"></i></span>
+                  <select  id="role-select" class="form-control">
+                    <option value="user" selected="selected">Common user</option>
+                    <option value="admin">Administrator</option>
+                  </select>
                 </div>
               </div>
-              <div class="col-sm-2 form-group">
-                <div class="form-check">
-                  <label class="form-check-label">
-                    Blink
-                  </label>
-                  <input id="blink-check-{{@index}}" class="form-check-input blink-check" type="checkbox" {{#blink}} checked="checked"{{/blink}}>
-                </div>
-              </div>
-            </div>
           </div>
 
-          <div class="col-sm-6" >
-            <div class="row">
-              <div class="col-sm-4 form-group">
-                <label for="example-number-input" class="col-2 col-form-label">Blink speed (1-16)</label>
-                <div class="col-10">
-                  <input id="blink-speed-input-{{@index}}" class="form-control blink-speed-input" type="number" value="{{blinkSpeed}}"  min="1" max="16" {{^blink}}disabled{{/blink}}>
-                </div>
-              </div>
-               <div class="col-sm-2 form-group">
-                <div class="form-check">
-                  <label class="form-check-label">
-                    Static
-                  </label>
-                  <input id="hide-check-{{@index}}" class="form-check-input hide-check" type="checkbox" {{#hide}} checked="checked"{{/hide}}>
-                </div>
-              </div>
-              <div class="col-sm-4 form-group">
-                <label for="example-number-input" class="col-2 col-form-label">Static duration</label>
-                <div class="col-10">
-                  <input id="static-duration-input-{{@index}}" class="form-control static-duration-input" type="number" value="{{staticDuration}}"  min="1" max="16" {{^hide}}disabled{{/hide}}>
-                </div>
-              </div>
-              {{#if @index}}
-              <div class="col-sm-2 parts-action-container">
-                <button type="button" id="remove-part-btn" class="btn btn-danger"><i class="glyphicon glyphicon-minus"></i></button>
-              </div>
-              {{/if}}
+          <button type="submit" class="btn btn-lg btn-primary btn-block btn-save-user" >Save</button>
 
-            </div>
-          </div>
-        </li> 
-      {{/exercise.parts}}
-        
-      </ul>
+          <button type="submit" class="btn btn-lg btn-primary btn-block btn-update-user" >Update</button>
+      </form><!-- /form -->
+      <div class="alert alert-danger error-msg">
+        <strong>Error</strong> Email already exists.
+      </div>
+      
+    </div>
+    
+  </div>
 
-    <div class="row add-part-row">
-      <div class="col-sm-2">
-        <button type="button" id="add-part-btn" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button>
-        <label>Add Part</label>
-      </div>
-    </div>
-    <div class="row">
-      {{^editMode}}
-      <div class="col-sm-1">
-        <button id="submit-btn" type="submit" class="btn btn-primary">Save</button>
-      </div>
-      {{/editMode}}
-      {{#editMode}}
-      <div class="col-sm-1 form-group">
-        <button id="update-btn" type="submit" class="btn btn-primary">Update</button>
-      </div>
-      {{/editMode}}
-    </div>
-  </form>
 </div>
+

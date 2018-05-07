@@ -1,0 +1,10 @@
+<h1>Eye Exercise App</h1>
+<ul class="list-group">
+	{{#isAdmin}}
+		<li class="list-group-item"> <a href="/exercise-creator.html">Exercise creator</a></li>
+	{{/isAdmin}}
+	<li class="list-group-item"> <a href="/exercise-list.html">Exercise List</a></li>
+	{{#isAdmin}}
+		<li class="list-group-item"> <a href="/admin.html">Admin page</a></li>
+	{{/isAdmin}}
+</ul>

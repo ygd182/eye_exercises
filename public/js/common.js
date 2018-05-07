@@ -1,3 +1,8 @@
+function registerHelpers() {
+	Handlebars.registerHelper('ifNotEquals', function(arg1, arg2, options) {
+		    return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
+		});
+}
 var common = (function() {
 	
 	function getParameterByName(name, url) {
@@ -11,7 +16,7 @@ var common = (function() {
 	}
 
 	function onError(error) {
-		console.log(error);
+		console.log(error.responseText);
 	}
 	/*
 	*@ param array[String]
@@ -31,10 +36,43 @@ var common = (function() {
 	    document.documentElement.scrollTop = 0; // For IE and Firefox
 	}
 
+	function checkLoggedIn(){
+		var token = sessionStorage.getItem('token');
+		if(!token) {
+			window.location.href = '/login.html';
+		} 
+	}
+
+	function isAdmin() {
+		var role = sessionStorage.getItem('role');
+		return role === 'admin';
+	}
+
+	function getAjaxHeader() {
+		var header = { Authorization : '' };
+		var token = sessionStorage.getItem('token');
+		if(token) {
+			header.Authorization = token;
+		}
+
+		return header;
+	}
+
+	function renderNavbar(containerId, options, template) {
+		var templateLoaded = Handlebars.compile(template);
+		options.user = sessionStorage.getItem('user');
+		$(containerId).html(templateLoaded(options));
+	}
+
+	registerHelpers();
 	return {
 		getParameterByName: getParameterByName,
 		onError: onError,
-		loadTemplates: loadTemplates
-	}
+		loadTemplates: loadTemplates,
+		checkLoggedIn: checkLoggedIn,
+		getAjaxHeader: getAjaxHeader,
+		renderNavbar: renderNavbar,
+		isAdmin: isAdmin
+	};
 
 })();
