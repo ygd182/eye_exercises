@@ -1,6 +1,7 @@
 # eye_exercises
 eye exercises app
 
+Tech stack
 node-js
 mongodb
 mongoose
@@ -8,6 +9,7 @@ express
 html5
 css3
 jquery
+handlebars
 lodash
 bootstrap
 
