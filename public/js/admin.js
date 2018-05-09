@@ -107,7 +107,7 @@
 		$(document).on('click','.edit-user', function(e) {
 			e.preventDefault();
 			showEdition = true;
-			
+			$('#user-form')[0].reset();
 			editId = getIdFromParent($(e.target));
 			index = getIndexFromParent($(e.target));
 			editUser();
