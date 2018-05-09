@@ -1,7 +1,15 @@
 # eye_exercises
 eye exercises app
 
-MEAN stack
+node-js
+mongodb
+mongoose
+express
+html5
+css3
+jquery
+lodash
+bootstrap
 
 Configuration file: config/default.json
 
