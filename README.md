@@ -1,7 +1,7 @@
 # eye_exercises
 eye exercises app
 
-Tech stack
+Tech stack:
 node-js
 mongodb
 mongoose
@@ -23,7 +23,7 @@ The variables are:
 db_pass,db_user for connectiong to the database 
 secret_jwt_key to generate a signed web tokens to login
 
-There are 2 types of user:
+There are 2 types of users:
 
 Administrator: Admin privileges. Can create, modify or delete exercises
 Can create, modify or delete users
