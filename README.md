@@ -11,6 +11,7 @@ css3
 jquery
 handlebars
 lodash
+JWT-passport
 bootstrap
 
 Configuration file: config/default.json
