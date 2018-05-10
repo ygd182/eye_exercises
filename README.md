@@ -1,5 +1,5 @@
 # eye_exercises
-eye exercises app
+Eye exercises app
 
 Tech stack:
 node-js
@@ -29,4 +29,6 @@ Administrator: Admin privileges. Can create, modify or delete exercises
 Can create, modify or delete users
 Can see exercise list and play exercises
 
-Common user: Can see exercise list and play exercises
+Common user: User privileges. Can see exercise list and play exercises
+
+To run an exercise the browser needs to be in fullscreen mode, so the app width and height is the same as the screen.
