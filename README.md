@@ -1,5 +1,4 @@
-# eye_exercises
-Eye exercises app
+# Eye exercises app
 
 Tech stack:
 node-js
