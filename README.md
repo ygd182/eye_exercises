@@ -52,26 +52,26 @@ The points define the initial and final location of a part of a movement.
 
 An exercise is composed by:
 
-Exercise Name: The neame to identify the exercise.
+** Exercise Name **: The neame to identify the exercise.
 
-Rest time (in secs): Time between repetitions.
+** Rest time (in secs) **: Time between repetitions.
 
-Number of reps: Amount of times the part is repeated
+** Number of reps **: Amount of times the part is repeated
 
 An exercise is composed by parts.
 
 Definition of movement part:
 
-From: Initial point in the screen.
+** From **: Initial point in the screen.
 
-To: Final point in the screen.
+** To **: Final point in the screen.
 
-Duration time (in secs): Duration of the movement part.
+** Duration time (in secs) **: Duration of the movement part.
 
-Blink: Flag to enable the circle blinking while moving in a part.
+** Blink **: Flag to enable the circle blinking while moving in a part.
 
-Blink speed (1-16): Speed of blinking if enabled.
+** Blink speed (1-16) **: Speed of blinking if enabled.
 
-Static: Static flag.
+** Static **: Static flag.
 
-Static duration: Duration of the movement circle static time.
+** Static duration **: Duration of the movement circle static time.
