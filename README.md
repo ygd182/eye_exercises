@@ -52,19 +52,19 @@ The points define the initial and final location of a part of a movement.
 
 An exercise is composed by:
 
-Exercise Name.
+Exercise Name: The neame to identify the exercise.
 
-Rest time (in secs)
+Rest time (in secs): Time between repetitions.
 
 Number of reps: Amount of times the part is repeated
 
-An exercise is composed by parts
+An exercise is composed by parts.
 
 Definition of movement part:
 
 From: Initial point in the screen.
 
-To: final point in the screen.
+To: Final point in the screen.
 
 Duration time (in secs): Duration of the movement part.
 
