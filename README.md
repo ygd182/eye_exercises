@@ -50,20 +50,22 @@ Exercise Name.
 
 Rest time (in secs)
 
-Number of reps
+Number of reps: Amount of times the part is repeated
 
 An exercise is composed by parts
 
 Definition of movement part:
 
-From 
+From: Initial point in the screen.
 
-To 
+To: final point in the screen.
 
-Duration time (in secs)
+Duration time (in secs): Duration of the movement part.
 
-Blink 
+Blink: Flag to enable the circle blinking while moving in a part.
 
-Blink speed (1-16)
+Blink speed (1-16): Speed of blinking if enabled.
 
-Static Static duration
+Static: Static flag.
+
+Static duration: Duration of the movement circle static time.
