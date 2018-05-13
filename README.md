@@ -38,7 +38,9 @@ To run an exercise the browser needs to be in fullscreen mode, so the app width 
 
 ## Exercises
 
-Exercise board
+Exercise screen points
+
+
 1     2     3
 
 4     5     6
