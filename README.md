@@ -24,7 +24,7 @@ The variables are:
 db_pass,db_user for connectiong to the database 
 secret_jwt_key to generate a signed web tokens to login
 
-#Users
+##Users
 
 There are 2 types of users:
 
@@ -37,7 +37,7 @@ Common user: User privileges. Can see exercise list and play a selected exercise
 
 To run an exercise the browser needs to be in fullscreen mode, so the app width and height is the same as the screen. (F11 keyboard key)
 
-#Exercises
+##Exercises
 
 Exercise board
 1     2     3
