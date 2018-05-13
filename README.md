@@ -40,8 +40,12 @@ To run an exercise the browser needs to be in fullscreen mode, so the app width 
 
 Exercise board
 1     2     3
+
 4     5     6
+
 7     8     9
+
+
 The points define the initial and final location of a part of a movement.
 
 An exercise is composed by:
